@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Centauro Esquadrias — Portfólio de Obras</title>
+<meta name="description" content="40 anos de excelência em esquadrias de alumínio de alto padrão. Conheça nossos projetos.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Centauro Esquadrias">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:url" content="https://centauroesquadrias.com.br/">
+<meta property="og:title" content="Centauro Esquadrias — Portfólio de Obras">
+<meta property="og:description" content="40 anos de excelência em esquadrias de alumínio de alto padrão. Conheça nossos projetos.">
+<meta property="og:image" content="https://centauroesquadrias.com.br/og-image.jpg">
+<meta property="og:image:secure_url" content="https://centauroesquadrias.com.br/og-image.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Centauro Esquadrias — Portfólio de Obras">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Centauro Esquadrias — Portfólio de Obras">
+<meta name="twitter:description" content="40 anos de excelência em esquadrias de alumínio de alto padrão.">
+<meta name="twitter:image" content="https://centauroesquadrias.com.br/og-image.jpg">
+<script>
+  (function () {
+    if (/[?&]preview/i.test(location.search)) return;
+    var isMobile = window.innerWidth <= 900 || /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    if (isMobile) window.location.replace('portfolio-mobile.html');
+  })();
+</script>
+<style>
+@font-face {
+  font-family: 'Kumbh Sans';
+  src: url('assets/KumbhSans.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --red:   #ED5454;
+  --dark:  #34353A;
+  --white: #FFFFFF;
+  --off:   #FAFAFA;
+  --gray:  #8a8b90;
+}
+
+body {
+  background: #0e0f11;
+  font-family: 'Kumbh Sans', 'Segoe UI', system-ui, sans-serif;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  min-height: 100vh; overflow: hidden;
+  user-select: none; -webkit-user-select: none;
+}
+
+#stage { display: flex; align-items: center; gap: 32px; }
+
+#book-wrap {
+  position: relative;
+  width: 1400px; height: 700px;
+  perspective: 2400px;
+}
+
+#spread {
+  position: absolute; inset: 0; display: flex;
+  box-shadow: 0 48px 96px rgba(0,0,0,0.85), 0 0 0 1px rgba(255,255,255,0.04);
+}
+#spread .half { width: 700px; height: 700px; overflow: hidden; flex-shrink: 0; position: relative; }
+#spread::after {
+  content: ''; position: absolute; left: 698px; top: 0; width: 4px; height: 100%;
+  background: linear-gradient(to right, rgba(0,0,0,0.3), rgba(0,0,0,0.1), rgba(0,0,0,0.04));
+  z-index: 10; pointer-events: none;
+}
+
+#flip-card {
+  position: absolute; width: 700px; height: 700px; top: 0;
+  transform-style: preserve-3d;
+  z-index: 20; pointer-events: none; display: none;
+}
+#flip-card.flipping-forward { left: 700px; transform-origin: left center; }
+#flip-card.flipping-back    { left: 0;     transform-origin: right center; }
+#flip-face, #flip-back {
+  position: absolute; width: 700px; height: 700px; top: 0; left: 0;
+  overflow: hidden;
+  backface-visibility: hidden; -webkit-backface-visibility: hidden;
+}
+#flip-back { transform: rotateY(180deg); }
+
+#book-shadow {
+  position: absolute; bottom: -28px; left: 50%; transform: translateX(-50%);
+  width: 1000px; height: 40px;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0.55) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.nav-btn {
+  width: 46px; height: 46px;
+  border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.04);
+  color: rgba(255,255,255,0.45); border-radius: 50%; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: border-color 0.2s, color 0.2s, background 0.2s; flex-shrink: 0;
+}
+.nav-btn:hover { border-color: var(--red); color: var(--red); background: rgba(237,84,84,0.08); }
+.nav-btn:disabled { opacity: 0.25; cursor: default; pointer-events: none; }
+
+#indicator {
+  position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%);
+  font-size: 10px; font-weight: 300; letter-spacing: 4px; color: rgba(255,255,255,0.2);
+}
+#fs-btn {
+  position: fixed; top: 18px; right: 18px; width: 34px; height: 34px;
+  border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.04);
+  color: rgba(255,255,255,0.3); border-radius: 6px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; transition: all 0.2s;
+}
+#fs-btn:hover { color: rgba(255,255,255,0.7); border-color: rgba(255,255,255,0.25); }
+
+/* ══════════════════════════════════════════
+   PAGE STYLES
+══════════════════════════════════════════ */
+
+/* — CAPA — */
+.p-cover {
+  background: var(--dark); width: 700px; height: 700px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 18px; position: relative; overflow: hidden; isolation: isolate;
+}
+.p-cover .logo { width: 260px; display: block; }
+.p-cover .cover-line { width: 30px; height: 1px; background: rgba(255,255,255,0.18); }
+.p-cover .tagline { font-size: 10px; font-weight: 300; letter-spacing: 5px; text-transform: uppercase; color: var(--red); }
+.badge-40 { display: flex; align-items: center; gap: 14px; border-top: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.1); padding: 12px 22px; margin-top: 2px; }
+.b40-num { font-size: 46px; font-weight: 900; color: var(--red); line-height: 1; }
+.b40-sub { display: flex; flex-direction: column; }
+.b40-anos { font-size: 14px; font-weight: 300; letter-spacing: 7px; text-transform: uppercase; color: rgba(255,255,255,0.65); }
+.b40-exp  { font-size: 8px; font-weight: 300; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.28); }
+.p-cover .city { position: absolute; bottom: 34px; left: 42px; font-size: 9px; font-weight: 300; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.18); }
+.p-cover .year { position: absolute; bottom: 34px; right: 42px; font-size: 9px; font-weight: 300; letter-spacing: 3px; color: rgba(255,255,255,0.18); }
+
+/* — ANIMAÇÃO DE ABERTURA DA CAPA —
+   logo (+ tagline) sobe ao topo · badge 40 anos desce à base · linha central some */
+@keyframes coverRise {
+  0%   { opacity: 0; transform: translateY(16px); }
+  38%  { opacity: 1; transform: translateY(0); }
+  100% { opacity: 1; transform: translateY(-205px); }
+}
+@keyframes coverSink {
+  0%   { opacity: 0; transform: translateY(-16px); }
+  38%  { opacity: 1; transform: translateY(0); }
+  100% { opacity: 1; transform: translateY(190px); }
+}
+@keyframes coverLineOut {
+  0%   { opacity: 0; transform: scaleX(1); }
+  38%  { opacity: 1; transform: scaleX(1); }
+  62%  { opacity: 1; transform: scaleX(1); }
+  100% { opacity: 0; transform: scaleX(0.15); }
+}
+.p-cover .logo    { animation: coverRise    2.6s cubic-bezier(0.22,0.61,0.36,1) 0.25s both; }
+.p-cover .tagline { animation: coverRise    2.6s cubic-bezier(0.22,0.61,0.36,1) 0.25s both; }
+.p-cover .badge-40{ animation: coverSink    2.6s cubic-bezier(0.22,0.61,0.36,1) 0.25s both; }
+.p-cover .cover-line { animation: coverLineOut 2.6s ease 0.25s both; }
+
+/* — SOBRE — */
+.p-sobre {
+  background: var(--white); width: 700px; height: 700px;
+  display: flex; align-items: center; padding: 60px 60px 60px 48px; gap: 28px; position: relative;
+}
+.p-sobre .red-bar { width: 3px; min-height: 200px; background: var(--red); flex-shrink: 0; align-self: stretch; margin: 50px 0; }
+.p-sobre .content { flex: 1; }
+.p-sobre .sec-label { font-size: 9px; font-weight: 600; letter-spacing: 5px; text-transform: uppercase; color: var(--red); margin-bottom: 16px; }
+.p-sobre h2 { font-size: 26px; font-weight: 700; color: var(--dark); line-height: 1.25; margin-bottom: 12px; }
+.sobre-desc {
+  font-size: 12px; font-weight: 400; color: var(--gray);
+  line-height: 1.8; margin-bottom: 26px;
+}
+.counters { display: flex; flex-direction: column; }
+.counter-item { padding: 12px 0; }
+.cnt-row { display: flex; align-items: baseline; gap: 4px; }
+.cnt-prefix { font-size: 28px; font-weight: 900; color: var(--red); }
+.cnt-num    { font-size: 42px; font-weight: 900; color: var(--dark); line-height: 1; }
+.cnt-plus   { font-size: 24px; font-weight: 700; color: var(--red); }
+.cnt-unit   { font-size: 15px; font-weight: 300; color: var(--gray); margin-left: 4px; }
+.cnt-label  { font-size: 10px; font-weight: 300; color: var(--gray); letter-spacing: 2px; text-transform: uppercase; margin-top: 4px; }
+.cnt-sep    { width: 28px; height: 1px; background: #e0e0e0; }
+.p-sobre .wm { position: absolute; bottom: 32px; right: 40px; width: 72px; opacity: 0.06; }
+
+/* — FOTO DE OBRA — */
+.p-foto { background: #1a1b1f; width: 700px; height: 700px; position: relative; overflow: hidden; }
+.p-foto img.obra-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.p-foto .overlay { position: absolute; bottom: 0; left: 0; right: 0; height: 48%; background: linear-gradient(to top, rgba(0,0,0,0.78) 0%, transparent 100%); pointer-events: none; }
+.p-foto .proj-label { position: absolute; bottom: 40px; left: 40px; }
+.p-foto .proj-num   { font-size: 9px; font-weight: 600; letter-spacing: 5px; color: var(--red); text-transform: uppercase; margin-bottom: 8px; }
+.p-foto .proj-name  { font-size: 24px; font-weight: 700; color: #fff; line-height: 1.1; margin-bottom: 6px; }
+.p-foto .proj-local { font-size: 10px; font-weight: 300; letter-spacing: 2px; color: rgba(255,255,255,0.5); }
+
+/* — DETALHE DE OBRA — */
+.p-detalhe {
+  background: var(--off); width: 700px; height: 700px;
+  padding: 60px 52px; position: relative; overflow: hidden;
+}
+.p-detalhe .num-bg {
+  position: absolute; top: 16px; right: 20px;
+  font-size: 130px; font-weight: 900; color: #ececec; line-height: 1;
+  pointer-events: none; z-index: 0;
+}
+.det-wm {
+  position: absolute; bottom: -40px; right: -40px;
+  width: 290px; opacity: 0.05; pointer-events: none; z-index: 0;
+}
+.det-content { position: relative; z-index: 1; }
+.det-label   { font-size: 9px; font-weight: 600; letter-spacing: 5px; text-transform: uppercase; color: var(--red); margin-bottom: 12px; }
+.det-title   { font-size: 24px; font-weight: 700; color: var(--dark); line-height: 1.2; margin-bottom: 6px; }
+.det-local   { font-size: 11px; font-weight: 300; letter-spacing: 2px; color: var(--gray); margin-bottom: 18px; }
+.div-line    { width: 34px; height: 2px; background: var(--red); margin-bottom: 16px; }
+.det-esq-lbl { font-size: 8px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--dark); margin-bottom: 6px; }
+.det-esq-val { font-size: 13px; font-weight: 600; color: var(--dark); margin-bottom: 4px; }
+.det-fachada { font-size: 11px; font-weight: 300; color: var(--gray); margin-top: 2px; }
+
+/* ── Frame base (borda branca) ── */
+.det-frame {
+  position: absolute; z-index: 2;
+  background: #fff; padding: 7px;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.13), 0 0 0 1px rgba(0,0,0,0.05);
+}
+.det-frame img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+/* ════════════════════════════════════════════════════════
+   PADRÃO A — texto esquerda, 3 imagens dir + 2 esq-baixo
+   (projetos ímpares: 1,3,5,7,9,11,13,15)
+   Frames 1-3 começam ABAIXO do num-bg (top:162)
+════════════════════════════════════════════════════════ */
+.p-det-A .det-content { max-width: 310px; }
+.p-det-A .det-frame-1 { top: 162px; right: 40px; width: 244px; height: 155px; }
+.p-det-A .det-frame-2 { top: 329px; right: 40px; width: 244px; height: 155px; }
+.p-det-A .det-frame-3 { top: 496px; right: 40px; width: 244px; height: 155px; }
+.p-det-A .det-frame-4 { top: 278px; left:  52px; width: 180px; height: 148px; }
+.p-det-A .det-frame-5 { top: 440px; left:  52px; width: 180px; height: 148px; }
+
+/* ════════════════════════════════════════════════════════
+   PADRÃO B — texto direita, 3 imagens esq + 2 dir-baixo
+   (projetos pares: 2,4,6,8,10,12,14,16)
+════════════════════════════════════════════════════════ */
+.p-det-B .det-content { margin-left: 292px; }
+.p-det-B .det-frame-1 { top: 162px; left: 40px; width: 244px; height: 155px; }
+.p-det-B .det-frame-2 { top: 329px; left: 40px; width: 244px; height: 155px; }
+.p-det-B .det-frame-3 { top: 496px; left: 40px; width: 244px; height: 155px; }
+.p-det-B .det-frame-4 { top: 278px; right: 52px; width: 180px; height: 148px; }
+.p-det-B .det-frame-5 { top: 440px; right: 52px; width: 180px; height: 148px; }
+
+/* ════════════════════════════════════════════════════════
+   ANIMAÇÃO FLY-IN — todos os frames voam da esquerda
+   (lado da foto da obra) para a posição final
+   Cada frame tem delay escalonado → cascata natural
+════════════════════════════════════════════════════════ */
+@keyframes frameIn {
+  from { opacity: 0; transform: translateX(-320px) scale(0.18); }
+  to   { opacity: 1; transform: none; }
+}
+.p-detalhe .det-frame {
+  animation: frameIn 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+.p-detalhe .det-frame-1 { animation-delay: 0.05s; }
+.p-detalhe .det-frame-2 { animation-delay: 0.22s; }
+.p-detalhe .det-frame-3 { animation-delay: 0.39s; }
+.p-detalhe .det-frame-4 { animation-delay: 0.56s; }
+.p-detalhe .det-frame-5 { animation-delay: 0.73s; }
+
+/* — OBRA 01 — zoom da fachada (topo-dir) + perfil do produto (base-esq, imagem inteira) */
+.p-det-zoom .det-frame-1 {                 /* PERFIL — base esquerda, grande */
+  top: 358px; left: 44px; width: 404px; height: 222px; z-index: 2;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.30), 0 8px 18px rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.04);
+}
+.p-det-zoom .det-frame-1 img { object-fit: contain; background: #fff; }  /* sem recortar */
+.p-det-zoom .det-frame-2 {                 /* ZOOM — topo direita, sobrepõe */
+  top: 152px; left: 372px; width: 288px; height: 230px; z-index: 3;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.30), 0 8px 18px rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.04);
+}
+
+/* — FRAME ÚNICO (Mahalo / Unique / BMW / projetos novos) — */
+.p-det-single .det-frame-1 { top: 75px; width: 282px; height: 460px; }
+.p-det-A.p-det-single .det-frame-1 { right: 40px; }
+.p-det-B.p-det-single .det-frame-1 { left:  40px; }
+
+/* — texto sempre à esquerda nos layouts perfil+zoom — */
+.p-det-zoom .det-content,
+.p-det-trio .det-content { max-width: 310px; }
+
+/* — segundo elemento quando é RENDER (reiki/fachada/perfil): contain em fundo branco — */
+.det-frame.det-render img { object-fit: contain; background: #fff; }
+
+/* — LAYOUT TRIO (zoom topo-dir + 2 renders na base) — projetos 02, 03, 05 — */
+.p-det-trio .det-frame-1 { top: 140px; left: 372px; width: 288px; height: 220px; z-index: 3;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.30), 0 8px 18px rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.04); }
+.p-det-trio .det-frame-2 { top: 384px; left: 44px;  width: 300px; height: 168px; z-index: 2;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.30), 0 8px 18px rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.04); }
+.p-det-trio .det-frame-3 { top: 384px; left: 360px; width: 300px; height: 168px; z-index: 2;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.30), 0 8px 18px rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.04); }
+
+/* — VIDROS: labels Antes / Depois — */
+.vv-frame { position: relative; }
+.vv-ab-label {
+  position: absolute; bottom: 10px; left: 12px;
+  font-size: 8px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+  color: rgba(255,255,255,0.88); background: rgba(0,0,0,0.52);
+  padding: 4px 10px;
+}
+
+/* — INOVAÇÃO — */
+.p-inov {
+  background: var(--dark); width: 700px; height: 700px;
+  position: relative; overflow: hidden;
+}
+.p-inov .inov-bg {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; display: block;
+}
+.p-inov .inov-overlay {
+  position: absolute; inset: 0;
+  background: rgba(10,11,13,0.38);
+}
+.p-inov-left .inov-center {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 22px;
+}
+.inov-rule { width: 48px; height: 1px; background: var(--red); }
+.inov-word {
+  font-size: 78px; font-weight: 100; color: #fff;
+  letter-spacing: 22px; text-transform: uppercase; line-height: 1;
+  text-indent: 22px;
+}
+
+.p-inov-right .inov-txt {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 60px 52px 56px;
+  background: linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.55) 55%, transparent 100%);
+}
+.inov-tag-r {
+  font-size: 9px; font-weight: 600; letter-spacing: 5px;
+  text-transform: uppercase; color: var(--red); margin-bottom: 18px;
+}
+.inov-phrase {
+  font-size: 28px; font-weight: 700; color: #fff;
+  line-height: 1.28; margin-bottom: 20px;
+}
+.inov-desc {
+  font-size: 11px; font-weight: 300; color: rgba(255,255,255,0.62);
+  line-height: 1.85; margin-bottom: 26px;
+}
+.inov-cta {
+  display: inline-block;
+  font-size: 9px; font-weight: 700; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--red);
+  border-bottom: 1px solid var(--red); padding-bottom: 3px;
+}
+
+/* — VIDROS INTELIGENTES — */
+.p-vidro {
+  width: 700px; height: 700px; position: relative; overflow: hidden;
+}
+.p-vidro-vid { background: #060708; }
+.p-vidro-vid video {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; opacity: 1;
+}
+.p-vidro-vid .vv-grad {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.80) 0%, rgba(0,0,0,0.30) 26%, transparent 52%);
+}
+.vv-phrase { font-size: 16px; font-weight: 300; color: #fff; line-height: 1.6; letter-spacing: 0.5px; max-width: 500px; text-shadow: 0 1px 12px rgba(0,0,0,0.5); }
+.vv-content { position: absolute; bottom: 58px; left: 60px; right: 60px; }
+.vv-sec   { font-size: 9px; font-weight: 600; letter-spacing: 5px; text-transform: uppercase; color: var(--red); margin-bottom: 14px; }
+.vv-title { font-size: 50px; font-weight: 100; color: #fff; letter-spacing: 6px; text-transform: uppercase; line-height: 1.1; margin-bottom: 20px; }
+.vv-rule  { width: 34px; height: 1px; background: var(--red); margin-bottom: 16px; }
+.vv-sub   { font-size: 11px; font-weight: 300; color: rgba(255,255,255,0.52); line-height: 1.85; }
+
+.p-vidro-imgs { background: #131315; }
+.vv-stack { width: 100%; height: 100%; display: flex; flex-direction: column; gap: 3px; }
+.vv-frame { flex: 1; overflow: hidden; }
+.vv-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* — PRODUTOS — */
+.p-prod {
+  background: var(--white); width: 700px; height: 700px;
+  padding: 64px 56px; display: flex; flex-direction: column; justify-content: center;
+}
+.p-prod .sec-label { font-size: 9px; font-weight: 600; letter-spacing: 5px; text-transform: uppercase; color: var(--red); margin-bottom: 10px; }
+.p-prod h2 { font-size: 28px; font-weight: 700; color: var(--dark); margin-bottom: 10px; }
+.p-prod .h-line { width: 34px; height: 2px; background: var(--red); margin-bottom: 38px; }
+.prod-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 26px 28px; }
+.prod-item .prod-icon { width: 36px; height: 36px; background: #F4F4F5; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
+.prod-item h4 { font-size: 13px; font-weight: 700; color: var(--dark); margin-bottom: 4px; }
+.prod-item p  { font-size: 11px; font-weight: 300; color: var(--gray); line-height: 1.7; }
+
+/* — CONTATO — */
+.p-cont {
+  background: var(--dark); width: 700px; height: 700px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 64px; position: relative; overflow: hidden; isolation: isolate;
+}
+.p-cont .logo   { width: 230px; margin-bottom: 36px; display: block; }
+.p-cont .c-line { width: 34px; height: 1px; background: var(--red); margin-bottom: 30px; }
+.p-cont .c-group { text-align: center; margin-bottom: 16px; }
+.p-cont .c-lbl  { font-size: 8px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 3px; }
+.p-cont .c-val  { font-size: 12px; font-weight: 300; color: rgba(255,255,255,0.78); }
+.p-cont .c-foot { position: absolute; bottom: 30px; font-size: 9px; font-weight: 300; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.14); }
+</style>
+</head>
+<body>
+
+<div id="pages" style="display:none">
+
+  <!-- PAGE 0 — CAPA -->
+  <div class="p-cover" data-page="0">
+    <video autoplay muted loop playsinline
+      style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1;opacity:0.35">
+      <source src="obras/_secoes/capa-video.mp4" type="video/mp4">
+    </video>
+    <img class="logo" src="assets/logo-white.png" alt="Centauro Esquadrias"
+         onerror="this.outerHTML='<div style=\'text-align:center\'><div style=\'font-size:26px;font-weight:700;color:#fff;letter-spacing:3px\'>CENTAURO</div><div style=\'font-size:11px;font-weight:300;color:#ED5454;letter-spacing:6px;margin-top:5px\'>ESQUADRIAS</div></div>'">
+    <div class="cover-line"></div>
+    <div class="tagline">Esquadrias de Alumínio de Alto Padrão</div>
+    <div class="badge-40">
+      <span class="b40-num">40</span>
+      <div class="b40-sub">
+        <span class="b40-anos">ANOS</span>
+        <span class="b40-exp">de experiência</span>
+      </div>
+    </div>
+    <span class="city">Guaratuba · PR</span>
+    <span class="year">2026</span>
+  </div>
+
+  <!-- PAGE 1 — SOBRE -->
+  <div class="p-sobre" data-page="1">
+    <div class="red-bar"></div>
+    <div class="content">
+      <div class="sec-label">Sobre a Empresa</div>
+      <h2>Qualidade que<br>transforma ambientes.</h2>
+      <p class="sobre-desc">Fundada em 1986, a Centauro Esquadrias é especializada em esquadrias de alumínio de alto padrão em Guaratuba, Paraná. Transformamos projetos em realidade através de janelas, portas e fachadas que unem precisão técnica, qualidade de materiais e design contemporâneo.</p>
+      <div class="counters">
+        <div class="counter-item">
+          <div class="cnt-row">
+            <span class="cnt-num" data-cnt="40" data-dur="2000">40</span>
+            <span class="cnt-plus">+</span>
+            <span class="cnt-unit">anos</span>
+          </div>
+          <div class="cnt-label">trabalhando com esquadrias</div>
+        </div>
+        <div class="cnt-sep" style="margin:4px 0"></div>
+        <div class="counter-item">
+          <div class="cnt-row">
+            <span class="cnt-prefix">+</span>
+            <span class="cnt-num" data-cnt="10000" data-dur="2500">10.000</span>
+          </div>
+          <div class="cnt-label">obras realizadas</div>
+        </div>
+      </div>
+    </div>
+    <img class="wm" src="assets/icone.png" alt="">
+  </div>
+
+  <!-- PROJETO 01 FOTO -->
+  <div class="p-foto" data-page="0">
+    <img class="obra-img" src="obras/projeto01/foto.jpg" alt="Projeto 01">
+    <div class="overlay"></div>
+    <div class="proj-label">
+      <div class="proj-num">Projeto 01</div>
+      <div class="proj-local">Guaratuba · Paraná</div>
+    </div>
+  </div>
+
+  <!-- PROJETO 01 DETALHE -->
+  <div class="p-detalhe p-det-zoom" data-page="0">
+    <div class="num-bg">01</div>
+    <img class="det-wm" src="assets/icone.png" alt="">
+    <div class="det-content">
+      <div class="det-label">Esquadrias Centauro</div>
+      <div class="det-local">Guaratuba · Paraná</div>
+      <div class="div-line"></div>
+      <div class="det-esq-lbl">Esquadrias utilizadas</div>
+      <div class="det-esq-val">Sublime 4.5</div>
+      <div class="det-fachada">Fachada (Atlanta)</div>
+    </div>
+    <div class="det-frame det-frame-1"><img src="obras/_perfis/sublime-4.5-preta.jpg" alt=""></div>
+    <div class="det-frame det-frame-2"><img src="obras/projeto01/zoom.jpg" alt=""></div>
+  </div>
+
+  <!-- PROJETO 02 FOTO -->
+  <div class="p-foto" data-page="0">
+    <img class="obra-img" src="obras/projeto02/foto.jpg" alt="Projeto 02">
+    <div class="overlay"></div>
+    <div class="proj-label">
+      <div class="proj-num">Projeto 02</div>
+      <div class="proj-local">Guaratuba · Paraná</div>
+    </div>
+  </div>
+
+  <!-- PROJETO 02 DETALHE -->
+  <div class="p-detalhe p-det-trio" data-page="0">
+    <div class="num-bg">02</div>
+    <img class="det-wm" src="assets/icone.png" alt="">
+    <div class="det-content">
+      <div class="det-label">Esquadrias Centauro</div>
+      <div class="det-local">Guaratuba · Paraná</div>
+      <div class="div-line"></div>
+      <div class="det-esq-lbl">Esquadrias utilizadas</div>
+      <div class="det-esq-val">Reiki Glazing</div>
+      <div class="det-esq-val">Sublime 3.5</div>
+      <div class="det-fachada">Fachada (Atlanta)</div>
+    </div>
+    <div class="det-frame det-frame-1"><img src="obras/projeto02/zoom.jpg" alt=""></div>
+    <div class="det-frame det-frame-2 det-render"><img src="obras/_perfis/sublime-3.5-branca.jpg" alt=""></div>
+    <div class="det-frame det-frame-3 det-render"><img src="obras/_perfis/reiki.jpg" alt=""></div>
+  </div>
+
+  <!-- PROJETO 03 FOTO -->
+  <div class="p-foto" data-page="0">
+    <img class="obra-img" src="obras/projeto03/foto.jpg" alt="Projeto 03">
+    <div class="overlay"></div>
+    <div class="proj-label">
+      <div class="proj-num">Projeto 03</div>
+      <div class="proj-local">Baía de Guaratuba</div>
+    </div>
+  </div>
+
+  <!-- PROJETO 03 DETALHE -->
+  <div class="p-detalhe p-det-trio" data-page="0">
+    <div class="num-bg">03</div>
+    <img class="det-wm" src="assets/icone.png" alt="">
+    <div class="det-content">
+      <div class="det-label">Esquadrias Centauro</div>
+      <div class="det-local">Baía de Guaratuba</div>
+      <div class="div-line"></div>
+      <div class="det-esq-lbl">Esquadrias utilizadas</div>
+      <div class="det-esq-val">Sublime 3.5</div>
+      <div class="det-esq-val">Sublime 2.5</div>
+    </div>
+    <div class="det-frame det-frame-1"><img src="obras/projeto03/zoom.jpg" alt=""></div>
+    <div class="det-frame det-frame-2 det-render"><img src="obras/_perfis/sublime-2.5-branca.jpg" alt=""></div>
+    <div class="det-frame det-frame-3 det-render"><img src="obras/_perfis/sublime-3.5-branca.jpg" alt=""></div>
+  </div>
+
+  <!-- PROJETO 04 FOTO -->
+  <div class="p-foto" data-page="0">
+    <img class="obra-img" src="obras/projeto04/foto.jpg" alt="Projeto 04">
+    <div class="overlay"></div>
+    <div class="proj-label">
+      <div class="proj-num">Projeto 04</div>
+      <div class="proj-local">Baía de Guaratuba</div>
+    </div>
+  </div>
+
+  <!-- PROJETO 04 DETALHE -->
+  <div class="p-detalhe p-det-zoom" data-page="0">
+    <div class="num-bg">04</div>
+    <img class="det-wm" src="assets/icone.png" alt="">
+    <div class="det-content">
+      <div class="det-label">Esquadrias Centauro</div>
+      <div class="det-local">Baía de Guaratuba</div>
+      <div class="div-line"></div>
+      <div class="det-esq-lbl">Esquadrias utilizadas</div>
+      <div class="det-esq-val">Sublime 3.5</div>
+    </div>
+    <div class="det-frame det-frame-1"><img src="obras/_perfis/sublime-3.5-branca.jpg" alt=""></div>
+    <div class="det-frame det-frame-2"><img src="obras/projeto04/zoom.jpg" alt=""></div>
+  </div>
+
+  <!-- PROJETO 05 FOTO -->
+  <div class="p-foto" data-page="0">
+    <img class="obra-img" src="obras/projeto05/foto.jpg" alt="Projeto 05">
+    <div class="overlay"></div>
+    <div class="proj-label">
+      <div class="proj-num">Projeto 05</div>
+      <div class="proj-local">Itapoá · SC</div>
+    </div>
+  </div>
+
+  <!-- PROJETO 05 DETALHE -->
+  <div class="p-detalhe p-det-trio" data-page="0">
+    <div class="num-bg">05</div>
+    <img class="det-wm" src="assets/icone.png" alt="">
+    <div class="det-content">
+      <div class="det-label">Esquadrias Centauro</div>
+      <div class="det-local">Itapoá · SC</div>
+      <div class="div-line"></div>
+      <div class="det-esq-lbl">Esquadrias utilizadas</div>
+      <div class="det-esq-val">Sublime 2.5</div>
+      <div class="det-esq-val">Sublime 3.5</div>
+      <div class="det-esq-val">Vidro Polarizado Inteligente</div>
+      <div class="det-fachada">Fachada (Atlanta)</div>
+    </div>
+    <div class="det-frame det-frame-1"><img src="obras/projeto05/zoom.jpg" alt=""></div>
+    <div class="det-frame det-frame-2 det-render"><img src="obras/_perfis/sublime-2.5-branca.jpg" alt=""></div>
+    <div class="det-frame det-frame-3 det-render"><img src="obras/_perfis/sublime-3.5-branca.jpg" alt=""></div>
+  </div>
+
+  <!-- PROJETO 06 FOTO -->
+  <div class="p-foto" data-page="0">
+    <img class="obra-img" src="obras/projeto06/foto.jpg" alt="Projeto 06">
+    <div class="overlay"></div>
+    <div class="proj-label">
+      <div class="proj-num">Projeto 06</div>
+      <div class="proj-local">Baía de Guaratuba</div>
+    </div>
+  </div>
+
+  <!-- PROJETO 06 DETALHE -->
+  <div class="p-detalhe p-det-zoom" data-page="0">
+    <div class="num-bg">06</div>
+    <img class="det-wm" src="assets/icone.png" alt="">
+    <div class="det-content">
+      <div class="det-label">Esquadrias Centauro</div>
+      <div class="det-local">Baía de Guaratuba</div>
+      <div class="div-line"></div>
+      <div class="det-esq-lbl">Esquadrias utilizadas</div>
+      <div class="det-esq-val">Sublime 3.5</div>
+    </div>
+    <div class="det-frame det-frame-1"><img src="obras/_perfis/sublime-3.5-branca.jpg" alt=""></div>
+    <div class="det-frame det-frame-2"><img src="obras/projeto06/zoom.jpg" alt=""></div>
+  </div>
+
+  <!-- PROJETO 07 FOTO -->
+  <div class="p-foto" data-page="0">
+    <img class="obra-img" src="obras/projeto07/foto.jpg" alt="Projeto 07">
+    <div class="overlay"></div>
+    <div class="proj-label">
+      <div class="proj-num">Projeto 07</div>
+      <div class="proj-local">Baía de Guaratuba</div>
+    </div>
+  </div>
+
+  <!-- PROJETO 07 DETALHE -->
+  <div class="p-detalhe p-det-zoom" data-page="0">
+    <div class="num-bg">07</div>
+    <img class="det-wm" src="assets/icone.png" alt="">
+    <div class="det-content">
+      <div class="det-label">Esquadrias Centauro</div>
+      <div class="det-local">Baía de Guaratuba</div>
+      <div class="div-line"></div>
+      <div class="det-esq-lbl">Esquadrias utilizadas</div>
+      <div class="det-esq-val">Sublime 3.5</div>
+    </div>
+    <div class="det-frame det-frame-1"><img src="obras/_perfis/sublime-3.5-branca.jpg" alt=""></div>
+    <div class="det-frame det-frame-2"><img src="obras/projeto07/zoom.jpg" alt=""></div>
+  </div>
+
+  <!-- PROJETO 08 FOTO -->
+  <div class="p-foto" data-page="0">
+    <img class="obra-img" src="obras/projeto08/foto.jpg" alt="Projeto 08">
+    <div class="overlay"></div>
+    <div class="proj-label">
+      <div class="proj-num">Projeto 08</div>
+      <div class="proj-local">Baía de Guaratuba</div>
+    </div>
+  </div>
+
+  <!-- PROJETO 08 DETALHE -->
+  <div class="p-detalhe p-det-zoom" data-page="0">
+    <div class="num-bg">08</div>
+    <img class="det-wm" src="assets/icone.png" alt="">
+    <div class="det-content">
+      <div class="det-label">Esquadrias Centauro</div>
+      <div class="det-local">Baía de Guaratuba</div>
+      <div class="div-line"></div>
+      <div class="det-esq-lbl">Esquadrias utilizadas</div>
+      <div class="det-esq-val">Sublime 3.5</div>
+    </div>
+    <div class="det-frame det-frame-1"><img src="obras/_perfis/sublime-3.5-preta.jpg" alt=""></div>
+    <div class="det-frame det-frame-2"><img src="obras/projeto08/zoom.jpg" alt=""></div>
+  </div>
+
+  <!-- PROJETO 09 FOTO -->
+  <div class="p-foto" data-page="0">
+    <img class="obra-img" src="obras/projeto09/foto.jpg" alt="Projeto 09">
+    <div class="overlay"></div>
+    <div class="proj-label">
+      <div class="proj-num">Projeto 09</div>
+      <div class="proj-local">Baía de Guaratuba</div>
+    </div>
+  </div>
+
+  <!-- PROJETO 09 DETALHE -->
+  <div class="p-detalhe p-det-zoom" data-page="0">
+    <div class="num-bg">09</div>
+    <img class="det-wm" src="assets/icone.png" alt="">
+    <div class="det-content">
+      <div class="det-label">Esquadrias Centauro</div>
+      <div class="det-local">Baía de Guaratuba</div>
+      <div class="div-line"></div>
+      <div class="det-esq-lbl">Esquadrias utilizadas</div>
+      <div class="det-esq-val">Sublime 3.5</div>
+    </div>
+    <div class="det-frame det-frame-1"><img src="obras/_perfis/sublime-3.5-branca.jpg" alt=""></div>
+    <div class="det-frame det-frame-2"><img src="obras/projeto09/zoom.jpg" alt=""></div>
+  </div>
+
+  <!-- PROJETO 10 FOTO -->
+  <div class="p-foto" data-page="0">
+    <img class="obra-img" src="obras/projeto10/foto.jpg" alt="Projeto 10">
+    <div class="overlay"></div>
+    <div class="proj-label">
+      <div class="proj-num">Projeto 10</div>
+      <div class="proj-local">Baía de Guaratuba</div>
+    </div>
+  </div>
+
+  <!-- PROJETO 10 DETALHE -->
+  <div class="p-detalhe p-det-zoom" data-page="0">
+    <div class="num-bg">10</div>
+    <img class="det-wm" src="assets/icone.png" alt="">
+    <div class="det-content">
+      <div class="det-label">Esquadrias Centauro</div>
+      <div class="det-local">Baía de Guaratuba</div>
+      <div class="div-line"></div>
+      <div class="det-esq-lbl">Esquadrias utilizadas</div>
+      <div class="det-esq-val">Sublime 3.5</div>
+    </div>
+    <div class="det-frame det-frame-1"><img src="obras/_perfis/sublime-3.5-branca.jpg" alt=""></div>
+    <div class="det-frame det-frame-2"><img src="obras/projeto10/zoom.jpg" alt=""></div>
+  </div>
+
+  <!-- PROJETO 11 FOTO -->
+  <div class="p-foto" data-page="0">
+    <img class="obra-img" src="obras/projeto11/foto.jpg" alt="Projeto 11">
+    <div class="overlay"></div>
+    <div class="proj-label">
+      <div class="proj-num">Projeto 11</div>
+      <div class="proj-local">Guaratuba · Paraná</div>
+    </div>
+  </div>
+
+  <!-- PROJETO 11 DETALHE -->
+  <div class="p-detalhe p-det-zoom" data-page="0">
+    <div class="num-bg">11</div>
+    <img class="det-wm" src="assets/icone.png" alt="">
+    <div class="det-content">
+      <div class="det-label">Esquadrias Centauro</div>
+      <div class="det-local">Guaratuba · Paraná</div>
+      <div class="div-line"></div>
+      <div class="det-esq-lbl">Esquadrias utilizadas</div>
+      <div class="det-esq-val">Sublime 3.5</div>
+    </div>
+    <div class="det-frame det-frame-1"><img src="obras/_perfis/sublime-3.5-preta.jpg" alt=""></div>
+    <div class="det-frame det-frame-2"><img src="obras/projeto11/zoom.jpg" alt=""></div>
+  </div>
+
+  <!-- PROJETO 12 FOTO -->
+  <div class="p-foto" data-page="0">
+    <img class="obra-img" src="obras/projeto12/foto.jpg" alt="Projeto 12">
+    <div class="overlay"></div>
+    <div class="proj-label">
+      <div class="proj-num">Projeto 12</div>
+      <div class="proj-local">Baía de Guaratuba</div>
+    </div>
+  </div>
+
+  <!-- PROJETO 12 DETALHE -->
+  <div class="p-detalhe p-det-zoom" data-page="0">
+    <div class="num-bg">12</div>
+    <img class="det-wm" src="assets/icone.png" alt="">
+    <div class="det-content">
+      <div class="det-label">Esquadrias Centauro</div>
+      <div class="det-local">Baía de Guaratuba</div>
+      <div class="div-line"></div>
+      <div class="det-esq-lbl">Esquadrias utilizadas</div>
+      <div class="det-esq-val">Sublime 3.5</div>
+    </div>
+    <div class="det-frame det-frame-1"><img src="obras/_perfis/sublime-3.5-preta.jpg" alt=""></div>
+    <div class="det-frame det-frame-2"><img src="obras/projeto12/zoom.jpg" alt=""></div>
+  </div>
+
+  <!-- PROJETO 13 FOTO -->
+  <div class="p-foto" data-page="0">
+    <img class="obra-img" src="obras/projeto13/foto.jpg" alt="Projeto 13">
+    <div class="overlay"></div>
+    <div class="proj-label">
+      <div class="proj-num">Projeto 13</div>
+      <div class="proj-local">Guaratuba · Paraná</div>
+    </div>
+  </div>
+
+  <!-- PROJETO 13 DETALHE -->
+  <div class="p-detalhe p-det-zoom" data-page="0">
+    <div class="num-bg">13</div>
+    <img class="det-wm" src="assets/icone.png" alt="">
+    <div class="det-content">
+      <div class="det-label">Esquadrias Centauro</div>
+      <div class="det-local">Guaratuba · Paraná</div>
+      <div class="div-line"></div>
+      <div class="det-esq-lbl">Esquadrias utilizadas</div>
+      <div class="det-esq-val">Sublime 2.5</div>
+      <div class="det-fachada">Fachada (Atlanta)</div>
+    </div>
+    <div class="det-frame det-frame-1"><img src="obras/_perfis/sublime-2.5-preta.jpg" alt=""></div>
+    <div class="det-frame det-frame-2"><img src="obras/projeto13/zoom.jpg" alt=""></div>
+  </div>
+
+  <!-- PROJETO 14 FOTO -->
+  <div class="p-foto" data-page="0">
+    <img class="obra-img" src="obras/projeto14/foto.jpg" alt="Projeto 14">
+    <div class="overlay"></div>
+    <div class="proj-label">
+      <div class="proj-num">Projeto 14</div>
+      <div class="proj-name">Ed. Phison</div>
+      <div class="proj-local">Guaratuba · Paraná</div>
+    </div>
+  </div>
+
+  <!-- PROJETO 14 DETALHE -->
+  <div class="p-detalhe p-det-zoom" data-page="0">
+    <div class="num-bg">14</div>
+    <img class="det-wm" src="assets/icone.png" alt="">
+    <div class="det-content">
+      <div class="det-label">Esquadrias Centauro</div>
+      <div class="det-title">Ed. Phison</div>
+      <div class="det-local">Guaratuba · Paraná</div>
+      <div class="div-line"></div>
+      <div class="det-esq-lbl">Esquadrias utilizadas</div>
+      <div class="det-esq-val">Sublime 3.5</div>
+    </div>
+    <div class="det-frame det-frame-1"><img src="obras/_perfis/sublime-3.5-preta.jpg" alt=""></div>
+    <div class="det-frame det-frame-2"><img src="obras/projeto14/zoom.jpg" alt=""></div>
+  </div>
+
+  <!-- PROJETO 15 FOTO -->
+  <div class="p-foto" data-page="0">
+    <img class="obra-img" src="obras/projeto15/foto.jpg" alt="Projeto 15">
+    <div class="overlay"></div>
+    <div class="proj-label">
+      <div class="proj-num">Projeto 15</div>
+      <div class="proj-name">Ed. Ancona</div>
+      <div class="proj-local">Guaratuba · Paraná</div>
+    </div>
+  </div>
+
+  <!-- PROJETO 15 DETALHE -->
+  <div class="p-detalhe p-det-zoom" data-page="0">
+    <div class="num-bg">15</div>
+    <img class="det-wm" src="assets/icone.png" alt="">
+    <div class="det-content">
+      <div class="det-label">Esquadrias Centauro</div>
+      <div class="det-title">Ed. Ancona</div>
+      <div class="det-local">Guaratuba · Paraná</div>
+      <div class="div-line"></div>
+      <div class="det-esq-lbl">Esquadrias utilizadas</div>
+      <div class="det-esq-val">Sublime 3.5</div>
+    </div>
+    <div class="det-frame det-frame-1"><img src="obras/_perfis/sublime-3.5-branca.jpg" alt=""></div>
+    <div class="det-frame det-frame-2"><img src="obras/projeto15/zoom.jpg" alt=""></div>
+  </div>
+
+  <!-- PROJETO 16 FOTO -->
+  <div class="p-foto" data-page="0">
+    <img class="obra-img" src="obras/projeto16/foto.jpg" alt="Projeto 16">
+    <div class="overlay"></div>
+    <div class="proj-label">
+      <div class="proj-num">Projeto 16</div>
+      <div class="proj-name">Ed. Malibu</div>
+      <div class="proj-local">Guaratuba · Paraná</div>
+    </div>
+  </div>
+
+  <!-- PROJETO 16 DETALHE -->
+  <div class="p-detalhe p-det-zoom" data-page="0">
+    <div class="num-bg">16</div>
+    <img class="det-wm" src="assets/icone.png" alt="">
+    <div class="det-content">
+      <div class="det-label">Esquadrias Centauro</div>
+      <div class="det-title">Ed. Malibu</div>
+      <div class="det-local">Guaratuba · Paraná</div>
+      <div class="div-line"></div>
+      <div class="det-esq-lbl">Esquadrias utilizadas</div>
+      <div class="det-esq-val">Sublime 3.5</div>
+      <div class="det-esq-val">Reiki Glazing</div>
+    </div>
+    <div class="det-frame det-frame-1"><img src="obras/_perfis/sublime-3.5-branca.jpg" alt=""></div>
+    <div class="det-frame det-frame-2 det-render"><img src="obras/_perfis/reiki.jpg" alt=""></div>
+  </div>
+
+  <!-- PROJETO 17 FOTO -->
+  <div class="p-foto" data-page="0">
+    <img class="obra-img" src="obras/projeto17/foto.jpg" alt="Projeto 17">
+    <div class="overlay"></div>
+    <div class="proj-label">
+      <div class="proj-num">Projeto 17</div>
+      <div class="proj-name">Ed. Valência</div>
+      <div class="proj-local">Guaratuba · Paraná</div>
+    </div>
+  </div>
+
+  <!-- PROJETO 17 DETALHE -->
+  <div class="p-detalhe p-det-zoom" data-page="0">
+    <div class="num-bg">17</div>
+    <img class="det-wm" src="assets/icone.png" alt="">
+    <div class="det-content">
+      <div class="det-label">Esquadrias Centauro</div>
+      <div class="det-title">Ed. Valência</div>
+      <div class="det-local">Guaratuba · Paraná</div>
+      <div class="div-line"></div>
+      <div class="det-esq-lbl">Esquadrias utilizadas</div>
+      <div class="det-esq-val">Sublime 3.5</div>
+      <div class="det-esq-val">Reiki Glazing</div>
+    </div>
+    <div class="det-frame det-frame-1"><img src="obras/_perfis/sublime-3.5-branca.jpg" alt=""></div>
+    <div class="det-frame det-frame-2 det-render"><img src="obras/_perfis/reiki.jpg" alt=""></div>
+  </div>
+
+  <!-- PROJETO 18 FOTO -->
+  <div class="p-foto" data-page="0">
+    <img class="obra-img" src="obras/projeto18/foto.jpg" alt="Projeto 18">
+    <div class="overlay"></div>
+    <div class="proj-label">
+      <div class="proj-num">Projeto 18</div>
+      <div class="proj-name">Ed. Ilha do Mel</div>
+      <div class="proj-local">Guaratuba · Paraná</div>
+    </div>
+  </div>
+
+  <!-- PROJETO 18 DETALHE -->
+  <div class="p-detalhe p-det-zoom" data-page="0">
+    <div class="num-bg">18</div>
+    <img class="det-wm" src="assets/icone.png" alt="">
+    <div class="det-content">
+      <div class="det-label">Esquadrias Centauro</div>
+      <div class="det-title">Ed. Ilha do Mel</div>
+      <div class="det-local">Guaratuba · Paraná</div>
+      <div class="div-line"></div>
+      <div class="det-esq-lbl">Esquadrias utilizadas</div>
+      <div class="det-esq-val">Sublime 3.5</div>
+    </div>
+    <div class="det-frame det-frame-1"><img src="obras/_perfis/sublime-3.5-branca.jpg" alt=""></div>
+    <div class="det-frame det-frame-2"><img src="obras/projeto18/zoom.jpg" alt=""></div>
+  </div>
+
+  <!-- PROJETO 19 FOTO -->
+  <div class="p-foto" data-page="0">
+    <img class="obra-img" src="obras/projeto19/foto.jpg" alt="Projeto 19">
+    <div class="overlay"></div>
+    <div class="proj-label">
+      <div class="proj-num">Projeto 19</div>
+      <div class="proj-name">Ed. Mahalo Front Beach</div>
+      <div class="proj-local">Itapoá · SC</div>
+    </div>
+  </div>
+
+  <!-- PROJETO 19 DETALHE -->
+  <div class="p-detalhe p-det-zoom" data-page="0">
+    <div class="num-bg">19</div>
+    <img class="det-wm" src="assets/icone.png" alt="">
+    <div class="det-content">
+      <div class="det-label">Esquadrias Centauro</div>
+      <div class="det-title">Ed. Mahalo Front Beach</div>
+      <div class="det-local">Itapoá · SC</div>
+      <div class="div-line"></div>
+      <div class="det-esq-lbl">Esquadrias utilizadas</div>
+      <div class="det-esq-val">Sublime 3.5</div>
+      <div class="det-esq-val">Reiki Glazing</div>
+      <div class="det-fachada">Fachada (Atlanta)</div>
+    </div>
+    <div class="det-frame det-frame-1"><img src="obras/_perfis/sublime-3.5-preta.jpg" alt=""></div>
+    <div class="det-frame det-frame-2 det-render"><img src="obras/_perfis/reiki.jpg" alt=""></div>
+  </div>
+
+  <!-- PROJETO 20 FOTO -->
+  <div class="p-foto" data-page="0">
+    <img class="obra-img" src="obras/projeto20/foto.jpg" alt="Projeto 20">
+    <div class="overlay"></div>
+    <div class="proj-label">
+      <div class="proj-num">Projeto 20</div>
+      <div class="proj-name">Ed. Unique</div>
+      <div class="proj-local">Matinhos · PR</div>
+    </div>
+  </div>
+
+  <!-- PROJETO 20 DETALHE -->
+  <div class="p-detalhe p-det-zoom" data-page="0">
+    <div class="num-bg">20</div>
+    <img class="det-wm" src="assets/icone.png" alt="">
+    <div class="det-content">
+      <div class="det-label">Esquadrias Centauro</div>
+      <div class="det-title">Ed. Unique</div>
+      <div class="det-local">Matinhos · PR</div>
+      <div class="div-line"></div>
+      <div class="det-esq-lbl">Esquadrias utilizadas</div>
+      <div class="det-esq-val">Sublime 3.5</div>
+      <div class="det-fachada">Fachada (Atlanta)</div>
+    </div>
+    <div class="det-frame det-frame-1"><img src="obras/_perfis/sublime-3.5-preta.jpg" alt=""></div>
+    <div class="det-frame det-frame-2 det-render"><img src="obras/_perfis/fachada_atlanta.jpg" alt=""></div>
+  </div>
+
+  <!-- PROJETO 21 FOTO -->
+  <div class="p-foto" data-page="0">
+    <img class="obra-img" src="obras/projeto21/foto.jpg" alt="Projeto 21">
+    <div class="overlay"></div>
+    <div class="proj-label">
+      <div class="proj-num">Projeto 21</div>
+      <div class="proj-name">Euro Import BMW</div>
+      <div class="proj-local">Joinville · SC</div>
+    </div>
+  </div>
+
+  <!-- PROJETO 21 DETALHE -->
+  <div class="p-detalhe p-det-zoom" data-page="0">
+    <div class="num-bg">21</div>
+    <img class="det-wm" src="assets/icone.png" alt="">
+    <div class="det-content">
+      <div class="det-label">Esquadrias Centauro</div>
+      <div class="det-title">Euro Import BMW</div>
+      <div class="det-local">Joinville · SC</div>
+      <div class="div-line"></div>
+      <div class="det-esq-lbl">Esquadrias utilizadas</div>
+      <div class="det-esq-val">Sublime 3.5</div>
+      <div class="det-fachada">Fachada (Atlanta)</div>
+    </div>
+    <div class="det-frame det-frame-1"><img src="obras/_perfis/sublime-3.5-preta.jpg" alt=""></div>
+    <div class="det-frame det-frame-2 det-render"><img src="obras/_perfis/fachada_atlanta.jpg" alt=""></div>
+  </div>
+
+  <!-- PROJETO 22 FOTO -->
+  <div class="p-foto" data-page="0">
+    <img class="obra-img" src="obras/projeto22/foto.jpg" alt="Projeto 22">
+    <div class="overlay"></div>
+    <div class="proj-label">
+      <div class="proj-num">Projeto 22</div>
+      <div class="proj-name">Euro Import BMW</div>
+      <div class="proj-local">Cascavel · PR</div>
+    </div>
+  </div>
+
+  <!-- PROJETO 22 DETALHE -->
+  <div class="p-detalhe p-det-zoom" data-page="0">
+    <div class="num-bg">22</div>
+    <img class="det-wm" src="assets/icone.png" alt="">
+    <div class="det-content">
+      <div class="det-label">Esquadrias Centauro</div>
+      <div class="det-title">Euro Import BMW</div>
+      <div class="det-local">Cascavel · PR</div>
+      <div class="div-line"></div>
+      <div class="det-esq-lbl">Esquadrias utilizadas</div>
+      <div class="det-esq-val">Sublime 3.5</div>
+      <div class="det-fachada">Fachada (Atlanta)</div>
+    </div>
+    <div class="det-frame det-frame-1"><img src="obras/_perfis/sublime-3.5-preta.jpg" alt=""></div>
+    <div class="det-frame det-frame-2 det-render"><img src="obras/_perfis/fachada_atlanta.jpg" alt=""></div>
+  </div>
+
+
+  <!-- PAGE 42 — INOVAÇÃO ESQUERDA (foto17) -->
+  <div class="p-inov p-inov-left" data-page="42">
+    <img class="inov-bg" src="obras/_secoes/inovacao-fundo.jpg" alt="">
+    <div class="inov-overlay"></div>
+    <div class="inov-center">
+      <div class="inov-rule"></div>
+      <div class="inov-word">INOVAÇÃO</div>
+      <div class="inov-rule"></div>
+    </div>
+  </div>
+
+  <!-- PAGE 43 — INOVAÇÃO DIREITA (foto18 limpa) -->
+  <div class="p-inov p-inov-right" data-page="43">
+    <img class="inov-bg" src="obras/_secoes/inovacao-limpa.jpg" alt="">
+  </div>
+
+  <!-- PAGE 44 — VIDROS: ANTES / DEPOIS -->
+  <div class="p-vidro p-vidro-imgs" data-page="44">
+    <div class="vv-stack">
+      <div class="vv-frame">
+        <img src="obras/_secoes/vidro-antes.jpg" alt="">
+        <div class="vv-ab-label">Antes — Desligado</div>
+      </div>
+      <div class="vv-frame">
+        <img src="obras/_secoes/vidro-depois.jpg" alt="">
+        <div class="vv-ab-label">Depois — Ligado</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 45 — VIDROS INTELIGENTES VÍDEO -->
+  <div class="p-vidro p-vidro-vid" data-page="45">
+    <video autoplay muted loop playsinline>
+      <source src="obras/_secoes/vidro-video.mp4" type="video/mp4">
+    </video>
+    <div class="vv-grad"></div>
+    <div class="vv-content">
+      <div class="vv-rule"></div>
+      <div class="vv-phrase">Assista até o final e entenda como funciona o nosso vidro polarizado inteligente.</div>
+    </div>
+  </div>
+
+  <!-- PAGE 46 — PRODUTOS -->
+  <div class="p-prod" data-page="46">
+    <div class="sec-label">O que fazemos</div>
+    <h2>Nossas Soluções</h2>
+    <div class="h-line"></div>
+    <div class="prod-grid">
+      <div class="prod-item">
+        <div class="prod-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#34353A" stroke-width="1.6">
+            <rect x="3" y="3" width="18" height="18" rx="1.5"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="12" y1="3" x2="12" y2="21"/>
+          </svg>
+        </div>
+        <h4>Janelas</h4>
+        <p>Correr, maxim-ar, basculante e fixas em alumínio de alto padrão com vidros temperados.</p>
+      </div>
+      <div class="prod-item">
+        <div class="prod-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#34353A" stroke-width="1.6">
+            <rect x="4" y="2" width="16" height="21" rx="1.5"/><circle cx="16.5" cy="12" r="1"/>
+          </svg>
+        </div>
+        <h4>Portas</h4>
+        <p>Pivotantes, de correr e em vidro com perfil slim, elegância e durabilidade.</p>
+      </div>
+      <div class="prod-item">
+        <div class="prod-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#34353A" stroke-width="1.6">
+            <rect x="2" y="3" width="20" height="18" rx="1.5"/><line x1="2" y1="9" x2="22" y2="9"/><line x1="2" y1="15" x2="22" y2="15"/>
+          </svg>
+        </div>
+        <h4>Fachadas</h4>
+        <p>Sistemas estruturais e semi-estruturais que valorizam a arquitetura do projeto.</p>
+      </div>
+      <div class="prod-item">
+        <div class="prod-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#34353A" stroke-width="1.6">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>
+          </svg>
+        </div>
+        <h4>Vidros Especiais</h4>
+        <p>Temperados, laminados, insulados e com controle solar — soluções completas.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 47 — CONTATO -->
+  <div class="p-cont" data-page="47">
+    <img class="logo" src="assets/logo-white.png" alt="Centauro Esquadrias"
+         onerror="this.outerHTML='<div style=\'text-align:center;margin-bottom:36px\'><div style=\'font-size:22px;font-weight:700;color:#fff;letter-spacing:3px\'>CENTAURO</div><div style=\'font-size:10px;font-weight:300;color:#ED5454;letter-spacing:6px;margin-top:4px\'>ESQUADRIAS</div></div>'">
+    <div class="c-line"></div>
+    <div class="c-group">
+      <div class="c-lbl">Website</div>
+      <div class="c-val">www.esquadriascentauro.com.br/guaratuba</div>
+    </div>
+    <div class="c-group">
+      <div class="c-lbl">WhatsApp</div>
+      <div class="c-val">+55 (41) 8834-2009</div>
+    </div>
+    <div class="c-group">
+      <div class="c-lbl">E-mail</div>
+      <div class="c-val">contato@esquadriascentauro.com.br</div>
+    </div>
+    <div class="c-group">
+      <div class="c-lbl">Instagram</div>
+      <div class="c-val">@centauroesquadrias</div>
+    </div>
+    <div class="c-foot">Guaratuba · Paraná · Brasil</div>
+  </div>
+
+</div><!-- /#pages -->
+
+<!-- ═══════════════════ BOOK UI ═══════════════════ -->
+<div id="stage">
+  <button class="nav-btn" id="prev-btn" disabled>
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <div id="book-wrap">
+    <div id="spread">
+      <div class="half" id="half-left"></div>
+      <div class="half" id="half-right"></div>
+    </div>
+    <div id="flip-card">
+      <div id="flip-face"></div>
+      <div id="flip-back"></div>
+    </div>
+    <div id="book-shadow"></div>
+  </div>
+  <button class="nav-btn" id="next-btn">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+</div>
+
+<div id="indicator"></div>
+
+<button id="fs-btn" title="Tela cheia">
+  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+  </svg>
+</button>
+
+<script>
+(function () {
+  'use strict';
+
+  var TOTAL, SPREADS;
+  var cur     = 0;
+  var busy    = false;
+  var FLIP_MS = 600;
+
+  var pages = Array.from(document.querySelectorAll('#pages > [data-page]'));
+
+  /* numeração automática por ordem do DOM:
+     cada .p-foto inicia um projeto; o .p-detalhe seguinte herda o número.
+     inserir projeto = só colar o bloco (foto+detalhe); nada de renumerar à mão. */
+  (function () {
+    var proj = 0;
+    var pad = function (n) { return (n < 10 ? '0' : '') + n; };
+    pages.forEach(function (p, i) {
+      p.setAttribute('data-page', i);
+      if (p.classList.contains('p-foto')) {
+        proj++;
+        var pn = p.querySelector('.proj-num');
+        if (pn) pn.textContent = 'Projeto ' + pad(proj);
+      } else if (p.classList.contains('p-detalhe')) {
+        var nb = p.querySelector('.num-bg');
+        if (nb) nb.textContent = pad(proj);
+      }
+    });
+  })();
+  TOTAL   = pages.length;
+  SPREADS = TOTAL / 2;
+  var halves = [
+    document.getElementById('half-left'),
+    document.getElementById('half-right')
+  ];
+  var flipCard = document.getElementById('flip-card');
+  var flipFace = document.getElementById('flip-face');
+  var flipBk   = document.getElementById('flip-back');
+  var prevBtn  = document.getElementById('prev-btn');
+  var nextBtn  = document.getElementById('next-btn');
+  var indicator = document.getElementById('indicator');
+
+  /* ── counter animation — re-animates on each visit to Sobre page ── */
+  function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+  function countUp(el, target, duration) {
+    var start = performance.now();
+    (function tick(now) {
+      var p = Math.min((now - start) / duration, 1);
+      el.textContent = Math.round(target * easeOut(p)).toLocaleString('pt-BR');
+      if (p < 1) requestAnimationFrame(tick);
+    })(performance.now());
+  }
+  function activateCounters(container) {
+    container.querySelectorAll('[data-cnt]').forEach(function (el) {
+      countUp(
+        el,
+        parseInt(el.getAttribute('data-cnt'), 10),
+        parseInt(el.getAttribute('data-dur') || '2000', 10)
+      );
+    });
+  }
+
+  /* ── helpers ── */
+  function getPage(idx) {
+    var el = pages[idx];
+    return el ? el.cloneNode(true) : document.createElement('div');
+  }
+
+  function setHalf(side, pageIdx) {
+    var h = halves[side];
+    h.innerHTML = '';
+    if (pageIdx >= 0 && pageIdx < TOTAL) h.appendChild(getPage(pageIdx));
+  }
+
+  /* showSpread: skipSide avoids re-inserting a half already pre-populated
+     during flip, preventing the CSS animation from restarting (mini-loop fix) */
+  function showSpread(spreadIdx, skipSide) {
+    if (skipSide !== 0) setHalf(0, spreadIdx * 2);
+    if (skipSide !== 1) setHalf(1, spreadIdx * 2 + 1);
+    activateCounters(halves[0]);
+    activateCounters(halves[1]);
+    updateUI(spreadIdx);
+  }
+
+  function updateUI(spreadIdx) {
+    indicator.textContent = (spreadIdx * 2 + 1) + '–' + Math.min(spreadIdx * 2 + 2, TOTAL) + ' / ' + TOTAL;
+    prevBtn.disabled = (spreadIdx === 0);
+    nextBtn.disabled = (spreadIdx === SPREADS - 1);
+  }
+
+  /* ════════════════════════════════════════════════════════
+     FLIP LOGIC
+
+     FORWARD (dir +1):
+       flip-face = cur right page (cur*2+1) → turns
+       flip-back = new left page  (next*2)  → revealed
+       card: left=700, origin=left, 0° → -180°
+       pre-populate right half (next*2+1) — hidden under card
+       showSpread skips right half (skipSide=1) to avoid restarting fly-in
+
+     BACKWARD (dir -1):
+       flip-face = cur left page  (cur*2)    → turns
+       flip-back = new right page (next*2+1) → revealed
+       card: left=0, origin=right, 0° → +180°
+       pre-populate left half (next*2) — hidden under card
+       showSpread skips left half (skipSide=0)
+  ════════════════════════════════════════════════════════ */
+  function flip(dir) {
+    if (busy) return;
+    var next = cur + dir;
+    if (next < 0 || next >= SPREADS) return;
+    busy = true;
+
+    var isForward = dir > 0;
+
+    flipFace.innerHTML = '';
+    flipBk.innerHTML   = '';
+
+    if (isForward) {
+      flipFace.appendChild(getPage(cur * 2 + 1));
+      flipBk.appendChild(getPage(next * 2));
+      flipCard.className = 'flipping-forward';
+      setHalf(1, next * 2 + 1);
+    } else {
+      flipFace.appendChild(getPage(cur * 2));
+      flipBk.appendChild(getPage(next * 2 + 1));
+      flipCard.className = 'flipping-back';
+      setHalf(0, next * 2);
+    }
+
+    flipCard.style.transition = 'none';
+    flipCard.style.transform  = 'rotateY(0deg)';
+    flipCard.style.display    = 'block';
+
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        flipCard.style.transition = 'transform ' + FLIP_MS + 'ms cubic-bezier(0.42, 0, 0.58, 1)';
+        flipCard.style.transform  = isForward ? 'rotateY(-180deg)' : 'rotateY(180deg)';
+      });
+    });
+
+    setTimeout(function () {
+      flipCard.style.display    = 'none';
+      flipCard.style.transition = 'none';
+      cur = next;
+      showSpread(cur, isForward ? 1 : 0);
+      busy = false;
+    }, FLIP_MS + 20);
+  }
+
+  /* ── controls ── */
+  prevBtn.addEventListener('click', function () { flip(-1); });
+  nextBtn.addEventListener('click', function () { flip(+1); });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   flip(-1);
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown')  flip(+1);
+  });
+
+  var tx = 0;
+  document.addEventListener('touchstart', function (e) { tx = e.touches[0].clientX; }, {passive:true});
+  document.addEventListener('touchend', function (e) {
+    var dx = e.changedTouches[0].clientX - tx;
+    if (Math.abs(dx) > 50) flip(dx < 0 ? +1 : -1);
+  }, {passive:true});
+
+  document.getElementById('fs-btn').addEventListener('click', function () {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen && document.documentElement.requestFullscreen();
+    } else {
+      document.exitFullscreen && document.exitFullscreen();
+    }
+  });
+
+  showSpread(0);
+
+})();
+</script>
+</body>
+</html>
