@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Centauro Esquadrias — Portfólio de Obras</title>
+<meta name="description" content="40 anos de excelência em esquadrias de alumínio de alto padrão. Conheça nossos projetos.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Centauro Esquadrias">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:url" content="https://centauroesquadrias.com.br/">
+<meta property="og:title" content="Centauro Esquadrias — Portfólio de Obras">
+<meta property="og:description" content="40 anos de excelência em esquadrias de alumínio de alto padrão. Conheça nossos projetos.">
+<meta property="og:image" content="https://centauroesquadrias.com.br/og-image.jpg">
+<meta property="og:image:secure_url" content="https://centauroesquadrias.com.br/og-image.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Centauro Esquadrias — Portfólio de Obras">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Centauro Esquadrias — Portfólio de Obras">
+<meta name="twitter:description" content="40 anos de excelência em esquadrias de alumínio de alto padrão.">
+<meta name="twitter:image" content="https://centauroesquadrias.com.br/og-image.jpg">
+<script>
+  (function () {
+    if (/[?&]preview/i.test(location.search)) return;
+    var isMobile = window.innerWidth <= 900 || /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    if (!isMobile) window.location.replace('portfolio.html');
+  })();
+</script>
+<style>
+@font-face {
+  font-family: 'Kumbh Sans';
+  src: url('assets/KumbhSans.ttf') format('truetype');
+  font-weight: 100 900;
+  font-display: swap;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root { --red: #cc1818; --dark: #1a1b1d; --gray: #777; }
+
+html {
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  height: 100%;
+  scroll-behavior: smooth;
+}
+body {
+  font-family: 'Kumbh Sans', sans-serif;
+  background: var(--dark);
+  height: 100%;
+}
+
+/* ── CARD BASE ── */
+.card {
+  width: 100vw;
+  height: 100svh;
+  min-height: -webkit-fill-available;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── BACKGROUNDS ── */
+.card-bg {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+}
+.card-video {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+
+/* ── OVERLAYS ── */
+.ov-dark  { position: absolute; inset: 0; background: rgba(0,0,0,0.40); }
+.ov-bottom { position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.28) 52%, transparent 100%); }
+.ov-top   { position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.52) 0%, transparent 40%); }
+
+/* ── SCROLL HINT ── */
+.scroll-hint {
+  position: absolute; bottom: 22px; left: 50%;
+  transform: translateX(-50%);
+  animation: bounce 2.2s ease-in-out infinite;
+  pointer-events: none;
+}
+.scroll-hint svg { width: 22px; height: 22px; display: block; }
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.4; }
+  50%       { transform: translateX(-50%) translateY(9px); opacity: 0.7; }
+}
+.capa-arraste {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+  text-align: center; pointer-events: none;
+  animation: arrasteFade 3.1s ease 0.25s both;
+}
+.capa-arraste span {
+  font-size: 9px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase;
+  color: rgba(255,255,255,0.72); text-indent: 4px; white-space: nowrap;
+}
+.capa-chev { width: 24px; height: 24px; animation: capaChevBounce 2s ease-in-out infinite; }
+@keyframes capaChevBounce {
+  0%, 100% { transform: translateY(0); opacity: 0.5; }
+  50%       { transform: translateY(8px); opacity: 0.95; }
+}
+@keyframes arrasteFade { 0% { opacity: 0; } 74% { opacity: 0; } 100% { opacity: 1; } }
+
+/* ════════════════════ CAPA ════════════════════ */
+.card-capa .capa-content {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 48px 32px;
+}
+.capa-logo  { width: 150px; margin-bottom: 26px; }
+.capa-line  { width: 34px; height: 1px; background: var(--red); margin: 0 auto 20px; }
+.capa-tag   { font-size: 8px; font-weight: 600; letter-spacing: 6px; text-transform: uppercase;
+              color: rgba(255,255,255,0.45); margin-bottom: 32px; text-indent: 6px; }
+.badge-40   { display: flex; align-items: baseline; gap: 7px; margin-bottom: 6px; }
+.b40-num    { font-size: 58px; font-weight: 900; color: var(--red); line-height: 1; }
+.b40-txt    { font-size: 13px; font-weight: 300; letter-spacing: 5px; color: #fff; text-transform: uppercase; }
+.capa-anos  { font-size: 8px; font-weight: 300; letter-spacing: 4px; text-transform: uppercase;
+              color: rgba(255,255,255,0.35); text-indent: 4px; }
+
+/* — animação de abertura: logo sobe · 40 anos desce · linha some — */
+@keyframes capaRise {
+  0%   { opacity: 0; transform: translateY(18px); }
+  38%  { opacity: 1; transform: translateY(0); }
+  100% { opacity: 1; transform: translateY(-30vh); }
+}
+@keyframes capaSink {
+  0%   { opacity: 0; transform: translateY(-18px); }
+  38%  { opacity: 1; transform: translateY(0); }
+  100% { opacity: 1; transform: translateY(26vh); }
+}
+@keyframes capaLineOut {
+  0% { opacity: 0; transform: scaleX(1); }
+  38% { opacity: 1; transform: scaleX(1); }
+  62% { opacity: 1; transform: scaleX(1); }
+  100% { opacity: 0; transform: scaleX(0.15); }
+}
+.card-capa .capa-logo { animation: capaRise    2.6s cubic-bezier(0.22,0.61,0.36,1) 0.25s both; }
+.card-capa .capa-tag  { animation: capaRise    2.6s cubic-bezier(0.22,0.61,0.36,1) 0.25s both; }
+.card-capa .badge-40  { animation: capaSink    2.6s cubic-bezier(0.22,0.61,0.36,1) 0.25s both; }
+.card-capa .capa-anos { animation: capaSink    2.6s cubic-bezier(0.22,0.61,0.36,1) 0.25s both; }
+.card-capa .capa-line { animation: capaLineOut 2.6s ease 0.25s both; }
+
+/* ════════════════════ SOBRE ════════════════════ */
+.card-sobre { background: #fff; justify-content: center; }
+.sobre-bar  { position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--red); }
+.sobre-inner { position: relative; z-index: 1; padding: 52px 40px; }
+.sec-lbl    { font-size: 8px; font-weight: 600; letter-spacing: 5px; text-transform: uppercase;
+              color: var(--red); margin-bottom: 14px; }
+.sobre-h2   { font-size: 25px; font-weight: 700; color: var(--dark); line-height: 1.25; margin-bottom: 16px; }
+.sobre-txt  { font-size: 12px; font-weight: 400; color: var(--gray); line-height: 1.85; margin-bottom: 36px; }
+.counters-mob { display: flex; flex-direction: column; gap: 0; }
+.cnt-item   {}
+.cnt-row    { display: flex; align-items: baseline; gap: 5px; margin-bottom: 3px; }
+.cnt-num    { font-size: 52px; font-weight: 900; color: var(--dark); line-height: 1; }
+.cnt-plus   { font-size: 22px; font-weight: 700; color: var(--red); }
+.cnt-unit   { font-size: 14px; font-weight: 300; color: var(--gray); }
+.cnt-lbl    { font-size: 8px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: #bbb; margin-bottom: 18px; }
+.cnt-sep    { width: 28px; height: 1px; background: #eaeaea; margin-bottom: 18px; }
+
+/* ════════════════════ PROJETOS ════════════════════ */
+.num-bg-mob {
+  position: absolute; top: 18px; right: 16px;
+  font-size: 88px; font-weight: 900; line-height: 1;
+  color: rgba(255,255,255,0.07); pointer-events: none;
+}
+.proj-info  { position: absolute; bottom: 0; left: 0; right: 0; padding: 32px 32px 52px; }
+.proj-num   { font-size: 8px; font-weight: 700; letter-spacing: 5px; text-transform: uppercase;
+              color: var(--red); margin-bottom: 6px; }
+.proj-name  { font-size: 24px; font-weight: 700; color: #fff; line-height: 1.2; margin-bottom: 3px; }
+.proj-loc   { font-size: 10px; font-weight: 300; letter-spacing: 2.5px;
+              color: rgba(255,255,255,0.5); margin-bottom: 14px; }
+.proj-div   { width: 22px; height: 1px; background: var(--red); margin-bottom: 10px; }
+.proj-esq-lbl { font-size: 7px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+                color: rgba(255,255,255,0.32); margin-bottom: 5px; }
+.proj-esq   { font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.72); line-height: 1.65; }
+.proj-fach  { font-size: 10px; font-weight: 300; color: rgba(255,255,255,0.32); margin-top: 4px; }
+
+/* ════════════════════ INOVAÇÃO ════════════════════ */
+.card-inov .inov-center {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 20px;
+}
+.inov-rule  { width: 36px; height: 1px; background: var(--red); }
+.inov-word  { font-size: 42px; font-weight: 100; color: #fff;
+              letter-spacing: 14px; text-transform: uppercase; text-indent: 14px; line-height: 1; }
+.inov-sub   { font-size: 8px; font-weight: 300; letter-spacing: 5px; text-transform: uppercase;
+              color: rgba(255,255,255,0.22); text-indent: 5px; }
+
+.mob-vidro-phrase { position: absolute; bottom: 58px; left: 26px; right: 26px; z-index: 2;
+  border: 1px solid rgba(237,84,84,0.85); padding: 20px 22px; text-align: center;
+  font-size: 14px; font-weight: 300; color: #fff; line-height: 1.6; letter-spacing: 0.3px;
+  text-shadow: 0 1px 12px rgba(0,0,0,0.7); }
+.mob-vidro-phrase .mvp-destaque { display: inline-block; margin-top: 9px;
+  color: #ED5454; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; font-size: 12.5px; }
+
+/* ════════════════════ VIDROS ════════════════════ */
+.card-vidro .vidro-content { position: absolute; bottom: 56px; left: 36px; right: 36px; }
+.vidro-sec   { font-size: 8px; font-weight: 600; letter-spacing: 5px; text-transform: uppercase;
+               color: var(--red); margin-bottom: 12px; }
+.vidro-title { font-size: 38px; font-weight: 100; color: #fff; letter-spacing: 3px;
+               text-transform: uppercase; line-height: 1.1; margin-bottom: 18px; }
+.vidro-rule  { width: 28px; height: 1px; background: var(--red); margin-bottom: 14px; }
+.vidro-sub   { font-size: 11px; font-weight: 300; color: rgba(255,255,255,0.5); line-height: 1.85; }
+
+/* ════════════════════ PRODUTOS ════════════════════ */
+.card-prod  { background: #0e0f11; justify-content: center; }
+.prod-inner { padding: 52px 40px; position: relative; z-index: 1; }
+.prod-title { font-size: 28px; font-weight: 100; letter-spacing: 4px; text-transform: uppercase;
+              color: #fff; margin-bottom: 32px; line-height: 1.2; }
+.prod-line  { display: flex; align-items: center; gap: 18px;
+              padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.prod-line:first-of-type { border-top: 1px solid rgba(255,255,255,0.06); }
+.prod-dot   { width: 5px; height: 5px; border-radius: 50%; background: var(--red); flex-shrink: 0; }
+.prod-name  { font-size: 14px; font-weight: 500; color: #fff; }
+.prod-wm    { position: absolute; bottom: -20px; right: -20px; width: 190px;
+              opacity: 0.04; pointer-events: none; }
+
+/* ════════════════════ ANTES/DEPOIS mobile ════════════════════ */
+.mob-stack { width: 100%; height: 100%; display: flex; flex-direction: column; gap: 2px; }
+.mob-frame { flex: 1; overflow: hidden; position: relative; }
+.mob-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.mob-ab-label { position: absolute; bottom: 10px; left: 12px; font-size: 8px; font-weight: 700;
+  letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.9);
+  background: rgba(0,0,0,0.55); padding: 4px 10px; }
+.vidro-titulo { position: absolute; top: 0; left: 0; right: 0; z-index: 3;
+  padding: 28px 22px 36px; text-align: center;
+  font-size: 13px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase;
+  color: #fff; text-shadow: 0 1px 10px rgba(0,0,0,0.65);
+  background: linear-gradient(to bottom, rgba(0,0,0,0.72) 0%, transparent 100%); }
+.vidro-titulo::after { content: ""; display: block; width: 42px; height: 1px;
+  background: var(--red); margin: 13px auto 0; }
+
+/* ════════════════════ CONTATO ════════════════════ */
+.card-cont  { background: var(--dark); justify-content: center; }
+.cont-inner { padding: 56px 40px; }
+.cont-logo  { width: 120px; margin-bottom: 32px; display: block; }
+.cont-bar   { width: 28px; height: 2px; background: var(--red); margin-bottom: 32px; }
+.cont-group { margin-bottom: 24px; }
+.cont-lbl   { font-size: 7px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase;
+              color: rgba(255,255,255,0.28); margin-bottom: 4px; }
+.cont-val   { font-size: 14px; font-weight: 400; color: rgba(255,255,255,0.85); }
+.cont-foot  { font-size: 8px; font-weight: 300; letter-spacing: 4px; text-transform: uppercase;
+              color: rgba(255,255,255,0.14); margin-top: 36px; }
+.cont-wm    { position: absolute; bottom: -20px; right: -20px; width: 200px;
+              opacity: 0.04; pointer-events: none; }
+</style>
+</head>
+<body>
+
+<!-- ════ CAPA ════ -->
+<section class="card card-capa">
+  <video class="card-video" autoplay muted loop playsinline>
+    <source src="obras/_secoes/capa-video.mp4" type="video/mp4">
+  </video>
+  <div class="ov-dark"></div>
+  <div class="capa-content">
+    <img class="capa-logo" src="assets/logo-white.png" alt="Centauro Esquadrias">
+    <div class="capa-line"></div>
+    <div class="capa-tag">Portfólio de Obras</div>
+    <div class="badge-40">
+      <span class="b40-num">40</span>
+      <span class="b40-txt">ANOS</span>
+    </div>
+    <div class="capa-anos">de excelência em esquadrias</div>
+  </div>
+  <div class="capa-arraste">
+    <span>Arraste para baixo</span>
+    <svg class="capa-chev" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg>
+  </div>
+</section>
+
+<!-- ════ SOBRE ════ -->
+<section class="card card-sobre">
+  <div class="sobre-bar"></div>
+  <div class="sobre-inner">
+    <div class="sec-lbl">Sobre a Empresa</div>
+    <h2 class="sobre-h2">Qualidade que<br>transforma ambientes.</h2>
+    <p class="sobre-txt">Fundada em 1986 em Guaratuba, Paraná, a Centauro Esquadrias é especializada em esquadrias de alumínio de alto padrão. Transformamos projetos em realidade através de janelas, portas e fachadas que unem precisão técnica, qualidade de materiais e design contemporâneo.</p>
+    <div class="counters-mob">
+      <div class="cnt-item">
+        <div class="cnt-row">
+          <span class="cnt-num" data-cnt="40" data-dur="2000">40</span>
+          <span class="cnt-plus">+</span>
+          <span class="cnt-unit">anos</span>
+        </div>
+        <div class="cnt-lbl">trabalhando com esquadrias</div>
+      </div>
+      <div class="cnt-sep"></div>
+      <div class="cnt-item">
+        <div class="cnt-row">
+          <span class="cnt-plus" style="font-size:18px;margin-right:2px">+</span>
+          <span class="cnt-num" data-cnt="10000" data-dur="2500">10.000</span>
+        </div>
+        <div class="cnt-lbl">obras realizadas</div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
+
+<!-- ════ PROJETO 01 ════ -->
+<section class="card">
+  <img class="card-bg" src="obras/projeto01/foto.jpg" alt="">
+  <div class="ov-top"></div><div class="ov-bottom"></div>
+  <div class="num-bg-mob">01</div>
+  <div class="proj-info">
+    <div class="proj-num">Projeto 01</div>
+    <div class="proj-loc">Guaratuba · Paraná</div>
+    <div class="proj-div"></div>
+    <div class="proj-esq-lbl">Esquadrias utilizadas</div>
+    <div class="proj-esq">Sublime 4.5</div>
+    <div class="proj-fach">Fachada (Atlanta)</div>
+  </div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
+
+<!-- ════ PROJETO 02 ════ -->
+<section class="card">
+  <img class="card-bg" src="obras/projeto02/foto.jpg" alt="">
+  <div class="ov-top"></div><div class="ov-bottom"></div>
+  <div class="num-bg-mob">02</div>
+  <div class="proj-info">
+    <div class="proj-num">Projeto 02</div>
+    <div class="proj-loc">Guaratuba · Paraná</div>
+    <div class="proj-div"></div>
+    <div class="proj-esq-lbl">Esquadrias utilizadas</div>
+    <div class="proj-esq">Reiki Glazing<br>Sublime 3.5</div>
+    <div class="proj-fach">Fachada (Atlanta)</div>
+  </div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
+
+<!-- ════ PROJETO 03 ════ -->
+<section class="card">
+  <img class="card-bg" src="obras/projeto03/foto.jpg" alt="">
+  <div class="ov-top"></div><div class="ov-bottom"></div>
+  <div class="num-bg-mob">03</div>
+  <div class="proj-info">
+    <div class="proj-num">Projeto 03</div>
+    <div class="proj-loc">Baía de Guaratuba</div>
+    <div class="proj-div"></div>
+    <div class="proj-esq-lbl">Esquadrias utilizadas</div>
+    <div class="proj-esq">Sublime 3.5<br>Sublime 2.5</div>
+  </div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
+
+<!-- ════ PROJETO 04 ════ -->
+<section class="card">
+  <img class="card-bg" src="obras/projeto04/foto.jpg" alt="">
+  <div class="ov-top"></div><div class="ov-bottom"></div>
+  <div class="num-bg-mob">04</div>
+  <div class="proj-info">
+    <div class="proj-num">Projeto 04</div>
+    <div class="proj-loc">Baía de Guaratuba</div>
+    <div class="proj-div"></div>
+    <div class="proj-esq-lbl">Esquadrias utilizadas</div>
+    <div class="proj-esq">Sublime 3.5</div>
+  </div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
+
+<!-- ════ PROJETO 05 (NOVO — Itapoá) ════ -->
+<section class="card">
+  <img class="card-bg" src="obras/projeto05/foto.jpg" alt="">
+  <div class="ov-top"></div><div class="ov-bottom"></div>
+  <div class="num-bg-mob">05</div>
+  <div class="proj-info">
+    <div class="proj-num">Projeto 05</div>
+    <div class="proj-loc">Itapoá · SC</div>
+    <div class="proj-div"></div>
+    <div class="proj-esq-lbl">Esquadrias utilizadas</div>
+    <div class="proj-esq">Sublime 2.5<br>Sublime 3.5<br>Vidro Polarizado Inteligente</div>
+    <div class="proj-fach">Fachada (Atlanta)</div>
+  </div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
+
+<!-- ════ PROJETO 05 ════ -->
+<section class="card">
+  <img class="card-bg" src="obras/projeto06/foto.jpg" alt="">
+  <div class="ov-top"></div><div class="ov-bottom"></div>
+  <div class="num-bg-mob">05</div>
+  <div class="proj-info">
+    <div class="proj-num">Projeto 05</div>
+    <div class="proj-loc">Baía de Guaratuba</div>
+    <div class="proj-div"></div>
+    <div class="proj-esq-lbl">Esquadrias utilizadas</div>
+    <div class="proj-esq">Sublime 3.5</div>
+  </div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
+
+<!-- ════ PROJETO 07 (NOVO — Baía de Guaratuba) ════ -->
+<section class="card">
+  <img class="card-bg" src="obras/projeto07/foto.jpg" alt="">
+  <div class="ov-top"></div><div class="ov-bottom"></div>
+  <div class="num-bg-mob">07</div>
+  <div class="proj-info">
+    <div class="proj-num">Projeto 07</div>
+    <div class="proj-loc">Baía de Guaratuba</div>
+    <div class="proj-div"></div>
+    <div class="proj-esq-lbl">Esquadrias utilizadas</div>
+    <div class="proj-esq">Sublime 3.5</div>
+  </div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
+
+<!-- ════ PROJETO 06 ════ -->
+<section class="card">
+  <img class="card-bg" src="obras/projeto08/foto.jpg" alt="">
+  <div class="ov-top"></div><div class="ov-bottom"></div>
+  <div class="num-bg-mob">06</div>
+  <div class="proj-info">
+    <div class="proj-num">Projeto 06</div>
+    <div class="proj-loc">Baía de Guaratuba</div>
+    <div class="proj-div"></div>
+    <div class="proj-esq-lbl">Esquadrias utilizadas</div>
+    <div class="proj-esq">Sublime 3.5</div>
+  </div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
+
+<!-- ════ PROJETO 07 ════ -->
+<section class="card">
+  <img class="card-bg" src="obras/projeto09/foto.jpg" alt="">
+  <div class="ov-top"></div><div class="ov-bottom"></div>
+  <div class="num-bg-mob">07</div>
+  <div class="proj-info">
+    <div class="proj-num">Projeto 07</div>
+    <div class="proj-loc">Baía de Guaratuba</div>
+    <div class="proj-div"></div>
+    <div class="proj-esq-lbl">Esquadrias utilizadas</div>
+    <div class="proj-esq">Sublime 3.5</div>
+  </div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
+
+<!-- ════ PROJETO 08 ════ -->
+<section class="card">
+  <img class="card-bg" src="obras/projeto10/foto.jpg" alt="">
+  <div class="ov-top"></div><div class="ov-bottom"></div>
+  <div class="num-bg-mob">08</div>
+  <div class="proj-info">
+    <div class="proj-num">Projeto 08</div>
+    <div class="proj-loc">Baía de Guaratuba</div>
+    <div class="proj-div"></div>
+    <div class="proj-esq-lbl">Esquadrias utilizadas</div>
+    <div class="proj-esq">Sublime 3.5</div>
+  </div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
+
+<!-- ════ PROJETO 09 ════ -->
+<section class="card">
+  <img class="card-bg" src="obras/projeto11/foto.jpg" alt="">
+  <div class="ov-top"></div><div class="ov-bottom"></div>
+  <div class="num-bg-mob">09</div>
+  <div class="proj-info">
+    <div class="proj-num">Projeto 09</div>
+    <div class="proj-loc">Guaratuba · Paraná</div>
+    <div class="proj-div"></div>
+    <div class="proj-esq-lbl">Esquadrias utilizadas</div>
+    <div class="proj-esq">Sublime 3.5</div>
+  </div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
+
+<!-- ════ PROJETO 10 ════ -->
+<section class="card">
+  <img class="card-bg" src="obras/projeto12/foto.jpg" alt="">
+  <div class="ov-top"></div><div class="ov-bottom"></div>
+  <div class="num-bg-mob">10</div>
+  <div class="proj-info">
+    <div class="proj-num">Projeto 10</div>
+    <div class="proj-loc">Baía de Guaratuba</div>
+    <div class="proj-div"></div>
+    <div class="proj-esq-lbl">Esquadrias utilizadas</div>
+    <div class="proj-esq">Sublime 3.5</div>
+  </div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
+
+<!-- ════ PROJETO 11 ════ -->
+<section class="card">
+  <img class="card-bg" src="obras/projeto13/foto.jpg" alt="">
+  <div class="ov-top"></div><div class="ov-bottom"></div>
+  <div class="num-bg-mob">11</div>
+  <div class="proj-info">
+    <div class="proj-num">Projeto 11</div>
+    <div class="proj-loc">Guaratuba · Paraná</div>
+    <div class="proj-div"></div>
+    <div class="proj-esq-lbl">Esquadrias utilizadas</div>
+    <div class="proj-esq">Sublime 2.5</div>
+    <div class="proj-fach">Fachada (Atlanta)</div>
+  </div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
+
+<!-- ════ PROJETO 12 — Ed. Phison ════ -->
+<section class="card">
+  <img class="card-bg" src="obras/projeto14/foto.jpg" alt="">
+  <div class="ov-top"></div><div class="ov-bottom"></div>
+  <div class="num-bg-mob">12</div>
+  <div class="proj-info">
+    <div class="proj-num">Projeto 12</div>
+    <div class="proj-name">Ed. Phison</div>
+    <div class="proj-loc">Guaratuba · Paraná</div>
+    <div class="proj-div"></div>
+    <div class="proj-esq-lbl">Esquadrias utilizadas</div>
+    <div class="proj-esq">Sublime 3.5</div>
+  </div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
+
+<!-- ════ PROJETO 13 ════ -->
+<section class="card">
+  <img class="card-bg" src="obras/projeto15/foto.jpg" alt="">
+  <div class="ov-top"></div><div class="ov-bottom"></div>
+  <div class="num-bg-mob">13</div>
+  <div class="proj-info">
+    <div class="proj-num">Projeto 13</div>
+    <div class="proj-name">Ed. Ancona</div>
+    <div class="proj-loc">Guaratuba · Paraná</div>
+    <div class="proj-div"></div>
+    <div class="proj-esq-lbl">Esquadrias utilizadas</div>
+    <div class="proj-esq">Sublime 3.5</div>
+  </div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
+
+<!-- ════ PROJETO 14 — Ed. Malibu ════ -->
+<section class="card">
+  <img class="card-bg" src="obras/projeto16/foto.jpg" alt="">
+  <div class="ov-top"></div><div class="ov-bottom"></div>
+  <div class="num-bg-mob">14</div>
+  <div class="proj-info">
+    <div class="proj-num">Projeto 14</div>
+    <div class="proj-name">Ed. Malibu</div>
+    <div class="proj-loc">Guaratuba · Paraná</div>
+    <div class="proj-div"></div>
+    <div class="proj-esq-lbl">Esquadrias utilizadas</div>
+    <div class="proj-esq">Sublime 3.5<br>Reiki Glazing</div>
+  </div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
+
+<!-- ════ PROJETO 15 — Ed. Valência ════ -->
+<section class="card">
+  <img class="card-bg" src="obras/projeto17/foto.jpg" alt="">
+  <div class="ov-top"></div><div class="ov-bottom"></div>
+  <div class="num-bg-mob">15</div>
+  <div class="proj-info">
+    <div class="proj-num">Projeto 15</div>
+    <div class="proj-name">Ed. Valência</div>
+    <div class="proj-loc">Guaratuba · Paraná</div>
+    <div class="proj-div"></div>
+    <div class="proj-esq-lbl">Esquadrias utilizadas</div>
+    <div class="proj-esq">Sublime 3.5<br>Reiki Glazing</div>
+  </div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
+
+<!-- ════ PROJETO 16 ════ -->
+<section class="card">
+  <img class="card-bg" src="obras/projeto18/foto.jpg" alt="">
+  <div class="ov-top"></div><div class="ov-bottom"></div>
+  <div class="num-bg-mob">16</div>
+  <div class="proj-info">
+    <div class="proj-num">Projeto 16</div>
+    <div class="proj-name">Ed. Ilha do Mel</div>
+    <div class="proj-loc">Guaratuba · Paraná</div>
+    <div class="proj-div"></div>
+    <div class="proj-esq-lbl">Esquadrias utilizadas</div>
+    <div class="proj-esq">Sublime 3.5</div>
+  </div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
+
+<!-- ════ PROJETO 17 — Ed. Mahalo Front Beach ════ -->
+<section class="card">
+  <img class="card-bg" src="obras/projeto19/foto.jpg" alt="">
+  <div class="ov-top"></div><div class="ov-bottom"></div>
+  <div class="num-bg-mob">17</div>
+  <div class="proj-info">
+    <div class="proj-num">Projeto 17</div>
+    <div class="proj-name">Ed. Mahalo Front Beach</div>
+    <div class="proj-loc">Itapoá · SC</div>
+    <div class="proj-div"></div>
+    <div class="proj-esq-lbl">Esquadrias utilizadas</div>
+    <div class="proj-esq">Sublime 3.5<br>Reiki Glazing</div>
+    <div class="proj-fach">Fachada (Atlanta)</div>
+  </div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
+
+<!-- ════ PROJETO 18 — Ed. Unique ════ -->
+<section class="card">
+  <img class="card-bg" src="obras/projeto20/foto.jpg" alt="">
+  <div class="ov-top"></div><div class="ov-bottom"></div>
+  <div class="num-bg-mob">18</div>
+  <div class="proj-info">
+    <div class="proj-num">Projeto 18</div>
+    <div class="proj-name">Ed. Unique</div>
+    <div class="proj-loc">Matinhos · PR</div>
+    <div class="proj-div"></div>
+    <div class="proj-esq-lbl">Esquadrias utilizadas</div>
+    <div class="proj-esq">Sublime 3.5</div>
+    <div class="proj-fach">Fachada (Atlanta)</div>
+  </div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
+
+<!-- ════ PROJETO 19 — Euro Import BMW Joinville ════ -->
+<section class="card">
+  <img class="card-bg" src="obras/projeto21/foto.jpg" alt="">
+  <div class="ov-top"></div><div class="ov-bottom"></div>
+  <div class="num-bg-mob">19</div>
+  <div class="proj-info">
+    <div class="proj-num">Projeto 19</div>
+    <div class="proj-name">Euro Import BMW</div>
+    <div class="proj-loc">Joinville · SC</div>
+    <div class="proj-div"></div>
+    <div class="proj-esq-lbl">Esquadrias utilizadas</div>
+    <div class="proj-esq">Sublime 3.5</div>
+    <div class="proj-fach">Fachada (Atlanta)</div>
+  </div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
+
+<!-- ════ PROJETO 20 — Euro Import BMW Cascavel ════ -->
+<section class="card">
+  <img class="card-bg" src="obras/projeto22/foto.jpg" alt="">
+  <div class="ov-top"></div><div class="ov-bottom"></div>
+  <div class="num-bg-mob">20</div>
+  <div class="proj-info">
+    <div class="proj-num">Projeto 20</div>
+    <div class="proj-name">Euro Import BMW</div>
+    <div class="proj-loc">Cascavel · PR</div>
+    <div class="proj-div"></div>
+    <div class="proj-esq-lbl">Esquadrias utilizadas</div>
+    <div class="proj-esq">Sublime 3.5</div>
+    <div class="proj-fach">Fachada (Atlanta)</div>
+  </div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
+
+<!-- ════ INOVAÇÃO ════ -->
+<section class="card card-inov">
+  <img class="card-bg" src="obras/_secoes/inovacao-fundo.jpg" alt="">
+  <div class="ov-dark"></div>
+  <div class="inov-center">
+    <div class="inov-rule"></div>
+    <div class="inov-word">INOVAÇÃO</div>
+    <div class="inov-rule"></div>
+  </div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
+
+<!-- ════ INOVAÇÃO — foto18 ════ -->
+<section class="card">
+  <img class="card-bg" src="obras/_secoes/inovacao-limpa.jpg" alt="">
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
+
+<!-- ════ VIDROS: ANTES / DEPOIS ════ -->
+<section class="card" style="background:#131315;">
+  <div class="vidro-titulo">Conheça nosso vidro inteligente</div>
+  <div class="mob-stack">
+    <div class="mob-frame">
+      <img src="obras/_secoes/vidro-antes.jpg" alt="">
+      <div class="mob-ab-label">Antes — Desligado</div>
+    </div>
+    <div class="mob-frame">
+      <img src="obras/_secoes/vidro-depois.jpg" alt="">
+      <div class="mob-ab-label">Depois — Ligado</div>
+    </div>
+  </div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
+
+<!-- ════ VIDROS: VÍDEO 25 ════ -->
+<section class="card" style="background:#060708;">
+  <video class="card-video" autoplay muted loop playsinline>
+    <source src="obras/_secoes/vidro-video.mp4" type="video/mp4">
+  </video>
+  <div class="ov-bottom"></div>
+  <div class="mob-vidro-phrase">Assista até o final e entenda como funciona o nosso<br><span class="mvp-destaque">vidro polarizado inteligente</span></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
+
+<!-- ════ CONTATO ════ -->
+<section class="card card-cont">
+  <img class="cont-wm" src="assets/icone.png" alt="">
+  <div class="cont-inner">
+    <img class="cont-logo" src="assets/logo-white.png" alt="Centauro Esquadrias">
+    <div class="cont-bar"></div>
+    <div class="cont-group">
+      <div class="cont-lbl">WhatsApp</div>
+      <div class="cont-val">+55 (41) 8834-2009</div>
+    </div>
+    <div class="cont-group">
+      <div class="cont-lbl">Website</div>
+      <div class="cont-val">esquadriascentauro.com.br</div>
+    </div>
+    <div class="cont-group">
+      <div class="cont-lbl">E-mail</div>
+      <div class="cont-val">contato@esquadriascentauro.com.br</div>
+    </div>
+    <div class="cont-group">
+      <div class="cont-lbl">Instagram</div>
+      <div class="cont-val">@centauroesquadrias</div>
+    </div>
+    <div class="cont-foot">Guaratuba · Paraná · Brasil</div>
+  </div>
+</section>
+
+<script>
+function countUp(el, to, dur) {
+  var from = 0, start = null;
+  var isK = to >= 1000;
+  function ease(t){ return t<0.5 ? 4*t*t*t : (t-1)*(2*t-2)*(2*t-2)+1; }
+  function step(ts) {
+    if (!start) start = ts;
+    var p = Math.min((ts - start) / dur, 1);
+    var val = Math.round(ease(p) * to);
+    el.textContent = isK ? (val >= 1000 ? '10.000' : val.toLocaleString('pt-BR')) : val;
+    if (p < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+// Counter on Sobre card — fires when it scrolls into view
+var sobreCard = document.querySelector('.card-sobre');
+var countersDone = false;
+var obs = new IntersectionObserver(function(entries){
+  if (entries[0].isIntersecting && !countersDone) {
+    countersDone = true;
+    document.querySelectorAll('[data-cnt]').forEach(function(el){
+      countUp(el,
+        parseInt(el.getAttribute('data-cnt')),
+        parseInt(el.getAttribute('data-dur') || '2000')
+      );
+    });
+  }
+}, { threshold: 0.5 });
+obs.observe(sobreCard);
+</script>
+<script>
+/* numeração automática dos cards de projeto por ordem do DOM */
+(function () {
+  var pad = function (n) { return (n < 10 ? '0' : '') + n; };
+  var proj = 0;
+  document.querySelectorAll('section.card').forEach(function (card) {
+    var pn = card.querySelector('.proj-num');
+    if (!pn) return;
+    proj++;
+    pn.textContent = 'Projeto ' + pad(proj);
+    var nb = card.querySelector('.num-bg-mob');
+    if (nb) nb.textContent = pad(proj);
+  });
+})();
+</script>
+</body>
+</html>
