@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <title>Centauro Esquadrias — Portfólio de Produtos</title>
 <meta name="description" content="Linhas e produtos em alumínio e vidro de alto padrão: esquadrias, fachadas, vidros e soluções sob medida.">
 <meta property="og:type" content="website">
@@ -423,7 +423,13 @@ body {
 
 /* ═══════════════ MOBILE — livro em paisagem forçada + splash ═══════════════ */
 html, body { overflow: hidden; overscroll-behavior: none; }
-body { position: fixed; inset: 0; }                           /* trava viewport (barra de endereço) */
+html { background: #0e0f11; }                                 /* mesma cor nas áreas fora da área visível */
+body {                                                        /* ancorado à área REALMENTE visível (exclui barra de endereço/navegação do Android) */
+  position: fixed;
+  left: var(--vp-x, 0px); top: var(--vp-y, 0px);
+  width: var(--vp-w, 100vw); height: var(--vp-h, 100vh);
+  min-height: 0;                                              /* anula o min-height:100vh do bloco base (senão força o layout viewport e corta) */
+}
 .nav-btn, #fs-btn, #indicator { display: none !important; }   /* limpo: só o livro + swipe */
 #stage { transform-origin: center center; visibility: hidden; }
 body.is-normal #stage { visibility: visible; transform: scale(var(--book-scale, 1)); }
@@ -1516,6 +1522,12 @@ body.is-forced #stage { visibility: visible; transform: rotate(90deg) scale(var(
     var vv = window.visualViewport;
     var vw = vv ? vv.width  : window.innerWidth;
     var vh = vv ? vv.height : window.innerHeight;
+    // ancora o body exatamente sobre a área visível (offset exclui barra de endereço/navegação)
+    var root = document.documentElement.style;
+    root.setProperty('--vp-w', vw + 'px');
+    root.setProperty('--vp-h', vh + 'px');
+    root.setProperty('--vp-x', (vv ? vv.offsetLeft : 0) + 'px');
+    root.setProperty('--vp-y', (vv ? vv.offsetTop  : 0) + 'px');
     var s;
     if (vw >= vh) {                          // viewport já em paisagem -> livro normal
       body.classList.add('is-normal'); body.classList.remove('is-forced');
@@ -1525,7 +1537,7 @@ body.is-forced #stage { visibility: visible; transform: rotate(90deg) scale(var(
       s = Math.min(vw / 700, vh / 1400);
     }
     s = Math.floor(s * MARGIN * 1000) / 1000;   // margem + arredonda p/ baixo (evita estouro sub-pixel)
-    document.documentElement.style.setProperty('--book-scale', s);
+    root.setProperty('--book-scale', s);
   }
   function refit() { fit(); setTimeout(fit, 250); }   // iOS: dims podem vir defasadas após girar
   fit();
