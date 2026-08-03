@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <title>Centauro Esquadrias — Portfólio de Produtos</title>
+
+<!-- ═══ PWA / iOS tela cheia (Adicionar à Tela de Início) ═══ -->
+<link rel="manifest" href="/site.webmanifest">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Centauro">
+<meta name="theme-color" content="#0e0f11">
 <meta name="description" content="Linhas e produtos em alumínio e vidro de alto padrão: esquadrias, fachadas, vidros e soluções sob medida.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Centauro Esquadrias">
@@ -448,6 +457,24 @@ body.fs-ok #fs-btn {
 #fs-btn .ic-exit { display: none; }
 body.is-fs #fs-btn .ic-enter { display: none; }
 body.is-fs #fs-btn .ic-exit  { display: block; }
+
+/* dica de TELA CHEIA no iPhone (Safari não expõe a Fullscreen API) — orienta a Adicionar à Tela de Início */
+#ios-tip {
+  position: fixed; z-index: 9997;
+  left: 50%; transform: translateX(-50%);
+  bottom: max(14px, env(safe-area-inset-bottom));
+  display: none; align-items: center; gap: 11px;
+  width: min(92vw, 360px); padding: 12px 15px;
+  background: rgba(20,21,24,0.94); border: 1px solid rgba(255,255,255,0.14); border-radius: 13px;
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  color: rgba(255,255,255,0.86); font-size: 12.5px; font-weight: 300; line-height: 1.4;
+  box-shadow: 0 10px 34px rgba(0,0,0,0.55);
+}
+body.ios-tip-on #ios-tip { display: flex; }
+#ios-tip span:not(.close-tip) { flex: 1; }
+#ios-tip b { font-weight: 700; color: #fff; }
+#ios-tip .share-ic { flex-shrink: 0; color: var(--red); }
+#ios-tip .close-tip { flex-shrink: 0; margin-left: 2px; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.45); font-size: 18px; line-height: 1; }
 
 #rotate-overlay {
   position: fixed; inset: 0; z-index: 9999; background: #0e0f11;
@@ -1349,6 +1376,15 @@ body.is-fs #fs-btn .ic-exit  { display: block; }
   </svg>
 </button>
 
+<!-- dica iOS: tela cheia via Adicionar à Tela de Início (só aparece no iPhone Safari) -->
+<div id="ios-tip">
+  <svg class="share-ic" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+    <path d="M12 15V3m0 0L8.5 6.5M12 3l3.5 3.5"/><path d="M6 11H5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1h-1"/>
+  </svg>
+  <span>Para <b>tela cheia</b>: toque em <b>Compartilhar</b> e <b>"Adicionar à Tela de Início"</b>.</span>
+  <span class="close-tip" role="button" aria-label="Fechar">&times;</span>
+</div>
+
 <script>
 (function () {
   'use strict';
@@ -1581,6 +1617,20 @@ body.is-fs #fs-btn .ic-exit  { display: block; }
   };
   setTimeout(function () { dismiss(false); }, 2500);
   overlay.addEventListener('click', function () { dismiss(true); });
+
+  /* ── iPhone: sem Fullscreen API. Se ainda não está em modo tela-cheia (Adicionado à Tela de Início),
+        mostra uma dica ensinando a instalar. Some sozinho ou no × ── */
+  var isIOS = /iP(hone|od|ad)/.test(navigator.userAgent) ||
+              (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);   // iPad iOS13+ se passa por Mac
+  var standalone = window.navigator.standalone === true ||
+                   (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches);
+  if (isIOS && !canFS && !standalone) {
+    var tip = document.getElementById('ios-tip');
+    var hideTip = function () { body.classList.remove('ios-tip-on'); };
+    setTimeout(function () { body.classList.add('ios-tip-on'); }, 3200);   // entra após o splash sair
+    tip.querySelector('.close-tip').addEventListener('click', function (e) { e.stopPropagation(); hideTip(); });
+    setTimeout(hideTip, 16000);                                            // some sozinho após ~13s visível
+  }
 })();
 </script>
 </body>
