@@ -415,10 +415,24 @@ body {                                                        /* ancorado à ár
   width: var(--vp-w, 100vw); height: var(--vp-h, 100vh);
   min-height: 0;                                              /* anula o min-height:100vh do bloco base (senão força o layout viewport e corta) */
 }
-.nav-btn, #fs-btn, #indicator { display: none !important; }   /* limpo: só o livro + swipe */
+.nav-btn, #indicator { display: none !important; }           /* limpo: só o livro + swipe */
 #stage { transform-origin: center center; visibility: hidden; }
 body.is-normal #stage { visibility: visible; transform: scale(var(--book-scale, 1)); }
 body.is-forced #stage { visibility: visible; transform: rotate(90deg) scale(var(--book-scale, 1)); }
+
+/* botão de TELA CHEIA — some por padrão; só aparece onde a Fullscreen API existe (Android). iPhone não suporta */
+#fs-btn { display: none; }
+body.fs-ok #fs-btn {
+  display: flex; z-index: 9998;
+  top: max(12px, env(safe-area-inset-top)); right: max(12px, env(safe-area-inset-right));
+  width: 42px; height: 42px; border-radius: 10px;
+  background: rgba(0,0,0,0.40); border-color: rgba(255,255,255,0.18);
+  color: rgba(255,255,255,0.72);
+  -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+}
+#fs-btn .ic-exit { display: none; }
+body.is-fs #fs-btn .ic-enter { display: none; }
+body.is-fs #fs-btn .ic-exit  { display: block; }
 
 #rotate-overlay {
   position: fixed; inset: 0; z-index: 9999; background: #0e0f11;
@@ -1223,9 +1237,12 @@ body.is-forced #stage { visibility: visible; transform: rotate(90deg) scale(var(
 
 <div id="indicator"></div>
 
-<button id="fs-btn" title="Tela cheia">
-  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<button id="fs-btn" title="Tela cheia" aria-label="Tela cheia">
+  <svg class="ic-enter" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
     <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+  </svg>
+  <svg class="ic-exit" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"/>
   </svg>
 </button>
 
@@ -1397,14 +1414,6 @@ body.is-forced #stage { visibility: visible; transform: rotate(90deg) scale(var(
     if (Math.abs(eff) > 45) flip(eff < 0 ? +1 : -1);
   }, {passive:true});
 
-  document.getElementById('fs-btn').addEventListener('click', function () {
-    if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen && document.documentElement.requestFullscreen();
-    } else {
-      document.exitFullscreen && document.exitFullscreen();
-    }
-  });
-
   showSpread(0);
 
 })();
@@ -1448,9 +1457,27 @@ body.is-forced #stage { visibility: visible; transform: rotate(90deg) scale(var(
     window.visualViewport.addEventListener('resize', fit);
     window.visualViewport.addEventListener('scroll', fit);
   }
-  var dismiss = function () { overlay.classList.add('hide'); };
-  setTimeout(dismiss, 2500);
-  overlay.addEventListener('click', dismiss);
+  /* ── TELA CHEIA (Android; iPhone/iOS não expõe a Fullscreen API p/ elementos) ── */
+  var fsBtn = document.getElementById('fs-btn');
+  var docEl = document.documentElement;
+  var canFS = !!(docEl.requestFullscreen || docEl.webkitRequestFullscreen);
+  function isFS()  { return !!(document.fullscreenElement || document.webkitFullscreenElement); }
+  function enterFS() { var fn = docEl.requestFullscreen || docEl.webkitRequestFullscreen; if (fn) try { fn.call(docEl); } catch (e) {} }
+  function exitFS()  { var fn = document.exitFullscreen || document.webkitExitFullscreen;   if (fn) try { fn.call(document); } catch (e) {} }
+  function syncFS()  { body.classList.toggle('is-fs', isFS()); refit(); }   // ao (des)entrar, o viewport muda -> reescala
+  if (canFS) {
+    body.classList.add('fs-ok');                                           // revela o botão só onde funciona
+    fsBtn.addEventListener('click', function () { isFS() ? exitFS() : enterFS(); });
+    document.addEventListener('fullscreenchange', syncFS);
+    document.addEventListener('webkitfullscreenchange', syncFS);
+  }
+
+  var dismiss = function (viaTap) {
+    overlay.classList.add('hide');
+    if (viaTap && canFS && !isFS()) enterFS();   // aproveita o toque (gesto do usuário exigido pela API) p/ já abrir em tela cheia
+  };
+  setTimeout(function () { dismiss(false); }, 2500);
+  overlay.addEventListener('click', function () { dismiss(true); });
 })();
 </script>
 </body>
