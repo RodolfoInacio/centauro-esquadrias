@@ -499,6 +499,17 @@ body.is-forced #swipe-hint .sh-move { animation: shY 1.8s cubic-bezier(.45,0,.3,
 
 /* chevron aponta p/ a direção real de "avançar": esquerda (paisagem) / cima (retrato) */
 body.is-forced #swipe-hint .sh-arrow { transform: rotate(-90deg); }
+
+/* rótulo "ARRASTE PARA O LADO" — só na 1ª página, piscando em sincronia com o dedo */
+#swipe-label {
+  position: absolute; right: 22px; top: 75%; transform: translateY(-50%);
+  z-index: 9000; pointer-events: none; display: none;
+  font-size: 9.5px; font-weight: 700; letter-spacing: 1.8px; text-transform: uppercase;
+  color: var(--red); white-space: nowrap; text-align: right;
+  text-shadow: 0 1px 5px rgba(0,0,0,0.45);
+}
+body.hint-first #swipe-label { display: block; animation: shBlink 1.8s cubic-bezier(.45,0,.3,1) infinite; }
+@keyframes shBlink { 0%{opacity:0} 18%{opacity:.95} 62%{opacity:.95} 100%{opacity:0} }
 </style>
 </head>
 <body>
@@ -531,6 +542,7 @@ body.is-forced #swipe-hint .sh-arrow { transform: rotate(-90deg); }
     </svg>
   </span>
 </div>
+<div id="swipe-label" aria-hidden="true">Arraste para o lado</div>
 
 <div id="pages" style="display:none">
 
