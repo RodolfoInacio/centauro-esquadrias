@@ -477,7 +477,7 @@ body.ios-tip-on #ios-tip { display: flex; }
 
 /* ═══════════════ HINT "arraste para folhear" — dedo (1ª pág) + seta (demais) ═══════════════ */
 #swipe-hint {
-  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  position: absolute; right: 26px; top: 50%; transform: translateY(-50%);
   z-index: 9000; pointer-events: none; display: none;
   filter: drop-shadow(0 3px 10px rgba(0,0,0,0.55));
 }
@@ -486,9 +486,9 @@ body.hint-first #swipe-hint, body.hint-mid #swipe-hint { display: block; }
 #swipe-hint .sh-hand, #swipe-hint .sh-arrow { display: none; }
 body.hint-first #swipe-hint .sh-hand  { display: block; }
 body.hint-mid   #swipe-hint .sh-arrow { display: block; }
-#swipe-hint .sh-hand  { width: 58px; height: 58px; color: #fff; }
-#swipe-hint .sh-hand .sh-dot { fill: var(--red); }
-#swipe-hint .sh-arrow { width: 40px; height: 40px; color: #fff; }
+#swipe-hint .sh-hand  { width: 58px; height: 58px; color: var(--red); }
+#swipe-hint .sh-hand .sh-dot { fill: #fff; }
+#swipe-hint .sh-arrow { width: 40px; height: 40px; color: var(--red); }
 #swipe-hint .sh-arrow .sh-c2 { opacity: 0.45; }
 
 /* movimento por orientação: paisagem = desliza p/ esquerda; retrato = desliza p/ cima */
