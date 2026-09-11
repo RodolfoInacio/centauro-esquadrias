@@ -2,17 +2,15 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>Centauro Esquadrias — Portfólio de Produtos</title>
-
-<!-- ═══ PWA / iOS tela cheia (Adicionar à Tela de Início) ═══ -->
 <link rel="manifest" href="/site.webmanifest">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Centauro">
-<meta name="theme-color" content="#0e0f11">
+<meta name="theme-color" content="#1a1b1d">
 <meta name="description" content="Linhas e produtos em alumínio e vidro de alto padrão: esquadrias, fachadas, vidros e soluções sob medida.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Centauro Esquadrias">
@@ -42,1595 +40,724 @@
   font-family: 'Kumbh Sans';
   src: url('assets/KumbhSans.ttf') format('truetype');
   font-weight: 100 900;
-  font-style: normal;
+  font-display: swap;
 }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root { --red: #ED5454; --dark: #1a1b1d; --gray: #777; }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-:root {
-  --red:   #ED5454;
-  --dark:  #34353A;
-  --white: #FFFFFF;
-  --off:   #FAFAFA;
-  --gray:  #8a8b90;
+html {
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  height: 100%;
+  scroll-behavior: smooth;
 }
-
 body {
-  background: #0e0f11;
-  font-family: 'Kumbh Sans', 'Segoe UI', system-ui, sans-serif;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  min-height: 100vh; overflow: hidden;
-  user-select: none; -webkit-user-select: none;
+  font-family: 'Kumbh Sans', sans-serif;
+  background: var(--dark);
+  height: 100%;
 }
 
-#stage { display: flex; align-items: center; gap: 32px; }
-
-#book-wrap {
+/* ── CARD BASE ── */
+.card {
+  width: 100vw;
+  height: 100svh;
+  min-height: -webkit-fill-available;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
   position: relative;
-  width: 1400px; height: 700px;
-  perspective: 2400px;
-}
-
-#spread {
-  position: absolute; inset: 0; display: flex;
-  box-shadow: 0 48px 96px rgba(0,0,0,0.85), 0 0 0 1px rgba(255,255,255,0.04);
-}
-#spread .half { width: 700px; height: 700px; overflow: hidden; flex-shrink: 0; position: relative; }
-#spread::after {
-  content: ''; position: absolute; left: 698px; top: 0; width: 4px; height: 100%;
-  background: linear-gradient(to right, rgba(0,0,0,0.3), rgba(0,0,0,0.1), rgba(0,0,0,0.04));
-  z-index: 10; pointer-events: none;
-}
-
-#flip-card {
-  position: absolute; width: 700px; height: 700px; top: 0;
-  transform-style: preserve-3d;
-  z-index: 20; pointer-events: none; display: none;
-}
-#flip-card.flipping-forward { left: 700px; transform-origin: left center; }
-#flip-card.flipping-back    { left: 0;     transform-origin: right center; }
-#flip-face, #flip-back {
-  position: absolute; width: 700px; height: 700px; top: 0; left: 0;
   overflow: hidden;
-  backface-visibility: hidden; -webkit-backface-visibility: hidden;
-}
-#flip-back { transform: rotateY(180deg); }
-
-#book-shadow {
-  position: absolute; bottom: -28px; left: 50%; transform: translateX(-50%);
-  width: 1000px; height: 40px;
-  background: radial-gradient(ellipse at center, rgba(0,0,0,0.55) 0%, transparent 70%);
-  pointer-events: none;
+  display: flex;
+  flex-direction: column;
 }
 
-.nav-btn {
-  width: 46px; height: 46px;
-  border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.04);
-  color: rgba(255,255,255,0.45); border-radius: 50%; cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  transition: border-color 0.2s, color 0.2s, background 0.2s; flex-shrink: 0;
-}
-.nav-btn:hover { border-color: var(--red); color: var(--red); background: rgba(237,84,84,0.08); }
-.nav-btn:disabled { opacity: 0.25; cursor: default; pointer-events: none; }
-
-#indicator {
-  position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%);
-  font-size: 10px; font-weight: 300; letter-spacing: 4px; color: rgba(255,255,255,0.2);
-}
-#fs-btn {
-  position: fixed; top: 18px; right: 18px; width: 34px; height: 34px;
-  border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.04);
-  color: rgba(255,255,255,0.3); border-radius: 6px; cursor: pointer;
-  display: flex; align-items: center; justify-content: center; transition: all 0.2s;
-}
-#fs-btn:hover { color: rgba(255,255,255,0.7); border-color: rgba(255,255,255,0.25); }
-
-/* ══════════════════════════════════════════
-   PAGE STYLES
-══════════════════════════════════════════ */
-
-/* — CAPA (foto herói) — */
-.p-cover {
-  background: var(--dark); width: 700px; height: 700px;
-  position: relative; overflow: hidden; isolation: isolate;
-  display: flex; flex-direction: column; justify-content: flex-end;
-}
-.p-cover .cover-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; display: block; }
-.p-cover .cover-scrim { position: absolute; inset: 0; z-index: -1;
-  background: linear-gradient(to top, rgba(10,11,13,0.90) 0%, rgba(10,11,13,0.32) 46%, rgba(10,11,13,0) 72%); }
-.p-cover .cover-content { padding: 0 48px 52px; }
-.p-cover .cover-line { width: 34px; height: 2px; background: var(--red); margin-bottom: 18px; }
-.p-cover .tagline { font-size: 10px; font-weight: 300; letter-spacing: 5px; text-transform: uppercase; color: #fff; opacity: 0.9; margin-bottom: 18px; }
-.badge-40 { display: inline-flex; align-items: center; gap: 14px; border-top: 1px solid rgba(255,255,255,0.22); border-bottom: 1px solid rgba(255,255,255,0.22); padding: 12px 0; }
-.b40-num { font-size: 46px; font-weight: 900; color: var(--red); line-height: 1; }
-.b40-sub { display: flex; flex-direction: column; }
-.b40-anos { font-size: 14px; font-weight: 300; letter-spacing: 7px; text-transform: uppercase; color: #fff; }
-.b40-exp  { font-size: 8px; font-weight: 300; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.55); }
-.p-cover .cover-cap { margin-top: 16px; font-size: 9px; font-weight: 300; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.45); }
-
-/* — ANIMAÇÃO DE ABERTURA DA CAPA — bloco inferior sobe em fade — */
-@keyframes coverUp {
-  0%   { opacity: 0; transform: translateY(24px); }
-  100% { opacity: 1; transform: none; }
-}
-.p-cover .cover-content { animation: coverUp 1.4s cubic-bezier(0.22,0.61,0.36,1) 0.3s both; }
-
-/* — ÍNDICE DE CATEGORIA (2ª página da divisória) — */
-.p-indice {
-  background: var(--dark); width: 700px; height: 700px;
-  padding: 76px 60px; position: relative; overflow: hidden; isolation: isolate;
-  display: flex; flex-direction: column; justify-content: center;
-}
-.p-indice .idx-label { font-size: 9px; font-weight: 600; letter-spacing: 5px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 14px; }
-.p-indice .idx-title { font-size: 30px; font-weight: 700; color: #fff; line-height: 1.15; margin-bottom: 20px; }
-.p-indice .idx-rule  { width: 40px; height: 2px; background: var(--red); margin-bottom: 30px; }
-.p-indice .idx-list  { display: flex; flex-direction: column; gap: 0; }
-.p-indice .idx-item  {
-  display: flex; align-items: baseline; gap: 14px;
-  padding: 13px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
-}
-.p-indice .idx-item:first-child { border-top: 1px solid rgba(255,255,255,0.07); }
-.p-indice .idx-n    { font-size: 9px; font-weight: 700; letter-spacing: 2px; color: var(--red); min-width: 22px; }
-.p-indice .idx-name { font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.82); }
-.p-indice .idx-wm   { position: absolute; bottom: -30px; right: -30px; width: 200px; opacity: 0.05; pointer-events: none; z-index: 0; }
-
-/* — SOBRE — */
-.p-sobre {
-  background: var(--white); width: 700px; height: 700px;
-  display: flex; align-items: center; padding: 60px 60px 60px 48px; gap: 28px; position: relative;
-}
-.p-sobre .red-bar { width: 3px; min-height: 200px; background: var(--red); flex-shrink: 0; align-self: stretch; margin: 50px 0; }
-.p-sobre .content { flex: 1; }
-.p-sobre .sec-label { font-size: 9px; font-weight: 600; letter-spacing: 5px; text-transform: uppercase; color: var(--red); margin-bottom: 16px; }
-.p-sobre h2 { font-size: 26px; font-weight: 700; color: var(--dark); line-height: 1.25; margin-bottom: 12px; }
-.sobre-desc {
-  font-size: 12px; font-weight: 400; color: var(--gray);
-  line-height: 1.8; margin-bottom: 26px;
-}
-.counters { display: flex; flex-direction: column; }
-.counter-item { padding: 12px 0; }
-.cnt-row { display: flex; align-items: baseline; gap: 4px; }
-.cnt-prefix { font-size: 28px; font-weight: 900; color: var(--red); }
-.cnt-num    { font-size: 42px; font-weight: 900; color: var(--dark); line-height: 1; }
-.cnt-plus   { font-size: 24px; font-weight: 700; color: var(--red); }
-.cnt-unit   { font-size: 15px; font-weight: 300; color: var(--gray); margin-left: 4px; }
-.cnt-label  { font-size: 10px; font-weight: 300; color: var(--gray); letter-spacing: 2px; text-transform: uppercase; margin-top: 4px; }
-.cnt-sep    { width: 28px; height: 1px; background: #e0e0e0; }
-.p-sobre .wm { position: absolute; bottom: 32px; right: 40px; width: 72px; opacity: 0.06; }
-
-/* — FOTO DE OBRA — */
-.p-foto { background: #1a1b1f; width: 700px; height: 700px; position: relative; overflow: hidden; }
-.p-foto img.obra-img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.p-foto .overlay { position: absolute; bottom: 0; left: 0; right: 0; height: 48%; background: linear-gradient(to top, rgba(0,0,0,0.78) 0%, transparent 100%); pointer-events: none; }
-.p-foto .proj-label { position: absolute; bottom: 40px; left: 40px; }
-.p-foto .proj-num   { font-size: 9px; font-weight: 600; letter-spacing: 5px; color: var(--red); text-transform: uppercase; margin-bottom: 8px; }
-.p-foto .proj-name  { font-size: 24px; font-weight: 700; color: #fff; line-height: 1.1; margin-bottom: 6px; }
-.p-foto .proj-local { font-size: 10px; font-weight: 300; letter-spacing: 2px; color: rgba(255,255,255,0.5); }
-
-/* — DETALHE DE OBRA — */
-.p-detalhe {
-  background: var(--off); width: 700px; height: 700px;
-  padding: 60px 52px; position: relative; overflow: hidden;
-}
-.p-detalhe .num-bg {
-  position: absolute; top: 16px; right: 20px;
-  font-size: 130px; font-weight: 900; color: #ececec; line-height: 1;
-  pointer-events: none; z-index: 0;
-}
-.det-wm {
-  position: absolute; bottom: -40px; right: -40px;
-  width: 290px; opacity: 0.05; pointer-events: none; z-index: 0;
-}
-.det-content { position: relative; z-index: 1; }
-.det-label   { font-size: 9px; font-weight: 600; letter-spacing: 5px; text-transform: uppercase; color: var(--red); margin-bottom: 12px; }
-.det-title   { font-size: 24px; font-weight: 700; color: var(--dark); line-height: 1.2; margin-bottom: 6px; }
-.det-local   { font-size: 11px; font-weight: 300; letter-spacing: 2px; color: var(--gray); margin-bottom: 18px; }
-.div-line    { width: 34px; height: 2px; background: var(--red); margin-bottom: 16px; }
-.det-esq-lbl { font-size: 8px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--dark); margin-bottom: 6px; }
-.det-esq-val { font-size: 13px; font-weight: 600; color: var(--dark); margin-bottom: 4px; }
-.det-fachada { font-size: 11px; font-weight: 300; color: var(--gray); margin-top: 2px; }
-
-/* ── Frame base (borda branca) ── */
-.det-frame {
-  position: absolute; z-index: 2;
-  background: #fff; padding: 7px;
-  box-shadow: 0 8px 28px rgba(0,0,0,0.13), 0 0 0 1px rgba(0,0,0,0.05);
-}
-.det-frame img { display: block; width: 100%; height: 100%; object-fit: cover; }
-
-/* ════════════════════════════════════════════════════════
-   PADRÃO A — texto esquerda, 3 imagens dir + 2 esq-baixo
-   (projetos ímpares: 1,3,5,7,9,11,13,15)
-   Frames 1-3 começam ABAIXO do num-bg (top:162)
-════════════════════════════════════════════════════════ */
-.p-det-A .det-content { max-width: 310px; }
-.p-det-A .det-frame-1 { top: 162px; right: 40px; width: 244px; height: 155px; }
-.p-det-A .det-frame-2 { top: 329px; right: 40px; width: 244px; height: 155px; }
-.p-det-A .det-frame-3 { top: 496px; right: 40px; width: 244px; height: 155px; }
-.p-det-A .det-frame-4 { top: 278px; left:  52px; width: 180px; height: 148px; }
-.p-det-A .det-frame-5 { top: 440px; left:  52px; width: 180px; height: 148px; }
-
-/* ════════════════════════════════════════════════════════
-   PADRÃO B — texto direita, 3 imagens esq + 2 dir-baixo
-   (projetos pares: 2,4,6,8,10,12,14,16)
-════════════════════════════════════════════════════════ */
-.p-det-B .det-content { margin-left: 292px; }
-.p-det-B .det-frame-1 { top: 162px; left: 40px; width: 244px; height: 155px; }
-.p-det-B .det-frame-2 { top: 329px; left: 40px; width: 244px; height: 155px; }
-.p-det-B .det-frame-3 { top: 496px; left: 40px; width: 244px; height: 155px; }
-.p-det-B .det-frame-4 { top: 278px; right: 52px; width: 180px; height: 148px; }
-.p-det-B .det-frame-5 { top: 440px; right: 52px; width: 180px; height: 148px; }
-
-/* ════════════════════════════════════════════════════════
-   ANIMAÇÃO FLY-IN — todos os frames voam da esquerda
-   (lado da foto da obra) para a posição final
-   Cada frame tem delay escalonado → cascata natural
-════════════════════════════════════════════════════════ */
-@keyframes frameIn {
-  from { opacity: 0; transform: translateX(-320px) scale(0.18); }
-  to   { opacity: 1; transform: none; }
-}
-.p-detalhe .det-frame {
-  animation: frameIn 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-}
-.p-detalhe .det-frame-1 { animation-delay: 0.05s; }
-.p-detalhe .det-frame-2 { animation-delay: 0.22s; }
-.p-detalhe .det-frame-3 { animation-delay: 0.39s; }
-.p-detalhe .det-frame-4 { animation-delay: 0.56s; }
-.p-detalhe .det-frame-5 { animation-delay: 0.73s; }
-
-/* — OBRA 01 — zoom da fachada (topo-dir) + perfil do produto (base-esq, imagem inteira) */
-.p-det-zoom .det-frame-1 {                 /* PERFIL — base esquerda, grande */
-  top: 358px; left: 44px; width: 404px; height: 222px; z-index: 2;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.30), 0 8px 18px rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.04);
-}
-.p-det-zoom .det-frame-1 img { object-fit: contain; background: #fff; }  /* sem recortar */
-.p-det-zoom .det-frame-2 {                 /* ZOOM — topo direita, sobrepõe */
-  top: 152px; left: 372px; width: 288px; height: 230px; z-index: 3;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.30), 0 8px 18px rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.04);
-}
-
-/* — FRAME ÚNICO (Mahalo / Unique / BMW / projetos novos) — */
-.p-det-single .det-frame-1 { top: 75px; width: 282px; height: 460px; }
-.p-det-A.p-det-single .det-frame-1 { right: 40px; }
-.p-det-B.p-det-single .det-frame-1 { left:  40px; }
-
-/* — texto sempre à esquerda nos layouts perfil+zoom — */
-.p-det-zoom .det-content,
-.p-det-trio .det-content { max-width: 310px; }
-
-/* — segundo elemento quando é RENDER (reiki/fachada/perfil): contain em fundo branco — */
-.det-frame.det-render img { object-fit: contain; background: #fff; }
-
-/* — LAYOUT TRIO (zoom topo-dir + 2 renders na base) — projetos 02, 03, 05 — */
-.p-det-trio .det-frame-1 { top: 140px; left: 372px; width: 288px; height: 220px; z-index: 3;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.30), 0 8px 18px rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.04); }
-.p-det-trio .det-frame-2 { top: 384px; left: 44px;  width: 300px; height: 168px; z-index: 2;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.30), 0 8px 18px rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.04); }
-.p-det-trio .det-frame-3 { top: 384px; left: 360px; width: 300px; height: 168px; z-index: 2;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.30), 0 8px 18px rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.04); }
-
-/* — VIDROS: labels Antes / Depois — */
-.vv-frame { position: relative; }
-.vv-ab-label {
-  position: absolute; bottom: 10px; left: 12px;
-  font-size: 8px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
-  color: rgba(255,255,255,0.88); background: rgba(0,0,0,0.52);
-  padding: 4px 10px;
-}
-
-/* — INOVAÇÃO — */
-.p-inov {
-  background: var(--dark); width: 700px; height: 700px;
-  position: relative; overflow: hidden;
-}
-.p-inov .inov-bg {
-  position: absolute; inset: 0; width: 100%; height: 100%;
+/* ── BACKGROUNDS ── */
+.card-bg {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
   object-fit: cover; display: block;
 }
-.p-inov .inov-overlay {
+
+/* ── OVERLAYS ── */
+.ov-dark  { position: absolute; inset: 0; background: rgba(0,0,0,0.55); }
+.ov-bottom { position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.28) 52%, transparent 100%); }
+.ov-top   { position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.52) 0%, transparent 40%); }
+
+/* ── SCROLL HINT ── */
+.scroll-hint {
+  position: absolute; bottom: 22px; left: 50%;
+  transform: translateX(-50%);
+  animation: bounce 2.2s ease-in-out infinite;
+  pointer-events: none;
+}
+.scroll-hint svg { width: 22px; height: 22px; display: block; }
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.4; }
+  50%       { transform: translateX(-50%) translateY(9px); opacity: 0.7; }
+}
+.capa-arraste {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+  text-align: center; pointer-events: none;
+  animation: arrasteFade 3.1s ease 0.25s both;
+}
+.capa-arraste span {
+  font-size: 9px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase;
+  color: rgba(255,255,255,0.72); text-indent: 4px; white-space: nowrap;
+}
+.capa-chev { width: 24px; height: 24px; animation: capaChevBounce 2s ease-in-out infinite; }
+@keyframes capaChevBounce {
+  0%, 100% { transform: translateY(0); opacity: 0.5; }
+  50%       { transform: translateY(8px); opacity: 0.95; }
+}
+@keyframes arrasteFade { 0% { opacity: 0; } 74% { opacity: 0; } 100% { opacity: 1; } }
+
+/* ════════════════════ CAPA ════════════════════ */
+.card-capa .capa-content {
   position: absolute; inset: 0;
-  background: rgba(10,11,13,0.38);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 48px 32px;
 }
-.p-inov-left .inov-center {
+.capa-logo  { width: 150px; margin-bottom: 26px; }
+.capa-line  { width: 34px; height: 1px; background: var(--red); margin: 0 auto 20px; }
+.capa-tag   { font-size: 8px; font-weight: 600; letter-spacing: 6px; text-transform: uppercase;
+              color: rgba(255,255,255,0.55); margin-bottom: 32px; text-indent: 6px; }
+.badge-40   { display: flex; align-items: baseline; gap: 7px; margin-bottom: 6px; }
+.b40-num    { font-size: 58px; font-weight: 900; color: var(--red); line-height: 1; }
+.b40-txt    { font-size: 13px; font-weight: 300; letter-spacing: 5px; color: #fff; text-transform: uppercase; }
+.capa-anos  { font-size: 8px; font-weight: 300; letter-spacing: 4px; text-transform: uppercase;
+              color: rgba(255,255,255,0.35); text-indent: 4px; }
+
+/* — animação de abertura: logo sobe · 40 anos desce · linha some — */
+@keyframes capaRise {
+  0%   { opacity: 0; transform: translateY(18px); }
+  38%  { opacity: 1; transform: translateY(0); }
+  100% { opacity: 1; transform: translateY(-30vh); }
+}
+@keyframes capaSink {
+  0%   { opacity: 0; transform: translateY(-18px); }
+  38%  { opacity: 1; transform: translateY(0); }
+  100% { opacity: 1; transform: translateY(26vh); }
+}
+@keyframes capaLineOut {
+  0% { opacity: 0; transform: scaleX(1); }
+  38% { opacity: 1; transform: scaleX(1); }
+  62% { opacity: 1; transform: scaleX(1); }
+  100% { opacity: 0; transform: scaleX(0.15); }
+}
+.card-capa .capa-logo { animation: capaRise    2.6s cubic-bezier(0.22,0.61,0.36,1) 0.25s both; }
+.card-capa .capa-tag  { animation: capaRise    2.6s cubic-bezier(0.22,0.61,0.36,1) 0.25s both; }
+.card-capa .badge-40  { animation: capaSink    2.6s cubic-bezier(0.22,0.61,0.36,1) 0.25s both; }
+.card-capa .capa-anos { animation: capaSink    2.6s cubic-bezier(0.22,0.61,0.36,1) 0.25s both; }
+.card-capa .capa-line { animation: capaLineOut 2.6s ease 0.25s both; }
+
+/* ════════════════════ SOBRE ════════════════════ */
+.card-sobre { background: #fff; justify-content: center; }
+.sobre-bar  { position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--red); }
+.sobre-inner { position: relative; z-index: 1; padding: 52px 40px; }
+.sec-lbl    { font-size: 8px; font-weight: 600; letter-spacing: 5px; text-transform: uppercase;
+              color: var(--red); margin-bottom: 14px; }
+.sobre-h2   { font-size: 25px; font-weight: 700; color: var(--dark); line-height: 1.25; margin-bottom: 16px; }
+.sobre-txt  { font-size: 12px; font-weight: 400; color: var(--gray); line-height: 1.85; margin-bottom: 36px; }
+.counters-mob { display: flex; flex-direction: column; gap: 0; }
+.cnt-item   {}
+.cnt-row    { display: flex; align-items: baseline; gap: 5px; margin-bottom: 3px; }
+.cnt-num    { font-size: 52px; font-weight: 900; color: var(--dark); line-height: 1; }
+.cnt-plus   { font-size: 22px; font-weight: 700; color: var(--red); }
+.cnt-unit   { font-size: 14px; font-weight: 300; color: var(--gray); }
+.cnt-lbl    { font-size: 8px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: #bbb; margin-bottom: 18px; }
+.cnt-sep    { width: 28px; height: 1px; background: #eaeaea; margin-bottom: 18px; }
+
+/* ════════════════════ PRODUTOS ════════════════════ */
+.num-bg-mob {
+  position: absolute; top: 18px; right: 16px;
+  font-size: 88px; font-weight: 900; line-height: 1;
+  color: rgba(255,255,255,0.07); pointer-events: none;
+}
+.proj-info  { position: absolute; bottom: 0; left: 0; right: 0; padding: 32px 32px 52px; }
+.proj-num   { font-size: 8px; font-weight: 700; letter-spacing: 5px; text-transform: uppercase;
+              color: var(--red); margin-bottom: 6px; }
+.proj-name  { font-size: 24px; font-weight: 700; color: #fff; line-height: 1.2; margin-bottom: 3px; }
+.proj-loc   { font-size: 10px; font-weight: 300; letter-spacing: 2.5px;
+              color: rgba(255,255,255,0.5); margin-bottom: 14px; }
+.proj-div   { width: 22px; height: 1px; background: var(--red); margin-bottom: 10px; }
+.proj-esq-lbl { font-size: 7px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+                color: rgba(255,255,255,0.32); margin-bottom: 5px; }
+.proj-esq   { font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.72); line-height: 1.65; }
+.proj-fach  { font-size: 10px; font-weight: 300; color: rgba(255,255,255,0.55); margin-top: 6px; line-height: 1.5; }
+
+/* ════════════════════ DIVISÓRIA DE CATEGORIA ════════════════════ */
+.card-inov .inov-center {
   position: absolute; inset: 0;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: 22px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 20px;
 }
-.inov-rule { width: 48px; height: 1px; background: var(--red); }
-.inov-word {
-  font-size: 78px; font-weight: 100; color: #fff;
-  letter-spacing: 22px; text-transform: uppercase; line-height: 1;
-  text-indent: 22px;
-}
+.inov-rule  { width: 36px; height: 1px; background: var(--red); }
+.inov-word  { font-size: 38px; font-weight: 100; color: #fff; text-align: center;
+              letter-spacing: 8px; text-transform: uppercase; text-indent: 8px; line-height: 1.3; }
 
-.p-inov-right .inov-txt {
-  position: absolute; bottom: 0; left: 0; right: 0;
-  padding: 60px 52px 56px;
-  background: linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.55) 55%, transparent 100%);
-}
-.inov-tag-r {
-  font-size: 9px; font-weight: 600; letter-spacing: 5px;
-  text-transform: uppercase; color: var(--red); margin-bottom: 18px;
-}
-.inov-phrase {
-  font-size: 28px; font-weight: 700; color: #fff;
-  line-height: 1.28; margin-bottom: 20px;
-}
-.inov-desc {
-  font-size: 11px; font-weight: 300; color: rgba(255,255,255,0.62);
-  line-height: 1.85; margin-bottom: 26px;
-}
-.inov-cta {
-  display: inline-block;
-  font-size: 9px; font-weight: 700; letter-spacing: 4px;
-  text-transform: uppercase; color: var(--red);
-  border-bottom: 1px solid var(--red); padding-bottom: 3px;
-}
-
-/* — VIDROS INTELIGENTES — */
-.p-vidro {
-  width: 700px; height: 700px; position: relative; overflow: hidden;
-}
-.p-vidro-vid { background: #060708; }
-.p-vidro-vid video {
-  position: absolute; inset: 0; width: 100%; height: 100%;
-  object-fit: cover; opacity: 1;
-}
-.p-vidro-vid .vv-grad {
-  position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.80) 0%, rgba(0,0,0,0.30) 26%, transparent 52%);
-}
-.vv-phrase { font-size: 16px; font-weight: 300; color: #fff; line-height: 1.6; letter-spacing: 0.5px; max-width: 500px; text-shadow: 0 1px 12px rgba(0,0,0,0.5); }
-.vv-content { position: absolute; bottom: 58px; left: 60px; right: 60px; }
-.vv-sec   { font-size: 9px; font-weight: 600; letter-spacing: 5px; text-transform: uppercase; color: var(--red); margin-bottom: 14px; }
-.vv-title { font-size: 50px; font-weight: 100; color: #fff; letter-spacing: 6px; text-transform: uppercase; line-height: 1.1; margin-bottom: 20px; }
-.vv-rule  { width: 34px; height: 1px; background: var(--red); margin-bottom: 16px; }
-.vv-sub   { font-size: 11px; font-weight: 300; color: rgba(255,255,255,0.52); line-height: 1.85; }
-
-.p-vidro-imgs { background: #131315; }
-.vv-stack { width: 100%; height: 100%; display: flex; flex-direction: column; gap: 3px; }
-.vv-frame { flex: 1; overflow: hidden; }
-.vv-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-/* — PRODUTOS — */
-.p-prod {
-  background: var(--white); width: 700px; height: 700px;
-  padding: 64px 56px; display: flex; flex-direction: column; justify-content: center;
-}
-.p-prod .sec-label { font-size: 9px; font-weight: 600; letter-spacing: 5px; text-transform: uppercase; color: var(--red); margin-bottom: 10px; }
-.p-prod h2 { font-size: 28px; font-weight: 700; color: var(--dark); margin-bottom: 10px; }
-.p-prod .h-line { width: 34px; height: 2px; background: var(--red); margin-bottom: 38px; }
-.prod-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 26px 28px; }
-.prod-item .prod-icon { width: 36px; height: 36px; background: #F4F4F5; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
-.prod-item h4 { font-size: 13px; font-weight: 700; color: var(--dark); margin-bottom: 4px; }
-.prod-item p  { font-size: 11px; font-weight: 300; color: var(--gray); line-height: 1.7; }
-
-/* — CONTATO — */
-.p-cont {
-  background: var(--dark); width: 700px; height: 700px;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  padding: 64px; position: relative; overflow: hidden; isolation: isolate;
-}
-.p-cont .logo   { width: 230px; margin-bottom: 36px; display: block; }
-.p-cont .c-line { width: 34px; height: 1px; background: var(--red); margin-bottom: 30px; }
-.p-cont .c-group { text-align: center; margin-bottom: 16px; }
-.p-cont .c-lbl  { font-size: 8px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 3px; }
-.p-cont .c-val  { font-size: 12px; font-weight: 300; color: rgba(255,255,255,0.78); }
-.p-cont .c-foot { position: absolute; bottom: 30px; font-size: 9px; font-weight: 300; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.14); }
-
-/* — CONTRACAPA — */
-.p-contracapa { background: var(--dark); width: 700px; height: 700px; display: flex; align-items: center; justify-content: center; }
-.p-contracapa img { width: 170px; opacity: 0.85; }
-  .p-produto .overlay { height: 62%; }
-  .p-produto .prod-num  { font-size: 9px; font-weight: 600; letter-spacing: 5px; color: var(--red); text-transform: uppercase; margin-bottom: 8px; opacity: 0.85; }
-  .p-produto .prod-cat  { font-size: 9px; font-weight: 600; letter-spacing: 5px; color: var(--red); text-transform: uppercase; margin-bottom: 10px; }
-  .p-produto .prod-nome { font-size: 30px; font-weight: 700; color: #fff; line-height: 1.05; margin-bottom: 11px; }
-  .p-produto .prod-desc { font-size: 12px; font-weight: 300; color: rgba(255,255,255,0.75); line-height: 1.65; max-width: 350px; }
-  .p-divisoria .inov-word { font-size: 38px; letter-spacing: 8px; line-height: 1.18; text-indent: 8px; text-align: center; }
-
-/* ═══════════════ MOBILE — livro em paisagem forçada + splash ═══════════════ */
-html, body { overflow: hidden; overscroll-behavior: none; }
-html { background: #0e0f11; }                                 /* mesma cor nas áreas fora da área visível */
-body {                                                        /* ancorado à área REALMENTE visível (exclui barra de endereço/navegação do Android) */
-  position: fixed;
-  left: var(--vp-x, 0px); top: var(--vp-y, 0px);
-  width: var(--vp-w, 100vw); height: var(--vp-h, 100vh);
-  min-height: 0;                                              /* anula o min-height:100vh do bloco base (senão força o layout viewport e corta) */
-}
-.nav-btn, #indicator { display: none !important; }           /* limpo: só o livro + swipe */
-#stage { transform-origin: center center; visibility: hidden; }
-body.is-normal #stage { visibility: visible; transform: scale(var(--book-scale, 1)); }
-body.is-forced #stage { visibility: visible; transform: rotate(90deg) scale(var(--book-scale, 1)); }
-
-/* botão de TELA CHEIA — some por padrão; só aparece onde a Fullscreen API existe (Android). iPhone não suporta */
-#fs-btn { display: none; }
-body.fs-ok #fs-btn {
-  display: flex; z-index: 9998;
-  top: max(12px, env(safe-area-inset-top)); right: max(12px, env(safe-area-inset-right));
-  width: 42px; height: 42px; border-radius: 10px;
-  background: rgba(0,0,0,0.40); border-color: rgba(255,255,255,0.18);
-  color: rgba(255,255,255,0.72);
-  -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
-}
-#fs-btn .ic-exit { display: none; }
-body.is-fs #fs-btn .ic-enter { display: none; }
-body.is-fs #fs-btn .ic-exit  { display: block; }
-
-/* dica de TELA CHEIA no iPhone (Safari não expõe a Fullscreen API) — orienta a Adicionar à Tela de Início */
-#ios-tip {
-  position: fixed; z-index: 9997;
-  left: 50%; transform: translateX(-50%);
-  bottom: max(14px, env(safe-area-inset-bottom));
-  display: none; align-items: center; gap: 11px;
-  width: min(92vw, 360px); padding: 12px 15px;
-  background: rgba(20,21,24,0.94); border: 1px solid rgba(255,255,255,0.14); border-radius: 13px;
-  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
-  color: rgba(255,255,255,0.86); font-size: 12.5px; font-weight: 300; line-height: 1.4;
-  box-shadow: 0 10px 34px rgba(0,0,0,0.55);
-}
-body.ios-tip-on #ios-tip { display: flex; }
-#ios-tip span:not(.close-tip) { flex: 1; }
-#ios-tip b { font-weight: 700; color: #fff; }
-#ios-tip .share-ic { flex-shrink: 0; color: var(--red); }
-#ios-tip .close-tip { flex-shrink: 0; margin-left: 2px; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.45); font-size: 18px; line-height: 1; }
-
-#rotate-overlay {
-  position: fixed; inset: 0; z-index: 9999; background: #0e0f11;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: 22px; padding: 40px; text-align: center;
-  opacity: 1; transition: opacity 0.7s ease;
-}
-#rotate-overlay.hide { opacity: 0; pointer-events: none; }
-#rotate-overlay .rt-logo { width: 148px; opacity: 0.92; margin-bottom: 4px; }
-#rotate-overlay .ph { width: 84px; height: 84px; color: #fff; animation: rotateHint 2.4s ease-in-out infinite; transform-origin: 50% 50%; }
-@keyframes rotateHint { 0%,14%{transform:rotate(0)} 42%,72%{transform:rotate(90deg)} 100%{transform:rotate(90deg)} }
-#rotate-overlay .rt-rule { width: 40px; height: 2px; background: var(--red); }
-#rotate-overlay .rt-title { font-size: 19px; font-weight: 700; color: #fff; letter-spacing: 0.5px; }
-#rotate-overlay .rt-sub { font-size: 11px; font-weight: 300; color: rgba(255,255,255,0.55); letter-spacing: 2.5px; text-transform: uppercase; margin-top: -12px; }
+/* ════════════════════ CONTATO ════════════════════ */
+.card-cont  { background: var(--dark); justify-content: center; }
+.cont-inner { padding: 56px 40px; position: relative; z-index: 1; }
+.cont-logo  { width: 120px; margin-bottom: 32px; display: block; }
+.cont-bar   { width: 28px; height: 2px; background: var(--red); margin-bottom: 32px; }
+.cont-group { margin-bottom: 24px; }
+.cont-lbl   { font-size: 7px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase;
+              color: rgba(255,255,255,0.28); margin-bottom: 4px; }
+.cont-val   { font-size: 14px; font-weight: 400; color: rgba(255,255,255,0.85); }
+.cont-foot  { font-size: 8px; font-weight: 300; letter-spacing: 4px; text-transform: uppercase;
+              color: rgba(255,255,255,0.14); margin-top: 36px; }
+.cont-wm    { position: absolute; bottom: -20px; right: -20px; width: 200px;
+              opacity: 0.04; pointer-events: none; }
 </style>
 </head>
 <body>
 
-<!-- MOBILE: splash "gire a tela" (~2.5s, some sozinho ou ao toque) -->
-<div id="rotate-overlay">
-  <img class="rt-logo" src="assets/logo-white.png" alt="Centauro Esquadrias">
-  <svg class="ph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
-    <rect x="7" y="2.5" width="10" height="19" rx="2.2"/><line x1="10.5" y1="18.5" x2="13.5" y2="18.5"/>
-  </svg>
-  <div class="rt-rule"></div>
-  <div class="rt-title">Vire o celular</div>
-  <div class="rt-sub">e arraste para folhear</div>
-</div>
-
-<div id="pages" style="display:none">
-
-  <!-- PAGE 0 — CAPA (foto herói) -->
-  <div class="p-cover" data-page="0">
-    <img class="cover-bg" src="produtos/imagem-capa.jpg" alt="Centauro Esquadrias">
-    <div class="cover-scrim"></div>
-    <div class="cover-content">
-      <div class="cover-line"></div>
-      <div class="tagline">Linhas & Soluções · Alumínio e Vidro</div>
-      <div class="badge-40">
-        <span class="b40-num">40</span>
-        <div class="b40-sub">
-          <span class="b40-anos">ANOS</span>
-          <span class="b40-exp">de experiência</span>
-        </div>
-      </div>
-      <div class="cover-cap">Guaratuba · PR · 2026</div>
+<!-- ════ CAPA ════ -->
+<section class="card card-capa">
+  <img class="card-bg" src="produtos/imagem-capa.jpg" alt="Centauro Esquadrias">
+  <div class="ov-dark"></div>
+  <div class="capa-content">
+    <img class="capa-logo" src="assets/logo-white.png" alt="Centauro Esquadrias">
+    <div class="capa-line"></div>
+    <div class="capa-tag">Linhas & Soluções · Alumínio e Vidro</div>
+    <div class="badge-40">
+      <span class="b40-num">40</span>
+      <span class="b40-txt">ANOS</span>
     </div>
+    <div class="capa-anos">de experiência</div>
   </div>
+  <div class="capa-arraste">
+    <span>Arraste para baixo</span>
+    <svg class="capa-chev" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg>
+  </div>
+</section>
 
-  <!-- PAGE 1 — SOBRE -->
-  <div class="p-sobre" data-page="1">
-    <div class="red-bar"></div>
-    <div class="content">
-      <div class="sec-label">O que fazemos</div>
-      <h2>Soluções completas<br>em alumínio e vidro.</h2>
-      <p class="sobre-desc">Da esquadria à fachada, do box ao guarda-corpo: reunimos todas as linhas e produtos que a Centauro fabrica e instala. Alumínio de alto padrão e vidro com precisão técnica, acabamento refinado e design contemporâneo.</p>
-      <div class="counters">
-        <div class="counter-item">
-          <div class="cnt-row">
-            <span class="cnt-num" data-cnt="40" data-dur="2000">40</span>
-            <span class="cnt-plus">+</span>
-            <span class="cnt-unit">anos</span>
-          </div>
-          <div class="cnt-label">trabalhando com esquadrias</div>
+<!-- ════ SOBRE ════ -->
+<section class="card card-sobre">
+  <div class="sobre-bar"></div>
+  <div class="sobre-inner">
+    <div class="sec-lbl">O que fazemos</div>
+    <h2 class="sobre-h2">Soluções completas<br>em alumínio e vidro.</h2>
+    <p class="sobre-txt">Da esquadria à fachada, do box ao guarda-corpo: reunimos todas as linhas e produtos que a Centauro fabrica e instala. Alumínio de alto padrão e vidro com precisão técnica, acabamento refinado e design contemporâneo.</p>
+    <div class="counters-mob">
+      <div class="cnt-item">
+        <div class="cnt-row">
+          <span class="cnt-num" data-cnt="40" data-dur="2000">40</span>
+          <span class="cnt-plus">+</span>
+          <span class="cnt-unit">anos</span>
         </div>
-        <div class="cnt-sep" style="margin:4px 0"></div>
-        <div class="counter-item">
-          <div class="cnt-row">
-            <span class="cnt-prefix">+</span>
-            <span class="cnt-num" data-cnt="10000" data-dur="2500">10.000</span>
-          </div>
-          <div class="cnt-label">obras realizadas</div>
+        <div class="cnt-lbl">trabalhando com esquadrias</div>
+      </div>
+      <div class="cnt-sep"></div>
+      <div class="cnt-item">
+        <div class="cnt-row">
+          <span class="cnt-plus" style="font-size:18px;margin-right:2px">+</span>
+          <span class="cnt-num" data-cnt="10000" data-dur="2500">10.000</span>
         </div>
+        <div class="cnt-lbl">obras realizadas</div>
       </div>
     </div>
-    <img class="wm" src="assets/icone.png" alt="">
   </div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
 
-  <!-- ═══════════════ CATEGORIA 1: Linhas de Esquadria ═══════════════ -->
-  <div class="p-inov p-inov-left p-divisoria" data-page="0">
-    <img class="inov-bg" src="produtos/divisoria-esquadrias.jpg" alt="">
-    <div class="inov-overlay"></div>
-    <div class="inov-center">
-      <div class="inov-rule"></div>
-      <div class="inov-word">Linhas de<br>Esquadria</div>
-      <div class="inov-rule"></div>
-    </div>
+<!-- ═══════════════ CATEGORIA 1: Linhas de Esquadria ═══════════════ -->
+<section class="card card-inov">
+  <img class="card-bg" src="produtos/divisoria-esquadrias.jpg" alt="">
+  <div class="ov-dark"></div>
+  <div class="inov-center">
+    <div class="inov-rule"></div>
+    <div class="inov-word">Linhas de<br>Esquadria</div>
+    <div class="inov-rule"></div>
   </div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
 
-  <!-- Indice - Linhas de Esquadria -->
-  <div class="p-indice" data-page="0">
-    <img class="idx-wm" src="assets/icone.png" alt="">
-    <div class="idx-label">Categoria</div>
-    <div class="idx-title">Linhas de<br>Esquadria</div>
-    <div class="idx-rule"></div>
-    <div class="idx-list">
-      <div class="idx-item"><span class="idx-n">—</span><span class="idx-name">Gold</span></div>
-      <div class="idx-item"><span class="idx-n">—</span><span class="idx-name">Sublime</span></div>
-      <div class="idx-item"><span class="idx-n">—</span><span class="idx-name">Prime Venko</span></div>
-      <div class="idx-item"><span class="idx-n">—</span><span class="idx-name">Euro Show</span></div>
-      <div class="idx-item"><span class="idx-n">—</span><span class="idx-name">Roll Door</span></div>
-      <div class="idx-item"><span class="idx-n">—</span><span class="idx-name">Reiki Glazing</span></div>
-    </div>
+<section class="card">
+  <img class="card-bg" src="produtos/linha-gold.jpg" alt="Gold">
+  <div class="ov-top"></div><div class="ov-bottom"></div>
+  <div class="num-bg-mob"></div>
+  <div class="proj-info">
+    <div class="proj-num"></div>
+    <div class="proj-name">Gold</div>
+    <div class="proj-loc">Linhas de Esquadria</div>
+    <div class="proj-div"></div>
+    <div class="proj-esq-lbl">Material</div>
+    <div class="proj-esq">Alumínio de alto padrão, acabamento branco ou preto fosco</div>
+    <div class="proj-fach">Linha versátil para janelas e portas de correr, com ótimo custo-benefício.</div>
   </div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
 
-  <!-- Gold -->
-  <div class="p-foto p-produto" data-page="0">
-    <img class="obra-img" src="produtos/linha-gold.jpg" alt="Gold">
-    <div class="overlay"></div>
-    <div class="proj-label">
-      <div class="prod-num"></div>
-      <div class="prod-cat">Linhas de Esquadria</div>
-      <div class="prod-nome">Gold</div>
-      <div class="prod-desc">Linha versátil para janelas e portas de correr, com ótimo custo-benefício.</div>
-    </div>
+<section class="card">
+  <img class="card-bg" src="produtos/linha-sublime.jpg" alt="Sublime">
+  <div class="ov-top"></div><div class="ov-bottom"></div>
+  <div class="num-bg-mob"></div>
+  <div class="proj-info">
+    <div class="proj-num"></div>
+    <div class="proj-name">Sublime</div>
+    <div class="proj-loc">Linhas de Esquadria</div>
+    <div class="proj-div"></div>
+    <div class="proj-esq-lbl">Material</div>
+    <div class="proj-esq">Alumínio extrudado, acabamento anodizado ou pintura eletrostática</div>
+    <div class="proj-fach">Sistema de correr de alto desempenho, perfis robustos e vedação superior.</div>
   </div>
-  <div class="p-detalhe p-det-single p-det-A" data-page="0">
-    <div class="num-bg"></div>
-    <img class="det-wm" src="assets/icone.png" alt="">
-    <div class="det-content">
-      <div class="det-label">Linhas de Esquadria</div>
-      <div class="det-title">Gold</div>
-      <div class="det-local">Versátil, ótimo custo-benefício</div>
-      <div class="div-line"></div>
-      <div class="det-esq-lbl">Material</div>
-      <div class="det-esq-val">Alumínio de alto padrão, acabamento branco ou preto fosco</div>
-      <div class="det-esq-lbl" style="margin-top:10px">Aplicações indicadas</div>
-      <div class="det-esq-val">Projetos residenciais que buscam praticidade sem abrir mão do acabamento</div>
-      <div class="det-fachada">Ótimo custo-benefício mantendo a qualidade de fabricação Centauro.</div>
-    </div>
-    <div class="det-frame det-frame-1"><img src="produtos/linha-gold.jpg" alt=""></div>
-  </div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
 
-  <!-- Sublime -->
-  <div class="p-foto p-produto" data-page="0">
-    <img class="obra-img" src="produtos/linha-sublime.jpg" alt="Sublime">
-    <div class="overlay"></div>
-    <div class="proj-label">
-      <div class="prod-num"></div>
-      <div class="prod-cat">Linhas de Esquadria</div>
-      <div class="prod-nome">Sublime</div>
-      <div class="prod-desc">Sistema de correr de alto desempenho, perfis robustos e vedação superior.</div>
-    </div>
+<section class="card">
+  <img class="card-bg" src="produtos/linha-primevenco.jpg" alt="Prime Venko">
+  <div class="ov-top"></div><div class="ov-bottom"></div>
+  <div class="num-bg-mob"></div>
+  <div class="proj-info">
+    <div class="proj-num"></div>
+    <div class="proj-name">Prime Venko</div>
+    <div class="proj-loc">Linhas de Esquadria</div>
+    <div class="proj-div"></div>
+    <div class="proj-esq-lbl">Material</div>
+    <div class="proj-esq">Alumínio premium, ferragens de alta precisão</div>
+    <div class="proj-fach">Esquadrias de precisão com acabamento refinado e durabilidade.</div>
   </div>
-  <div class="p-detalhe p-det-single p-det-A" data-page="0">
-    <div class="num-bg"></div>
-    <img class="det-wm" src="assets/icone.png" alt="">
-    <div class="det-content">
-      <div class="det-label">Linhas de Esquadria</div>
-      <div class="det-title">Sublime</div>
-      <div class="det-local">Sistema de correr de alto desempenho</div>
-      <div class="div-line"></div>
-      <div class="det-esq-lbl">Material</div>
-      <div class="det-esq-val">Alumínio extrudado, acabamento anodizado ou pintura eletrostática</div>
-      <div class="det-esq-lbl" style="margin-top:10px">Aplicações indicadas</div>
-      <div class="det-esq-val">Janelas e portas de correr residenciais e comerciais</div>
-      <div class="det-fachada">Perfis robustos, vedação superior e alta durabilidade.</div>
-    </div>
-    <div class="det-frame det-frame-1"><img src="produtos/linha-sublime.jpg" alt=""></div>
-  </div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
 
-  <!-- Prime Venko -->
-  <div class="p-foto p-produto" data-page="0">
-    <img class="obra-img" src="produtos/linha-primevenco.jpg" alt="Prime Venko">
-    <div class="overlay"></div>
-    <div class="proj-label">
-      <div class="prod-num"></div>
-      <div class="prod-cat">Linhas de Esquadria</div>
-      <div class="prod-nome">Prime Venko</div>
-      <div class="prod-desc">Esquadrias de precisão com acabamento refinado e durabilidade.</div>
-    </div>
+<section class="card">
+  <img class="card-bg" src="produtos/linha-euroshow.jpg" alt="Euro Show">
+  <div class="ov-top"></div><div class="ov-bottom"></div>
+  <div class="num-bg-mob"></div>
+  <div class="proj-info">
+    <div class="proj-num"></div>
+    <div class="proj-name">Euro Show</div>
+    <div class="proj-loc">Linhas de Esquadria</div>
+    <div class="proj-div"></div>
+    <div class="proj-esq-lbl">Material</div>
+    <div class="proj-esq">Alumínio de perfil reduzido (slim), vidro temperado</div>
+    <div class="proj-fach">Grandes panos de vidro com perfis slim e visual contemporâneo.</div>
   </div>
-  <div class="p-detalhe p-det-single p-det-A" data-page="0">
-    <div class="num-bg"></div>
-    <img class="det-wm" src="assets/icone.png" alt="">
-    <div class="det-content">
-      <div class="det-label">Linhas de Esquadria</div>
-      <div class="det-title">Prime Venko</div>
-      <div class="det-local">Precisão e acabamento refinado</div>
-      <div class="div-line"></div>
-      <div class="det-esq-lbl">Material</div>
-      <div class="det-esq-val">Alumínio premium, ferragens de alta precisão</div>
-      <div class="det-esq-lbl" style="margin-top:10px">Aplicações indicadas</div>
-      <div class="det-esq-val">Projetos de alto padrão que exigem acabamento refinado</div>
-      <div class="det-fachada">Precisão de encaixe e durabilidade superior das ferragens.</div>
-    </div>
-    <div class="det-frame det-frame-1"><img src="produtos/linha-primevenco.jpg" alt=""></div>
-  </div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
 
-  <!-- Euro Show -->
-  <div class="p-foto p-produto" data-page="0">
-    <img class="obra-img" src="produtos/linha-euroshow.jpg" alt="Euro Show">
-    <div class="overlay"></div>
-    <div class="proj-label">
-      <div class="prod-num"></div>
-      <div class="prod-cat">Linhas de Esquadria</div>
-      <div class="prod-nome">Euro Show</div>
-      <div class="prod-desc">Grandes panos de vidro com perfis slim e visual contemporâneo.</div>
-    </div>
+<section class="card">
+  <img class="card-bg" src="produtos/linha-rolldoor.jpg" alt="Roll Door">
+  <div class="ov-top"></div><div class="ov-bottom"></div>
+  <div class="num-bg-mob"></div>
+  <div class="proj-info">
+    <div class="proj-num"></div>
+    <div class="proj-name">Roll Door</div>
+    <div class="proj-loc">Linhas de Esquadria</div>
+    <div class="proj-div"></div>
+    <div class="proj-esq-lbl">Material</div>
+    <div class="proj-esq">Alumínio extrudado com motorização</div>
+    <div class="proj-fach">Portas automáticas de enrolar em alumínio — praticidade e segurança.</div>
   </div>
-  <div class="p-detalhe p-det-single p-det-A" data-page="0">
-    <div class="num-bg"></div>
-    <img class="det-wm" src="assets/icone.png" alt="">
-    <div class="det-content">
-      <div class="det-label">Linhas de Esquadria</div>
-      <div class="det-title">Euro Show</div>
-      <div class="det-local">Grandes panos de vidro, perfil slim</div>
-      <div class="div-line"></div>
-      <div class="det-esq-lbl">Material</div>
-      <div class="det-esq-val">Alumínio de perfil reduzido (slim), vidro temperado</div>
-      <div class="det-esq-lbl" style="margin-top:10px">Aplicações indicadas</div>
-      <div class="det-esq-val">Fachadas e ambientes que valorizam amplos panos de vidro</div>
-      <div class="det-fachada">Perfis discretos que maximizam a entrada de luz natural.</div>
-    </div>
-    <div class="det-frame det-frame-1"><img src="produtos/linha-euroshow.jpg" alt=""></div>
-  </div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
 
-  <!-- Roll Door -->
-  <div class="p-foto p-produto" data-page="0">
-    <img class="obra-img" src="produtos/linha-rolldoor.jpg" alt="Roll Door">
-    <div class="overlay"></div>
-    <div class="proj-label">
-      <div class="prod-num"></div>
-      <div class="prod-cat">Linhas de Esquadria</div>
-      <div class="prod-nome">Roll Door</div>
-      <div class="prod-desc">Portas automáticas de enrolar em alumínio — praticidade e segurança.</div>
-    </div>
+<section class="card">
+  <img class="card-bg" src="produtos/linha-reiki.jpg" alt="Reiki Glazing">
+  <div class="ov-top"></div><div class="ov-bottom"></div>
+  <div class="num-bg-mob"></div>
+  <div class="proj-info">
+    <div class="proj-num"></div>
+    <div class="proj-name">Reiki Glazing</div>
+    <div class="proj-loc">Linhas de Esquadria</div>
+    <div class="proj-div"></div>
+    <div class="proj-esq-lbl">Material</div>
+    <div class="proj-esq">Sistema estrutural de vidro com fixação minimalista em alumínio</div>
+    <div class="proj-fach">Envidraçamento estrutural com estética minimalista e leveza.</div>
   </div>
-  <div class="p-detalhe p-det-single p-det-A" data-page="0">
-    <div class="num-bg"></div>
-    <img class="det-wm" src="assets/icone.png" alt="">
-    <div class="det-content">
-      <div class="det-label">Linhas de Esquadria</div>
-      <div class="det-title">Roll Door</div>
-      <div class="det-local">Porta de enrolar automatizada</div>
-      <div class="div-line"></div>
-      <div class="det-esq-lbl">Material</div>
-      <div class="det-esq-val">Alumínio extrudado com motorização</div>
-      <div class="det-esq-lbl" style="margin-top:10px">Aplicações indicadas</div>
-      <div class="det-esq-val">Garagens, comércios e áreas que exigem fechamento automatizado</div>
-      <div class="det-fachada">Praticidade do acionamento automático aliada à segurança.</div>
-    </div>
-    <div class="det-frame det-frame-1"><img src="produtos/linha-rolldoor.jpg" alt=""></div>
-  </div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
 
-  <!-- Reiki Glazing -->
-  <div class="p-foto p-produto" data-page="0">
-    <img class="obra-img" src="produtos/linha-reiki.jpg" alt="Reiki Glazing">
-    <div class="overlay"></div>
-    <div class="proj-label">
-      <div class="prod-num"></div>
-      <div class="prod-cat">Linhas de Esquadria</div>
-      <div class="prod-nome">Reiki Glazing</div>
-      <div class="prod-desc">Envidraçamento estrutural com estética minimalista e leveza.</div>
-    </div>
+<!-- ═══════════════ CATEGORIA 2: Portas & Grandes Vãos ═══════════════ -->
+<section class="card card-inov">
+  <img class="card-bg" src="produtos/divisoria-portas.jpg" alt="">
+  <div class="ov-dark"></div>
+  <div class="inov-center">
+    <div class="inov-rule"></div>
+    <div class="inov-word">Portas &amp;<br>Grandes Vãos</div>
+    <div class="inov-rule"></div>
   </div>
-  <div class="p-detalhe p-det-single p-det-A" data-page="0">
-    <div class="num-bg"></div>
-    <img class="det-wm" src="assets/icone.png" alt="">
-    <div class="det-content">
-      <div class="det-label">Linhas de Esquadria</div>
-      <div class="det-title">Reiki Glazing</div>
-      <div class="det-local">Envidraçamento estrutural minimalista</div>
-      <div class="div-line"></div>
-      <div class="det-esq-lbl">Material</div>
-      <div class="det-esq-val">Sistema estrutural de vidro com fixação minimalista em alumínio</div>
-      <div class="det-esq-lbl" style="margin-top:10px">Aplicações indicadas</div>
-      <div class="det-esq-val">Fachadas e coberturas que buscam leveza visual máxima</div>
-      <div class="det-fachada">Estética minimalista com estrutura de fixação discreta.</div>
-    </div>
-    <div class="det-frame det-frame-1"><img src="produtos/linha-reiki.jpg" alt=""></div>
-  </div>
-  <!-- ═══════════════ CATEGORIA 2: Portas & Grandes Vãos ═══════════════ -->
-  <div class="p-inov p-inov-left p-divisoria" data-page="0">
-    <img class="inov-bg" src="produtos/divisoria-portas.jpg" alt="">
-    <div class="inov-overlay"></div>
-    <div class="inov-center">
-      <div class="inov-rule"></div>
-      <div class="inov-word">Portas &amp;<br>Grandes Vãos</div>
-      <div class="inov-rule"></div>
-    </div>
-  </div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
 
-  <!-- Indice - Portas & Grandes Vãos -->
-  <div class="p-indice" data-page="0">
-    <img class="idx-wm" src="assets/icone.png" alt="">
-    <div class="idx-label">Categoria</div>
-    <div class="idx-title">Portas &amp;<br>Grandes Vãos</div>
-    <div class="idx-rule"></div>
-    <div class="idx-list">
-      <div class="idx-item"><span class="idx-n">—</span><span class="idx-name">Big Door</span></div>
-      <div class="idx-item"><span class="idx-n">—</span><span class="idx-name">Portas de Alumínio</span></div>
-      <div class="idx-item"><span class="idx-n">—</span><span class="idx-name">Portões Basculantes & Sociais</span></div>
-    </div>
+<section class="card">
+  <img class="card-bg" src="produtos/big-door.jpg" alt="Big Door">
+  <div class="ov-top"></div><div class="ov-bottom"></div>
+  <div class="num-bg-mob"></div>
+  <div class="proj-info">
+    <div class="proj-num"></div>
+    <div class="proj-name">Big Door</div>
+    <div class="proj-loc">Portas & Grandes Vãos</div>
+    <div class="proj-div"></div>
+    <div class="proj-esq-lbl">Material</div>
+    <div class="proj-esq">Alumínio estrutural reforçado, vidro temperado</div>
+    <div class="proj-fach">Portas pivotantes de grandes dimensões — imponência e design.</div>
   </div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
 
-  <!-- Big Door -->
-  <div class="p-foto p-produto" data-page="0">
-    <img class="obra-img" src="produtos/big-door.jpg" alt="Big Door">
-    <div class="overlay"></div>
-    <div class="proj-label">
-      <div class="prod-num"></div>
-      <div class="prod-cat">Portas & Grandes Vãos</div>
-      <div class="prod-nome">Big Door</div>
-      <div class="prod-desc">Portas pivotantes de grandes dimensões — imponência e design.</div>
-    </div>
+<section class="card">
+  <img class="card-bg" src="produtos/portas.jpg" alt="Portas de Alumínio">
+  <div class="ov-top"></div><div class="ov-bottom"></div>
+  <div class="num-bg-mob"></div>
+  <div class="proj-info">
+    <div class="proj-num"></div>
+    <div class="proj-name">Portas de Alumínio</div>
+    <div class="proj-loc">Portas & Grandes Vãos</div>
+    <div class="proj-div"></div>
+    <div class="proj-esq-lbl">Material</div>
+    <div class="proj-esq">Alumínio de alto padrão, diversos acabamentos</div>
+    <div class="proj-fach">Portas de entrada, de correr e pivotantes em alumínio de alto padrão.</div>
   </div>
-  <div class="p-detalhe p-det-single p-det-A" data-page="0">
-    <div class="num-bg"></div>
-    <img class="det-wm" src="assets/icone.png" alt="">
-    <div class="det-content">
-      <div class="det-label">Portas & Grandes Vãos</div>
-      <div class="det-title">Big Door</div>
-      <div class="det-local">Pivotante de grandes dimensões</div>
-      <div class="div-line"></div>
-      <div class="det-esq-lbl">Material</div>
-      <div class="det-esq-val">Alumínio estrutural reforçado, vidro temperado</div>
-      <div class="det-esq-lbl" style="margin-top:10px">Aplicações indicadas</div>
-      <div class="det-esq-val">Entradas principais e integrações de grandes vãos</div>
-      <div class="det-fachada">Imponência visual com sistema pivotante de alta precisão.</div>
-    </div>
-    <div class="det-frame det-frame-1"><img src="produtos/big-door.jpg" alt=""></div>
-  </div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
 
-  <!-- Portas de Alumínio -->
-  <div class="p-foto p-produto" data-page="0">
-    <img class="obra-img" src="produtos/portas.jpg" alt="Portas de Alumínio">
-    <div class="overlay"></div>
-    <div class="proj-label">
-      <div class="prod-num"></div>
-      <div class="prod-cat">Portas & Grandes Vãos</div>
-      <div class="prod-nome">Portas de Alumínio</div>
-      <div class="prod-desc">Portas de entrada, de correr e pivotantes em alumínio de alto padrão.</div>
-    </div>
+<section class="card">
+  <img class="card-bg" src="produtos/portoes-basculante.jpg" alt="Portões Basculantes & Sociais">
+  <div class="ov-top"></div><div class="ov-bottom"></div>
+  <div class="num-bg-mob"></div>
+  <div class="proj-info">
+    <div class="proj-num"></div>
+    <div class="proj-name">Portões Basculantes & Sociais</div>
+    <div class="proj-loc">Portas & Grandes Vãos</div>
+    <div class="proj-div"></div>
+    <div class="proj-esq-lbl">Material</div>
+    <div class="proj-esq">Alumínio de alta resistência, acionamento manual ou motorizado</div>
+    <div class="proj-fach">Portões basculantes e sociais em alumínio — praticidade para o dia a dia.</div>
   </div>
-  <div class="p-detalhe p-det-single p-det-A" data-page="0">
-    <div class="num-bg"></div>
-    <img class="det-wm" src="assets/icone.png" alt="">
-    <div class="det-content">
-      <div class="det-label">Portas & Grandes Vãos</div>
-      <div class="det-title">Portas de Alumínio</div>
-      <div class="det-local">Entrada, correr e pivotante</div>
-      <div class="div-line"></div>
-      <div class="det-esq-lbl">Material</div>
-      <div class="det-esq-val">Alumínio de alto padrão, diversos acabamentos</div>
-      <div class="det-esq-lbl" style="margin-top:10px">Aplicações indicadas</div>
-      <div class="det-esq-val">Entradas residenciais e comerciais</div>
-      <div class="det-fachada">Versatilidade de modelos com acabamento premium.</div>
-    </div>
-    <div class="det-frame det-frame-1"><img src="produtos/portas.jpg" alt=""></div>
-  </div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
 
-  <!-- Portões Basculantes & Sociais -->
-  <div class="p-foto p-produto" data-page="0">
-    <img class="obra-img" src="produtos/portoes-basculante.jpg" alt="Portões Basculantes & Sociais">
-    <div class="overlay"></div>
-    <div class="proj-label">
-      <div class="prod-num"></div>
-      <div class="prod-cat">Portas & Grandes Vãos</div>
-      <div class="prod-nome">Portões Basculantes & Sociais</div>
-      <div class="prod-desc">Portões basculantes e sociais em alumínio — praticidade para o dia a dia.</div>
-    </div>
+<!-- ═══════════════ CATEGORIA 3: Fachadas & Revestimentos ═══════════════ -->
+<section class="card card-inov">
+  <img class="card-bg" src="produtos/divisoria-fachadas.jpg" alt="">
+  <div class="ov-dark"></div>
+  <div class="inov-center">
+    <div class="inov-rule"></div>
+    <div class="inov-word">Fachadas &amp;<br>Revestimentos</div>
+    <div class="inov-rule"></div>
   </div>
-  <div class="p-detalhe p-det-single p-det-A" data-page="0">
-    <div class="num-bg"></div>
-    <img class="det-wm" src="assets/icone.png" alt="">
-    <div class="det-content">
-      <div class="det-label">Portas & Grandes Vãos</div>
-      <div class="det-title">Portões Basculantes & Sociais</div>
-      <div class="det-local">Praticidade no uso diário</div>
-      <div class="div-line"></div>
-      <div class="det-esq-lbl">Material</div>
-      <div class="det-esq-val">Alumínio de alta resistência, acionamento manual ou motorizado</div>
-      <div class="det-esq-lbl" style="margin-top:10px">Aplicações indicadas</div>
-      <div class="det-esq-val">Acessos sociais e de veículos em residências</div>
-      <div class="det-fachada">Robustez e praticidade de operação no uso diário.</div>
-    </div>
-    <div class="det-frame det-frame-1"><img src="produtos/portoes-basculante.jpg" alt=""></div>
-  </div>
-  <!-- ═══════════════ CATEGORIA 3: Fachadas & Revestimentos ═══════════════ -->
-  <div class="p-inov p-inov-left p-divisoria" data-page="0">
-    <img class="inov-bg" src="produtos/divisoria-fachadas.jpg" alt="">
-    <div class="inov-overlay"></div>
-    <div class="inov-center">
-      <div class="inov-rule"></div>
-      <div class="inov-word">Fachadas &amp;<br>Revestimentos</div>
-      <div class="inov-rule"></div>
-    </div>
-  </div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
 
-  <!-- Indice - Fachadas & Revestimentos -->
-  <div class="p-indice" data-page="0">
-    <img class="idx-wm" src="assets/icone.png" alt="">
-    <div class="idx-label">Categoria</div>
-    <div class="idx-title">Fachadas &amp;<br>Revestimentos</div>
-    <div class="idx-rule"></div>
-    <div class="idx-list">
-      <div class="idx-item"><span class="idx-n">—</span><span class="idx-name">Fachadas</span></div>
-      <div class="idx-item"><span class="idx-n">—</span><span class="idx-name">Pele de Vidro</span></div>
-      <div class="idx-item"><span class="idx-n">—</span><span class="idx-name">Brise</span></div>
-      <div class="idx-item"><span class="idx-n">—</span><span class="idx-name">Ripado</span></div>
-    </div>
+<section class="card">
+  <img class="card-bg" src="produtos/fachadas.jpg" alt="Fachadas">
+  <div class="ov-top"></div><div class="ov-bottom"></div>
+  <div class="num-bg-mob"></div>
+  <div class="proj-info">
+    <div class="proj-num"></div>
+    <div class="proj-name">Fachadas</div>
+    <div class="proj-loc">Fachadas & Revestimentos</div>
+    <div class="proj-div"></div>
+    <div class="proj-esq-lbl">Material</div>
+    <div class="proj-esq">Alumínio estrutural, vidro laminado/temperado</div>
+    <div class="proj-fach">Fachadas envidraçadas e structural glazing de alto padrão.</div>
   </div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
 
-  <!-- Fachadas -->
-  <div class="p-foto p-produto" data-page="0">
-    <img class="obra-img" src="produtos/fachadas.jpg" alt="Fachadas">
-    <div class="overlay"></div>
-    <div class="proj-label">
-      <div class="prod-num"></div>
-      <div class="prod-cat">Fachadas & Revestimentos</div>
-      <div class="prod-nome">Fachadas</div>
-      <div class="prod-desc">Fachadas envidraçadas e structural glazing de alto padrão.</div>
-    </div>
+<section class="card">
+  <img class="card-bg" src="produtos/pele-vidro.jpg" alt="Pele de Vidro">
+  <div class="ov-top"></div><div class="ov-bottom"></div>
+  <div class="num-bg-mob"></div>
+  <div class="proj-info">
+    <div class="proj-num"></div>
+    <div class="proj-name">Pele de Vidro</div>
+    <div class="proj-loc">Fachadas & Revestimentos</div>
+    <div class="proj-div"></div>
+    <div class="proj-esq-lbl">Material</div>
+    <div class="proj-esq">Vidro temperado/laminado com estrutura de alumínio oculta</div>
+    <div class="proj-fach">Revestimento contínuo em vidro — visual imponente e moderno.</div>
   </div>
-  <div class="p-detalhe p-det-single p-det-A" data-page="0">
-    <div class="num-bg"></div>
-    <img class="det-wm" src="assets/icone.png" alt="">
-    <div class="det-content">
-      <div class="det-label">Fachadas & Revestimentos</div>
-      <div class="det-title">Fachadas</div>
-      <div class="det-local">Structural glazing de alto padrão</div>
-      <div class="div-line"></div>
-      <div class="det-esq-lbl">Material</div>
-      <div class="det-esq-val">Alumínio estrutural, vidro laminado/temperado</div>
-      <div class="det-esq-lbl" style="margin-top:10px">Aplicações indicadas</div>
-      <div class="det-esq-val">Edifícios comerciais e residenciais de alto padrão</div>
-      <div class="det-fachada">Estética contemporânea com desempenho estrutural.</div>
-    </div>
-    <div class="det-frame det-frame-1"><img src="produtos/fachadas.jpg" alt=""></div>
-  </div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
 
-  <!-- Pele de Vidro -->
-  <div class="p-foto p-produto" data-page="0">
-    <img class="obra-img" src="produtos/pele-vidro.jpg" alt="Pele de Vidro">
-    <div class="overlay"></div>
-    <div class="proj-label">
-      <div class="prod-num"></div>
-      <div class="prod-cat">Fachadas & Revestimentos</div>
-      <div class="prod-nome">Pele de Vidro</div>
-      <div class="prod-desc">Revestimento contínuo em vidro — visual imponente e moderno.</div>
-    </div>
+<section class="card">
+  <img class="card-bg" src="produtos/brise.jpg" alt="Brise">
+  <div class="ov-top"></div><div class="ov-bottom"></div>
+  <div class="num-bg-mob"></div>
+  <div class="proj-info">
+    <div class="proj-num"></div>
+    <div class="proj-name">Brise</div>
+    <div class="proj-loc">Fachadas & Revestimentos</div>
+    <div class="proj-div"></div>
+    <div class="proj-esq-lbl">Material</div>
+    <div class="proj-esq">Alumínio extrudado, lâminas fixas ou móveis</div>
+    <div class="proj-fach">Brises de alumínio para conforto térmico e assinatura estética.</div>
   </div>
-  <div class="p-detalhe p-det-single p-det-A" data-page="0">
-    <div class="num-bg"></div>
-    <img class="det-wm" src="assets/icone.png" alt="">
-    <div class="det-content">
-      <div class="det-label">Fachadas & Revestimentos</div>
-      <div class="det-title">Pele de Vidro</div>
-      <div class="det-local">Revestimento contínuo e imponente</div>
-      <div class="div-line"></div>
-      <div class="det-esq-lbl">Material</div>
-      <div class="det-esq-val">Vidro temperado/laminado com estrutura de alumínio oculta</div>
-      <div class="det-esq-lbl" style="margin-top:10px">Aplicações indicadas</div>
-      <div class="det-esq-val">Revestimento de fachadas inteiras</div>
-      <div class="det-fachada">Visual contínuo e imponente, sem interrupções aparentes.</div>
-    </div>
-    <div class="det-frame det-frame-1"><img src="produtos/pele-vidro.jpg" alt=""></div>
-  </div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
 
-  <!-- Brise -->
-  <div class="p-foto p-produto" data-page="0">
-    <img class="obra-img" src="produtos/brise.jpg" alt="Brise">
-    <div class="overlay"></div>
-    <div class="proj-label">
-      <div class="prod-num"></div>
-      <div class="prod-cat">Fachadas & Revestimentos</div>
-      <div class="prod-nome">Brise</div>
-      <div class="prod-desc">Brises de alumínio para conforto térmico e assinatura estética.</div>
-    </div>
+<section class="card">
+  <img class="card-bg" src="produtos/ripado.jpg" alt="Ripado">
+  <div class="ov-top"></div><div class="ov-bottom"></div>
+  <div class="num-bg-mob"></div>
+  <div class="proj-info">
+    <div class="proj-num"></div>
+    <div class="proj-name">Ripado</div>
+    <div class="proj-loc">Fachadas & Revestimentos</div>
+    <div class="proj-div"></div>
+    <div class="proj-esq-lbl">Material</div>
+    <div class="proj-esq">Alumínio com acabamento amadeirado (efeito madeira)</div>
+    <div class="proj-fach">Ripado de alumínio amadeirado para fachadas e revestimentos.</div>
   </div>
-  <div class="p-detalhe p-det-single p-det-A" data-page="0">
-    <div class="num-bg"></div>
-    <img class="det-wm" src="assets/icone.png" alt="">
-    <div class="det-content">
-      <div class="det-label">Fachadas & Revestimentos</div>
-      <div class="det-title">Brise</div>
-      <div class="det-local">Conforto térmico e assinatura estética</div>
-      <div class="div-line"></div>
-      <div class="det-esq-lbl">Material</div>
-      <div class="det-esq-val">Alumínio extrudado, lâminas fixas ou móveis</div>
-      <div class="det-esq-lbl" style="margin-top:10px">Aplicações indicadas</div>
-      <div class="det-esq-val">Fachadas expostas ao sol, controle de luminosidade</div>
-      <div class="det-fachada">Conforto térmico aliado à assinatura estética do projeto.</div>
-    </div>
-    <div class="det-frame det-frame-1"><img src="produtos/brise.jpg" alt=""></div>
-  </div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
 
-  <!-- Ripado -->
-  <div class="p-foto p-produto" data-page="0">
-    <img class="obra-img" src="produtos/ripado.jpg" alt="Ripado">
-    <div class="overlay"></div>
-    <div class="proj-label">
-      <div class="prod-num"></div>
-      <div class="prod-cat">Fachadas & Revestimentos</div>
-      <div class="prod-nome">Ripado</div>
-      <div class="prod-desc">Ripado de alumínio amadeirado para fachadas e revestimentos.</div>
-    </div>
+<!-- ═══════════════ CATEGORIA 4: Vidros & Ambientes ═══════════════ -->
+<section class="card card-inov">
+  <img class="card-bg" src="produtos/divisoria-vidros.jpg" alt="">
+  <div class="ov-dark"></div>
+  <div class="inov-center">
+    <div class="inov-rule"></div>
+    <div class="inov-word">Vidros &amp;<br>Ambientes</div>
+    <div class="inov-rule"></div>
   </div>
-  <div class="p-detalhe p-det-single p-det-A" data-page="0">
-    <div class="num-bg"></div>
-    <img class="det-wm" src="assets/icone.png" alt="">
-    <div class="det-content">
-      <div class="det-label">Fachadas & Revestimentos</div>
-      <div class="det-title">Ripado</div>
-      <div class="det-local">Acabamento amadeirado</div>
-      <div class="div-line"></div>
-      <div class="det-esq-lbl">Material</div>
-      <div class="det-esq-val">Alumínio com acabamento amadeirado (efeito madeira)</div>
-      <div class="det-esq-lbl" style="margin-top:10px">Aplicações indicadas</div>
-      <div class="det-esq-val">Fachadas, forros e revestimentos decorativos</div>
-      <div class="det-fachada">Estética amadeirada com a durabilidade do alumínio.</div>
-    </div>
-    <div class="det-frame det-frame-1"><img src="produtos/ripado.jpg" alt=""></div>
-  </div>
-  <!-- ═══════════════ CATEGORIA 4: Vidros & Ambientes ═══════════════ -->
-  <div class="p-inov p-inov-left p-divisoria" data-page="0">
-    <img class="inov-bg" src="produtos/divisoria-vidros.jpg" alt="">
-    <div class="inov-overlay"></div>
-    <div class="inov-center">
-      <div class="inov-rule"></div>
-      <div class="inov-word">Vidros &amp;<br>Ambientes</div>
-      <div class="inov-rule"></div>
-    </div>
-  </div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
 
-  <!-- Indice - Vidros & Ambientes -->
-  <div class="p-indice" data-page="0">
-    <img class="idx-wm" src="assets/icone.png" alt="">
-    <div class="idx-label">Categoria</div>
-    <div class="idx-title">Vidros &amp;<br>Ambientes</div>
-    <div class="idx-rule"></div>
-    <div class="idx-list">
-      <div class="idx-item"><span class="idx-n">—</span><span class="idx-name">Vidro Inteligente</span></div>
-      <div class="idx-item"><span class="idx-n">—</span><span class="idx-name">Box de Banheiro</span></div>
-      <div class="idx-item"><span class="idx-n">—</span><span class="idx-name">Divisórias</span></div>
-      <div class="idx-item"><span class="idx-n">—</span><span class="idx-name">Guarda-corpo</span></div>
-    </div>
+<section class="card">
+  <img class="card-bg" src="produtos/vidro-inteligente.jpg" alt="Vidro Inteligente">
+  <div class="ov-top"></div><div class="ov-bottom"></div>
+  <div class="num-bg-mob"></div>
+  <div class="proj-info">
+    <div class="proj-num"></div>
+    <div class="proj-name">Vidro Inteligente</div>
+    <div class="proj-loc">Vidros & Ambientes</div>
+    <div class="proj-div"></div>
+    <div class="proj-esq-lbl">Material</div>
+    <div class="proj-esq">Vidro laminado com película de cristal líquido (PDLC)</div>
+    <div class="proj-fach">Alterna entre transparente e opaco com um simples toque.</div>
   </div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
 
-  <!-- Vidro Inteligente -->
-  <div class="p-foto p-produto" data-page="0">
-    <img class="obra-img" src="produtos/vidro-inteligente.jpg" alt="Vidro Inteligente">
-    <div class="overlay"></div>
-    <div class="proj-label">
-      <div class="prod-num"></div>
-      <div class="prod-cat">Vidros & Ambientes</div>
-      <div class="prod-nome">Vidro Inteligente</div>
-      <div class="prod-desc">Alterna entre transparente e opaco com um simples toque.</div>
-    </div>
+<section class="card">
+  <img class="card-bg" src="produtos/box.jpg" alt="Box de Banheiro">
+  <div class="ov-top"></div><div class="ov-bottom"></div>
+  <div class="num-bg-mob"></div>
+  <div class="proj-info">
+    <div class="proj-num"></div>
+    <div class="proj-name">Box de Banheiro</div>
+    <div class="proj-loc">Vidros & Ambientes</div>
+    <div class="proj-div"></div>
+    <div class="proj-esq-lbl">Material</div>
+    <div class="proj-esq">Vidro temperado, ferragens em alumínio ou inox</div>
+    <div class="proj-fach">Boxes em vidro temperado com perfis slim e acabamento premium.</div>
   </div>
-  <div class="p-detalhe p-det-single p-det-A" data-page="0">
-    <div class="num-bg"></div>
-    <img class="det-wm" src="assets/icone.png" alt="">
-    <div class="det-content">
-      <div class="det-label">Vidros & Ambientes</div>
-      <div class="det-title">Vidro Inteligente</div>
-      <div class="det-local">Privacidade sob demanda</div>
-      <div class="div-line"></div>
-      <div class="det-esq-lbl">Material</div>
-      <div class="det-esq-val">Vidro laminado com película de cristal líquido (PDLC)</div>
-      <div class="det-esq-lbl" style="margin-top:10px">Aplicações indicadas</div>
-      <div class="det-esq-val">Divisórias, escritórios e ambientes que exigem privacidade sob demanda</div>
-      <div class="det-fachada">Alternância instantânea entre transparente e opaco.</div>
-    </div>
-    <div class="det-frame det-frame-1"><img src="produtos/vidro-inteligente.jpg" alt=""></div>
-  </div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
 
-  <!-- Box de Banheiro -->
-  <div class="p-foto p-produto" data-page="0">
-    <img class="obra-img" src="produtos/box.jpg" alt="Box de Banheiro">
-    <div class="overlay"></div>
-    <div class="proj-label">
-      <div class="prod-num"></div>
-      <div class="prod-cat">Vidros & Ambientes</div>
-      <div class="prod-nome">Box de Banheiro</div>
-      <div class="prod-desc">Boxes em vidro temperado com perfis slim e acabamento premium.</div>
-    </div>
+<section class="card">
+  <img class="card-bg" src="produtos/divisorias.jpg" alt="Divisórias">
+  <div class="ov-top"></div><div class="ov-bottom"></div>
+  <div class="num-bg-mob"></div>
+  <div class="proj-info">
+    <div class="proj-num"></div>
+    <div class="proj-name">Divisórias</div>
+    <div class="proj-loc">Vidros & Ambientes</div>
+    <div class="proj-div"></div>
+    <div class="proj-esq-lbl">Material</div>
+    <div class="proj-esq">Vidro temperado/laminado, perfis de alumínio</div>
+    <div class="proj-fach">Divisórias de vidro para escritórios e ambientes corporativos.</div>
   </div>
-  <div class="p-detalhe p-det-single p-det-A" data-page="0">
-    <div class="num-bg"></div>
-    <img class="det-wm" src="assets/icone.png" alt="">
-    <div class="det-content">
-      <div class="det-label">Vidros & Ambientes</div>
-      <div class="det-title">Box de Banheiro</div>
-      <div class="det-local">Perfis slim, acabamento premium</div>
-      <div class="div-line"></div>
-      <div class="det-esq-lbl">Material</div>
-      <div class="det-esq-val">Vidro temperado, ferragens em alumínio ou inox</div>
-      <div class="det-esq-lbl" style="margin-top:10px">Aplicações indicadas</div>
-      <div class="det-esq-val">Banheiros residenciais e comerciais</div>
-      <div class="det-fachada">Perfis slim e acabamento premium com vedação eficiente.</div>
-    </div>
-    <div class="det-frame det-frame-1"><img src="produtos/box.jpg" alt=""></div>
-  </div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
 
-  <!-- Divisórias -->
-  <div class="p-foto p-produto" data-page="0">
-    <img class="obra-img" src="produtos/divisorias.jpg" alt="Divisórias">
-    <div class="overlay"></div>
-    <div class="proj-label">
-      <div class="prod-num"></div>
-      <div class="prod-cat">Vidros & Ambientes</div>
-      <div class="prod-nome">Divisórias</div>
-      <div class="prod-desc">Divisórias de vidro para escritórios e ambientes corporativos.</div>
-    </div>
+<section class="card">
+  <img class="card-bg" src="produtos/guarda-corpo.jpg" alt="Guarda-corpo">
+  <div class="ov-top"></div><div class="ov-bottom"></div>
+  <div class="num-bg-mob"></div>
+  <div class="proj-info">
+    <div class="proj-num"></div>
+    <div class="proj-name">Guarda-corpo</div>
+    <div class="proj-loc">Vidros & Ambientes</div>
+    <div class="proj-div"></div>
+    <div class="proj-esq-lbl">Material</div>
+    <div class="proj-esq">Vidro temperado/laminado, fixação em alumínio ou inox</div>
+    <div class="proj-fach">Guarda-corpos de vidro com fixação minimalista e segura.</div>
   </div>
-  <div class="p-detalhe p-det-single p-det-A" data-page="0">
-    <div class="num-bg"></div>
-    <img class="det-wm" src="assets/icone.png" alt="">
-    <div class="det-content">
-      <div class="det-label">Vidros & Ambientes</div>
-      <div class="det-title">Divisórias</div>
-      <div class="det-local">Ambientes corporativos integrados</div>
-      <div class="div-line"></div>
-      <div class="det-esq-lbl">Material</div>
-      <div class="det-esq-val">Vidro temperado/laminado, perfis de alumínio</div>
-      <div class="det-esq-lbl" style="margin-top:10px">Aplicações indicadas</div>
-      <div class="det-esq-val">Escritórios e ambientes corporativos</div>
-      <div class="det-fachada">Ambientes integrados visualmente com isolamento acústico.</div>
-    </div>
-    <div class="det-frame det-frame-1"><img src="produtos/divisorias.jpg" alt=""></div>
-  </div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
 
-  <!-- Guarda-corpo -->
-  <div class="p-foto p-produto" data-page="0">
-    <img class="obra-img" src="produtos/guarda-corpo.jpg" alt="Guarda-corpo">
-    <div class="overlay"></div>
-    <div class="proj-label">
-      <div class="prod-num"></div>
-      <div class="prod-cat">Vidros & Ambientes</div>
-      <div class="prod-nome">Guarda-corpo</div>
-      <div class="prod-desc">Guarda-corpos de vidro com fixação minimalista e segura.</div>
-    </div>
+<!-- ═══════════════ CATEGORIA 5: Complementos & Acessórios ═══════════════ -->
+<section class="card card-inov">
+  <img class="card-bg" src="produtos/divisoria-complementos.jpg" alt="">
+  <div class="ov-dark"></div>
+  <div class="inov-center">
+    <div class="inov-rule"></div>
+    <div class="inov-word">Complementos<br>&amp; Acessórios</div>
+    <div class="inov-rule"></div>
   </div>
-  <div class="p-detalhe p-det-single p-det-A" data-page="0">
-    <div class="num-bg"></div>
-    <img class="det-wm" src="assets/icone.png" alt="">
-    <div class="det-content">
-      <div class="det-label">Vidros & Ambientes</div>
-      <div class="det-title">Guarda-corpo</div>
-      <div class="det-local">Fixação minimalista e segura</div>
-      <div class="div-line"></div>
-      <div class="det-esq-lbl">Material</div>
-      <div class="det-esq-val">Vidro temperado/laminado, fixação em alumínio ou inox</div>
-      <div class="det-esq-lbl" style="margin-top:10px">Aplicações indicadas</div>
-      <div class="det-esq-val">Sacadas, escadas e áreas de desnível</div>
-      <div class="det-fachada">Fixação minimalista sem comprometer a segurança.</div>
-    </div>
-    <div class="det-frame det-frame-1"><img src="produtos/guarda-corpo.jpg" alt=""></div>
-  </div>
-  <!-- ═══════════════ CATEGORIA 5: Complementos & Acessórios ═══════════════ -->
-  <div class="p-inov p-inov-left p-divisoria" data-page="0">
-    <img class="inov-bg" src="produtos/divisoria-complementos.jpg" alt="">
-    <div class="inov-overlay"></div>
-    <div class="inov-center">
-      <div class="inov-rule"></div>
-      <div class="inov-word">Complementos<br>&amp; Acessórios</div>
-      <div class="inov-rule"></div>
-    </div>
-  </div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
 
-  <!-- Indice - Complementos & Acessórios -->
-  <div class="p-indice" data-page="0">
-    <img class="idx-wm" src="assets/icone.png" alt="">
-    <div class="idx-label">Categoria</div>
-    <div class="idx-title">Complementos<br>&amp; Acessórios</div>
-    <div class="idx-rule"></div>
-    <div class="idx-list">
-      <div class="idx-item"><span class="idx-n">—</span><span class="idx-name">Espelhos</span></div>
-      <div class="idx-item"><span class="idx-n">—</span><span class="idx-name">Persiana Integrada</span></div>
-    </div>
+<section class="card">
+  <img class="card-bg" src="produtos/espelhos.jpg" alt="Espelhos">
+  <div class="ov-top"></div><div class="ov-bottom"></div>
+  <div class="num-bg-mob"></div>
+  <div class="proj-info">
+    <div class="proj-num"></div>
+    <div class="proj-name">Espelhos</div>
+    <div class="proj-loc">Complementos & Acessórios</div>
+    <div class="proj-div"></div>
+    <div class="proj-esq-lbl">Material</div>
+    <div class="proj-esq">Vidro espelhado, lapidação sob medida</div>
+    <div class="proj-fach">Espelhos lapidados e decorativos sob medida.</div>
   </div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
 
-  <!-- Espelhos -->
-  <div class="p-foto p-produto" data-page="0">
-    <img class="obra-img" src="produtos/espelhos.jpg" alt="Espelhos">
-    <div class="overlay"></div>
-    <div class="proj-label">
-      <div class="prod-num"></div>
-      <div class="prod-cat">Complementos & Acessórios</div>
-      <div class="prod-nome">Espelhos</div>
-      <div class="prod-desc">Espelhos lapidados e decorativos sob medida.</div>
-    </div>
+<section class="card">
+  <img class="card-bg" src="produtos/persiana-integrada.jpg" alt="Persiana Integrada">
+  <div class="ov-top"></div><div class="ov-bottom"></div>
+  <div class="num-bg-mob"></div>
+  <div class="proj-info">
+    <div class="proj-num"></div>
+    <div class="proj-name">Persiana Integrada</div>
+    <div class="proj-loc">Complementos & Acessórios</div>
+    <div class="proj-div"></div>
+    <div class="proj-esq-lbl">Material</div>
+    <div class="proj-esq">Lâminas de alumínio integradas entre os vidros, acionamento manual ou motorizado</div>
+    <div class="proj-fach">Persiana de alumínio integrada entre os vidros — controle de luz sem manutenção.</div>
   </div>
-  <div class="p-detalhe p-det-single p-det-A" data-page="0">
-    <div class="num-bg"></div>
-    <img class="det-wm" src="assets/icone.png" alt="">
-    <div class="det-content">
-      <div class="det-label">Complementos & Acessórios</div>
-      <div class="det-title">Espelhos</div>
-      <div class="det-local">Lapidação sob medida</div>
-      <div class="div-line"></div>
-      <div class="det-esq-lbl">Material</div>
-      <div class="det-esq-val">Vidro espelhado, lapidação sob medida</div>
-      <div class="det-esq-lbl" style="margin-top:10px">Aplicações indicadas</div>
-      <div class="det-esq-val">Banheiros, closets e ambientes decorativos</div>
-      <div class="det-fachada">Corte e lapidação sob medida para cada projeto.</div>
-    </div>
-    <div class="det-frame det-frame-1"><img src="produtos/espelhos.jpg" alt=""></div>
-  </div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
 
-  <!-- Persiana Integrada -->
-  <div class="p-foto p-produto" data-page="0">
-    <img class="obra-img" src="produtos/persiana-integrada.jpg" alt="Persiana Integrada">
-    <div class="overlay"></div>
-    <div class="proj-label">
-      <div class="prod-num"></div>
-      <div class="prod-cat">Complementos & Acessórios</div>
-      <div class="prod-nome">Persiana Integrada</div>
-      <div class="prod-desc">Persiana de alumínio integrada entre os vidros — controle de luz sem manutenção.</div>
-    </div>
+<!-- ═══════════════ CATEGORIA 6: Áreas Externas & Estruturas ═══════════════ -->
+<section class="card card-inov">
+  <img class="card-bg" src="produtos/divisoria-externas.jpg" alt="">
+  <div class="ov-dark"></div>
+  <div class="inov-center">
+    <div class="inov-rule"></div>
+    <div class="inov-word">Áreas Externas<br>&amp; Estruturas</div>
+    <div class="inov-rule"></div>
   </div>
-  <div class="p-detalhe p-det-single p-det-A" data-page="0">
-    <div class="num-bg"></div>
-    <img class="det-wm" src="assets/icone.png" alt="">
-    <div class="det-content">
-      <div class="det-label">Complementos & Acessórios</div>
-      <div class="det-title">Persiana Integrada</div>
-      <div class="det-local">Persiana integrada à esquadria</div>
-      <div class="div-line"></div>
-      <div class="det-esq-lbl">Material</div>
-      <div class="det-esq-val">Lâminas de alumínio integradas entre os vidros, acionamento manual ou motorizado</div>
-      <div class="det-esq-lbl" style="margin-top:10px">Aplicações indicadas</div>
-      <div class="det-esq-val">Janelas e portas onde se deseja controle de luz sem manutenção</div>
-      <div class="det-fachada">Persiana protegida entre os vidros — sem acúmulo de poeira, sem manutenção.</div>
-    </div>
-    <div class="det-frame det-frame-1"><img src="produtos/persiana-integrada.jpg" alt=""></div>
-  </div>
-  <!-- ═══════════════ CATEGORIA 6: Áreas Externas & Estruturas ═══════════════ -->
-  <div class="p-inov p-inov-left p-divisoria" data-page="0">
-    <img class="inov-bg" src="produtos/divisoria-externas.jpg" alt="">
-    <div class="inov-overlay"></div>
-    <div class="inov-center">
-      <div class="inov-rule"></div>
-      <div class="inov-word">Áreas Externas<br>&amp; Estruturas</div>
-      <div class="inov-rule"></div>
-    </div>
-  </div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
 
-  <!-- Indice - Áreas Externas & Estruturas -->
-  <div class="p-indice" data-page="0">
-    <img class="idx-wm" src="assets/icone.png" alt="">
-    <div class="idx-label">Categoria</div>
-    <div class="idx-title">Áreas Externas<br>&amp; Estruturas</div>
-    <div class="idx-rule"></div>
-    <div class="idx-list">
-      <div class="idx-item"><span class="idx-n">—</span><span class="idx-name">Pergolados</span></div>
-      <div class="idx-item"><span class="idx-n">—</span><span class="idx-name">Escadas</span></div>
-      <div class="idx-item"><span class="idx-n">—</span><span class="idx-name">Coberturas de Vidro</span></div>
-    </div>
+<section class="card">
+  <img class="card-bg" src="produtos/pergolados.jpg" alt="Pergolados">
+  <div class="ov-top"></div><div class="ov-bottom"></div>
+  <div class="num-bg-mob"></div>
+  <div class="proj-info">
+    <div class="proj-num"></div>
+    <div class="proj-name">Pergolados</div>
+    <div class="proj-loc">Áreas Externas & Estruturas</div>
+    <div class="proj-div"></div>
+    <div class="proj-esq-lbl">Material</div>
+    <div class="proj-esq">Alumínio estrutural, cobertura fixa ou retrátil</div>
+    <div class="proj-fach">Pergolados de alumínio com cobertura para áreas externas.</div>
   </div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
 
-  <!-- Pergolados -->
-  <div class="p-foto p-produto" data-page="0">
-    <img class="obra-img" src="produtos/pergolados.jpg" alt="Pergolados">
-    <div class="overlay"></div>
-    <div class="proj-label">
-      <div class="prod-num"></div>
-      <div class="prod-cat">Áreas Externas & Estruturas</div>
-      <div class="prod-nome">Pergolados</div>
-      <div class="prod-desc">Pergolados de alumínio com cobertura para áreas externas.</div>
-    </div>
+<section class="card">
+  <img class="card-bg" src="produtos/escadas.jpg" alt="Escadas">
+  <div class="ov-top"></div><div class="ov-bottom"></div>
+  <div class="num-bg-mob"></div>
+  <div class="proj-info">
+    <div class="proj-num"></div>
+    <div class="proj-name">Escadas</div>
+    <div class="proj-loc">Áreas Externas & Estruturas</div>
+    <div class="proj-div"></div>
+    <div class="proj-esq-lbl">Material</div>
+    <div class="proj-esq">Vidro temperado e/ou alumínio estrutural</div>
+    <div class="proj-fach">Escadas em vidro e alumínio — leveza e sofisticação.</div>
   </div>
-  <div class="p-detalhe p-det-single p-det-A" data-page="0">
-    <div class="num-bg"></div>
-    <img class="det-wm" src="assets/icone.png" alt="">
-    <div class="det-content">
-      <div class="det-label">Áreas Externas & Estruturas</div>
-      <div class="det-title">Pergolados</div>
-      <div class="det-local">Cobertura para áreas externas</div>
-      <div class="div-line"></div>
-      <div class="det-esq-lbl">Material</div>
-      <div class="det-esq-val">Alumínio estrutural, cobertura fixa ou retrátil</div>
-      <div class="det-esq-lbl" style="margin-top:10px">Aplicações indicadas</div>
-      <div class="det-esq-val">Áreas de lazer, piscinas e varandas gourmet</div>
-      <div class="det-fachada">Estrutura leve e resistente com opções de cobertura retrátil.</div>
-    </div>
-    <div class="det-frame det-frame-1"><img src="produtos/pergolados.jpg" alt=""></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
+
+<section class="card">
+  <img class="card-bg" src="produtos/coberturas.jpg" alt="Coberturas de Vidro">
+  <div class="ov-top"></div><div class="ov-bottom"></div>
+  <div class="num-bg-mob"></div>
+  <div class="proj-info">
+    <div class="proj-num"></div>
+    <div class="proj-name">Coberturas de Vidro</div>
+    <div class="proj-loc">Áreas Externas & Estruturas</div>
+    <div class="proj-div"></div>
+    <div class="proj-esq-lbl">Material</div>
+    <div class="proj-esq">Vidro laminado, estrutura de alumínio</div>
+    <div class="proj-fach">Coberturas e claraboias de vidro com estrutura em alumínio.</div>
   </div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+</section>
 
-  <!-- Escadas -->
-  <div class="p-foto p-produto" data-page="0">
-    <img class="obra-img" src="produtos/escadas.jpg" alt="Escadas">
-    <div class="overlay"></div>
-    <div class="proj-label">
-      <div class="prod-num"></div>
-      <div class="prod-cat">Áreas Externas & Estruturas</div>
-      <div class="prod-nome">Escadas</div>
-      <div class="prod-desc">Escadas em vidro e alumínio — leveza e sofisticação.</div>
+<!-- ════ CONTATO ════ -->
+<section class="card card-cont">
+  <img class="cont-wm" src="assets/icone.png" alt="">
+  <div class="cont-inner">
+    <img class="cont-logo" src="assets/logo-white.png" alt="Centauro Esquadrias">
+    <div class="cont-bar"></div>
+    <div class="cont-group">
+      <div class="cont-lbl">Website</div>
+      <div class="cont-val">www.esquadriascentauro.com.br/guaratuba</div>
     </div>
+    <div class="cont-group">
+      <div class="cont-lbl">WhatsApp</div>
+      <div class="cont-val">+55 (41) 8834-2009</div>
+    </div>
+    <div class="cont-group">
+      <div class="cont-lbl">E-mail</div>
+      <div class="cont-val">contato@esquadriascentauro.com.br</div>
+    </div>
+    <div class="cont-group">
+      <div class="cont-lbl">Instagram</div>
+      <div class="cont-val">@centauroesquadrias</div>
+    </div>
+    <div class="cont-foot">Guaratuba · Paraná · Brasil</div>
   </div>
-  <div class="p-detalhe p-det-single p-det-A" data-page="0">
-    <div class="num-bg"></div>
-    <img class="det-wm" src="assets/icone.png" alt="">
-    <div class="det-content">
-      <div class="det-label">Áreas Externas & Estruturas</div>
-      <div class="det-title">Escadas</div>
-      <div class="det-local">Leveza e sofisticação</div>
-      <div class="div-line"></div>
-      <div class="det-esq-lbl">Material</div>
-      <div class="det-esq-val">Vidro temperado e/ou alumínio estrutural</div>
-      <div class="det-esq-lbl" style="margin-top:10px">Aplicações indicadas</div>
-      <div class="det-esq-val">Escadas internas e externas de projetos contemporâneos</div>
-      <div class="det-fachada">Leveza visual sem abrir mão da resistência estrutural.</div>
-    </div>
-    <div class="det-frame det-frame-1"><img src="produtos/escadas.jpg" alt=""></div>
-  </div>
-
-  <!-- Coberturas de Vidro -->
-  <div class="p-foto p-produto" data-page="0">
-    <img class="obra-img" src="produtos/coberturas.jpg" alt="Coberturas de Vidro">
-    <div class="overlay"></div>
-    <div class="proj-label">
-      <div class="prod-num"></div>
-      <div class="prod-cat">Áreas Externas & Estruturas</div>
-      <div class="prod-nome">Coberturas de Vidro</div>
-      <div class="prod-desc">Coberturas e claraboias de vidro com estrutura em alumínio.</div>
-    </div>
-  </div>
-  <div class="p-detalhe p-det-single p-det-A" data-page="0">
-    <div class="num-bg"></div>
-    <img class="det-wm" src="assets/icone.png" alt="">
-    <div class="det-content">
-      <div class="det-label">Áreas Externas & Estruturas</div>
-      <div class="det-title">Coberturas de Vidro</div>
-      <div class="det-local">Claraboias e coberturas</div>
-      <div class="div-line"></div>
-      <div class="det-esq-lbl">Material</div>
-      <div class="det-esq-val">Vidro laminado, estrutura de alumínio</div>
-      <div class="det-esq-lbl" style="margin-top:10px">Aplicações indicadas</div>
-      <div class="det-esq-val">Claraboias, coberturas de áreas internas e de transição</div>
-      <div class="det-fachada">Entrada de luz natural com proteção estrutural.</div>
-    </div>
-    <div class="det-frame det-frame-1"><img src="produtos/coberturas.jpg" alt=""></div>
-  </div>
-
-  <!-- CONTATO -->
-  <div class="p-cont" data-page="47">
-    <img class="logo" src="assets/logo-white.png" alt="Centauro Esquadrias"
-         onerror="this.outerHTML='<div style=\'text-align:center;margin-bottom:36px\'><div style=\'font-size:22px;font-weight:700;color:#fff;letter-spacing:3px\'>CENTAURO</div><div style=\'font-size:10px;font-weight:300;color:#ED5454;letter-spacing:6px;margin-top:4px\'>ESQUADRIAS</div></div>'">
-    <div class="c-line"></div>
-    <div class="c-group">
-      <div class="c-lbl">Website</div>
-      <div class="c-val">www.esquadriascentauro.com.br/guaratuba</div>
-    </div>
-    <div class="c-group">
-      <div class="c-lbl">WhatsApp</div>
-      <div class="c-val">+55 (41) 8834-2009</div>
-    </div>
-    <div class="c-group">
-      <div class="c-lbl">E-mail</div>
-      <div class="c-val">contato@esquadriascentauro.com.br</div>
-    </div>
-    <div class="c-group">
-      <div class="c-lbl">Instagram</div>
-      <div class="c-val">@centauroesquadrias</div>
-    </div>
-    <div class="c-foot">Guaratuba · Paraná · Brasil</div>
-  </div>
-
-  <!-- CONTRACAPA -->
-  <div class="p-contracapa" data-page="0">
-    <img src="assets/icone.png" alt="Centauro Esquadrias"
-         onerror="this.outerHTML='<div style=\'font-size:11px;font-weight:300;color:#ED5454;letter-spacing:6px\'>CENTAURO ESQUADRIAS</div>'">
-  </div>
-
-</div><!-- /#pages -->
-
-<!-- ═══════════════════ BOOK UI ═══════════════════ -->
-<div id="stage">
-  <button class="nav-btn" id="prev-btn" disabled>
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
-  </button>
-  <div id="book-wrap">
-    <div id="spread">
-      <div class="half" id="half-left"></div>
-      <div class="half" id="half-right"></div>
-    </div>
-    <div id="flip-card">
-      <div id="flip-face"></div>
-      <div id="flip-back"></div>
-    </div>
-    <div id="book-shadow"></div>
-  </div>
-  <button class="nav-btn" id="next-btn">
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-  </button>
-</div>
-
-<div id="indicator"></div>
-
-<button id="fs-btn" title="Tela cheia" aria-label="Tela cheia">
-  <svg class="ic-enter" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-    <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
-  </svg>
-  <svg class="ic-exit" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-    <path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"/>
-  </svg>
-</button>
-
-<!-- dica iOS: tela cheia via Adicionar à Tela de Início (só aparece no iPhone Safari) -->
-<div id="ios-tip">
-  <svg class="share-ic" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-    <path d="M12 15V3m0 0L8.5 6.5M12 3l3.5 3.5"/><path d="M6 11H5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1h-1"/>
-  </svg>
-  <span>Para <b>tela cheia</b>: toque em <b>Compartilhar</b> e <b>"Adicionar à Tela de Início"</b>.</span>
-  <span class="close-tip" role="button" aria-label="Fechar">&times;</span>
-</div>
+</section>
 
 <script>
-(function () {
-  'use strict';
-
-  var TOTAL, SPREADS;
-  var cur     = 0;
-  var busy    = false;
-  var FLIP_MS = 600;
-
-  var pages = Array.from(document.querySelectorAll('#pages > [data-page]'));
-
-  /* numeração automática por ordem do DOM:
-     cada .p-foto inicia um produto; o .p-detalhe seguinte herda o número.
-     inserir produto = só colar o bloco (foto+detalhe); nada de renumerar à mão. */
-  (function () {
-    var prod = 0;
-    var pad = function (n) { return (n < 10 ? '0' : '') + n; };
-    pages.forEach(function (p, i) {
-      p.setAttribute('data-page', i);
-      if (p.classList.contains('p-produto')) {
-        prod++;
-        var pn = p.querySelector('.prod-num');
-        if (pn) pn.textContent = 'Produto ' + pad(prod);
-      } else if (p.classList.contains('p-detalhe')) {
-        var nb = p.querySelector('.num-bg');
-        if (nb) nb.textContent = pad(prod);
-      }
-    });
-  })();
-  TOTAL   = pages.length;
-  SPREADS = TOTAL / 2;
-  var halves = [
-    document.getElementById('half-left'),
-    document.getElementById('half-right')
-  ];
-  var flipCard = document.getElementById('flip-card');
-  var flipFace = document.getElementById('flip-face');
-  var flipBk   = document.getElementById('flip-back');
-  var prevBtn  = document.getElementById('prev-btn');
-  var nextBtn  = document.getElementById('next-btn');
-  var indicator = document.getElementById('indicator');
-
-  /* ── counter animation — re-animates on each visit to Sobre page ── */
-  function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
-  function countUp(el, target, duration) {
-    var start = performance.now();
-    (function tick(now) {
-      var p = Math.min((now - start) / duration, 1);
-      el.textContent = Math.round(target * easeOut(p)).toLocaleString('pt-BR');
-      if (p < 1) requestAnimationFrame(tick);
-    })(performance.now());
+function countUp(el, to, dur) {
+  var from = 0, start = null;
+  var isK = to >= 1000;
+  function ease(t){ return t<0.5 ? 4*t*t*t : (t-1)*(2*t-2)*(2*t-2)+1; }
+  function step(ts) {
+    if (!start) start = ts;
+    var p = Math.min((ts - start) / dur, 1);
+    var val = Math.round(ease(p) * to);
+    el.textContent = isK ? (val >= 1000 ? '10.000' : val.toLocaleString('pt-BR')) : val;
+    if (p < 1) requestAnimationFrame(step);
   }
-  function activateCounters(container) {
-    container.querySelectorAll('[data-cnt]').forEach(function (el) {
-      countUp(
-        el,
-        parseInt(el.getAttribute('data-cnt'), 10),
-        parseInt(el.getAttribute('data-dur') || '2000', 10)
+  requestAnimationFrame(step);
+}
+
+// Counter on Sobre card — fires when it scrolls into view
+var sobreCard = document.querySelector('.card-sobre');
+var countersDone = false;
+var obs = new IntersectionObserver(function(entries){
+  if (entries[0].isIntersecting && !countersDone) {
+    countersDone = true;
+    document.querySelectorAll('[data-cnt]').forEach(function(el){
+      countUp(el,
+        parseInt(el.getAttribute('data-cnt')),
+        parseInt(el.getAttribute('data-dur') || '2000')
       );
     });
   }
-
-  /* ── helpers ── */
-  function getPage(idx) {
-    var el = pages[idx];
-    return el ? el.cloneNode(true) : document.createElement('div');
-  }
-
-  function setHalf(side, pageIdx) {
-    var h = halves[side];
-    h.innerHTML = '';
-    if (pageIdx >= 0 && pageIdx < TOTAL) h.appendChild(getPage(pageIdx));
-  }
-
-  /* showSpread: skipSide avoids re-inserting a half already pre-populated
-     during flip, preventing the CSS animation from restarting (mini-loop fix) */
-  function showSpread(spreadIdx, skipSide) {
-    if (skipSide !== 0) setHalf(0, spreadIdx * 2);
-    if (skipSide !== 1) setHalf(1, spreadIdx * 2 + 1);
-    activateCounters(halves[0]);
-    activateCounters(halves[1]);
-    updateUI(spreadIdx);
-  }
-
-  function updateUI(spreadIdx) {
-    indicator.textContent = (spreadIdx * 2 + 1) + '–' + Math.min(spreadIdx * 2 + 2, TOTAL) + ' / ' + TOTAL;
-    prevBtn.disabled = (spreadIdx === 0);
-    nextBtn.disabled = (spreadIdx === SPREADS - 1);
-  }
-
-  /* ════════════════════════════════════════════════════════
-     FLIP LOGIC
-
-     FORWARD (dir +1):
-       flip-face = cur right page (cur*2+1) → turns
-       flip-back = new left page  (next*2)  → revealed
-       card: left=700, origin=left, 0° → -180°
-       pre-populate right half (next*2+1) — hidden under card
-       showSpread skips right half (skipSide=1) to avoid restarting fly-in
-
-     BACKWARD (dir -1):
-       flip-face = cur left page  (cur*2)    → turns
-       flip-back = new right page (next*2+1) → revealed
-       card: left=0, origin=right, 0° → +180°
-       pre-populate left half (next*2) — hidden under card
-       showSpread skips left half (skipSide=0)
-  ════════════════════════════════════════════════════════ */
-  function flip(dir) {
-    if (busy) return;
-    var next = cur + dir;
-    if (next < 0 || next >= SPREADS) return;
-    busy = true;
-
-    var isForward = dir > 0;
-
-    flipFace.innerHTML = '';
-    flipBk.innerHTML   = '';
-
-    if (isForward) {
-      flipFace.appendChild(getPage(cur * 2 + 1));
-      flipBk.appendChild(getPage(next * 2));
-      flipCard.className = 'flipping-forward';
-      setHalf(1, next * 2 + 1);
-    } else {
-      flipFace.appendChild(getPage(cur * 2));
-      flipBk.appendChild(getPage(next * 2 + 1));
-      flipCard.className = 'flipping-back';
-      setHalf(0, next * 2);
-    }
-
-    flipCard.style.transition = 'none';
-    flipCard.style.transform  = 'rotateY(0deg)';
-    flipCard.style.display    = 'block';
-
-    requestAnimationFrame(function () {
-      requestAnimationFrame(function () {
-        flipCard.style.transition = 'transform ' + FLIP_MS + 'ms cubic-bezier(0.42, 0, 0.58, 1)';
-        flipCard.style.transform  = isForward ? 'rotateY(-180deg)' : 'rotateY(180deg)';
-      });
-    });
-
-    setTimeout(function () {
-      flipCard.style.display    = 'none';
-      flipCard.style.transition = 'none';
-      cur = next;
-      showSpread(cur, isForward ? 1 : 0);
-      busy = false;
-    }, FLIP_MS + 20);
-  }
-
-  /* ── controls ── */
-  prevBtn.addEventListener('click', function () { flip(-1); });
-  nextBtn.addEventListener('click', function () { flip(+1); });
-
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   flip(-1);
-    if (e.key === 'ArrowRight' || e.key === 'ArrowDown')  flip(+1);
-  });
-
-  var tx = 0, ty = 0;
-  document.addEventListener('touchstart', function (e) { tx = e.touches[0].clientX; ty = e.touches[0].clientY; }, {passive:true});
-  document.addEventListener('touchend', function (e) {
-    var dx = e.changedTouches[0].clientX - tx;
-    var dy = e.changedTouches[0].clientY - ty;
-    var eff = document.body.classList.contains('is-forced') ? dy : dx;  // livro girado: usa eixo vertical
-    if (Math.abs(eff) > 45) flip(eff < 0 ? +1 : -1);
-  }, {passive:true});
-
-  showSpread(0);
-
-})();
+}, { threshold: 0.5 });
+obs.observe(sobreCard);
 </script>
 <script>
-/* mobile: força paisagem (gira o livro em retrato) + splash temporizado */
+/* numeração automática dos cards de produto por ordem do DOM */
 (function () {
-  var body = document.body, overlay = document.getElementById('rotate-overlay');
-  var MARGIN = 0.95;
-  function fit() {
-    // mede o tamanho REALMENTE visível (visualViewport exclui a barra de endereço no iOS)
-    var vv = window.visualViewport;
-    var vw = vv ? vv.width  : window.innerWidth;
-    var vh = vv ? vv.height : window.innerHeight;
-    // ancora o body exatamente sobre a área visível (offset exclui barra de endereço/navegação)
-    var root = document.documentElement.style;
-    root.setProperty('--vp-w', vw + 'px');
-    root.setProperty('--vp-h', vh + 'px');
-    root.setProperty('--vp-x', (vv ? vv.offsetLeft : 0) + 'px');
-    root.setProperty('--vp-y', (vv ? vv.offsetTop  : 0) + 'px');
-    var s;
-    if (vw >= vh) {                          // viewport já em paisagem -> livro normal
-      body.classList.add('is-normal'); body.classList.remove('is-forced');
-      s = Math.min(vw / 1400, vh / 700);
-    } else {                                 // viewport retrato -> gira o livro 90°
-      body.classList.add('is-forced'); body.classList.remove('is-normal');
-      s = Math.min(vw / 700, vh / 1400);
-    }
-    s = Math.floor(s * MARGIN * 1000) / 1000;   // margem + arredonda p/ baixo (evita estouro sub-pixel)
-    root.setProperty('--book-scale', s);
-  }
-  function refit() { fit(); setTimeout(fit, 250); }   // iOS: dims podem vir defasadas após girar
-  fit();
-  window.addEventListener('resize', fit);
-  window.addEventListener('orientationchange', refit);
-  if (window.matchMedia) {
-    var mq = window.matchMedia('(orientation: landscape)');
-    (mq.addEventListener ? mq.addEventListener.bind(mq, 'change') : mq.addListener.bind(mq))(refit);
-  }
-  if (window.visualViewport) {
-    window.visualViewport.addEventListener('resize', fit);
-    window.visualViewport.addEventListener('scroll', fit);
-  }
-  /* ── TELA CHEIA (Android; iPhone/iOS não expõe a Fullscreen API p/ elementos) ── */
-  var fsBtn = document.getElementById('fs-btn');
-  var docEl = document.documentElement;
-  var canFS = !!(docEl.requestFullscreen || docEl.webkitRequestFullscreen);
-  function isFS()  { return !!(document.fullscreenElement || document.webkitFullscreenElement); }
-  function enterFS() { var fn = docEl.requestFullscreen || docEl.webkitRequestFullscreen; if (fn) try { fn.call(docEl); } catch (e) {} }
-  function exitFS()  { var fn = document.exitFullscreen || document.webkitExitFullscreen;   if (fn) try { fn.call(document); } catch (e) {} }
-  function syncFS()  { body.classList.toggle('is-fs', isFS()); refit(); }   // ao (des)entrar, o viewport muda -> reescala
-  if (canFS) {
-    body.classList.add('fs-ok');                                           // revela o botão só onde funciona
-    fsBtn.addEventListener('click', function () { isFS() ? exitFS() : enterFS(); });
-    document.addEventListener('fullscreenchange', syncFS);
-    document.addEventListener('webkitfullscreenchange', syncFS);
-  }
-
-  var dismiss = function (viaTap) {
-    overlay.classList.add('hide');
-    if (viaTap && canFS && !isFS()) enterFS();   // aproveita o toque (gesto do usuário exigido pela API) p/ já abrir em tela cheia
-  };
-  setTimeout(function () { dismiss(false); }, 2500);
-  overlay.addEventListener('click', function () { dismiss(true); });
-
-  /* ── iPhone: sem Fullscreen API. Se ainda não está em modo tela-cheia (Adicionado à Tela de Início),
-        mostra uma dica ensinando a instalar. Some sozinho ou no × ── */
-  var isIOS = /iP(hone|od|ad)/.test(navigator.userAgent) ||
-              (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);   // iPad iOS13+ se passa por Mac
-  var standalone = window.navigator.standalone === true ||
-                   (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches);
-  if (isIOS && !canFS && !standalone) {
-    var tip = document.getElementById('ios-tip');
-    var hideTip = function () { body.classList.remove('ios-tip-on'); };
-    setTimeout(function () { body.classList.add('ios-tip-on'); }, 3200);   // entra após o splash sair
-    tip.querySelector('.close-tip').addEventListener('click', function (e) { e.stopPropagation(); hideTip(); });
-    setTimeout(hideTip, 16000);                                            // some sozinho após ~13s visível
-  }
+  var pad = function (n) { return (n < 10 ? '0' : '') + n; };
+  var prod = 0;
+  document.querySelectorAll('section.card').forEach(function (card) {
+    var pn = card.querySelector('.proj-num');
+    if (!pn) return;
+    prod++;
+    pn.textContent = 'Produto ' + pad(prod);
+    var nb = card.querySelector('.num-bg-mob');
+    if (nb) nb.textContent = pad(prod);
+  });
 })();
 </script>
 </body>
