@@ -58,8 +58,7 @@ body {
 }
 
 /* ── CARD BASE ── */
-html.sem-snap { scroll-snap-type: none; }   /* durante o "pulo" */
-
+.card {
   width: 100vw;
   height: 100svh;
   min-height: -webkit-fill-available;
@@ -100,7 +99,7 @@ html.sem-snap { scroll-snap-type: none; }   /* durante o "pulo" */
 .scroll-hint svg { width: 22px; height: 22px; display: block; }
 @keyframes bounce {
   0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.4; }
-  50%       { transform: translateX(-50%) translateY(-9px); opacity: 0.7; }
+  50%       { transform: translateX(-50%) translateY(9px); opacity: 0.7; }
 }
 .capa-arraste {
   position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
@@ -115,7 +114,7 @@ html.sem-snap { scroll-snap-type: none; }   /* durante o "pulo" */
 .capa-chev { width: 24px; height: 24px; animation: capaChevBounce 2s ease-in-out infinite; }
 @keyframes capaChevBounce {
   0%, 100% { transform: translateY(0); opacity: 0.5; }
-  50%       { transform: translateY(-8px); opacity: 0.95; }
+  50%       { transform: translateY(8px); opacity: 0.95; }
 }
 @keyframes arrasteFade { 0% { opacity: 0; } 74% { opacity: 0; } 100% { opacity: 1; } }
 
@@ -284,8 +283,8 @@ html.sem-snap { scroll-snap-type: none; }   /* durante o "pulo" */
     <div class="capa-anos">de excelência em esquadrias</div>
   </div>
   <div class="capa-arraste">
-    <span>Arraste para cima</span>
-    <svg class="capa-chev" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg>
+    <span>Arraste para baixo</span>
+    <svg class="capa-chev" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg>
   </div>
 </section>
 
@@ -315,7 +314,7 @@ html.sem-snap { scroll-snap-type: none; }   /* durante o "pulo" */
       </div>
     </div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
 </section>
 
 <!-- ════ PROJETO 01 ════ -->
@@ -331,7 +330,7 @@ html.sem-snap { scroll-snap-type: none; }   /* durante o "pulo" */
     <div class="proj-esq">Gold<br>Sublime<br>Prime Venko<br>Euro Show<br>Roll Door<br>Reiki Glazing</div>
     <div class="proj-fach">Fachada (Atlanta)</div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
 </section>
 
 <!-- ════ PROJETO 02 ════ -->
@@ -347,7 +346,7 @@ html.sem-snap { scroll-snap-type: none; }   /* durante o "pulo" */
     <div class="proj-esq">Gold<br>Sublime<br>Prime Venko<br>Euro Show<br>Roll Door<br>Reiki Glazing</div>
     <div class="proj-fach">Fachada (Atlanta)</div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
 </section>
 
 <!-- ════ PROJETO 03 ════ -->
@@ -362,7 +361,7 @@ html.sem-snap { scroll-snap-type: none; }   /* durante o "pulo" */
     <div class="proj-esq-lbl">Escolha a sua esquadria ideal</div>
     <div class="proj-esq">Gold<br>Sublime<br>Prime Venko<br>Euro Show<br>Roll Door<br>Reiki Glazing</div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
 </section>
 
 <!-- ════ PROJETO 04 ════ -->
@@ -377,7 +376,7 @@ html.sem-snap { scroll-snap-type: none; }   /* durante o "pulo" */
     <div class="proj-esq-lbl">Escolha a sua esquadria ideal</div>
     <div class="proj-esq">Gold<br>Sublime<br>Prime Venko<br>Euro Show<br>Roll Door<br>Reiki Glazing</div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
 </section>
 
 <!-- ════ PROJETO 05 (NOVO — Itapoá) ════ -->
@@ -393,7 +392,7 @@ html.sem-snap { scroll-snap-type: none; }   /* durante o "pulo" */
     <div class="proj-esq">Gold<br>Sublime<br>Prime Venko<br>Euro Show<br>Roll Door<br>Reiki Glazing<br>Vidro Polarizado Inteligente</div>
     <div class="proj-fach">Fachada (Atlanta)</div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
 </section>
 
 <!-- ════ PROJETO 05 ════ -->
@@ -408,7 +407,7 @@ html.sem-snap { scroll-snap-type: none; }   /* durante o "pulo" */
     <div class="proj-esq-lbl">Escolha a sua esquadria ideal</div>
     <div class="proj-esq">Gold<br>Sublime<br>Prime Venko<br>Euro Show<br>Roll Door<br>Reiki Glazing</div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
 </section>
 
 <!-- ════ PROJETO 07 (NOVO — Baía de Guaratuba) ════ -->
@@ -423,7 +422,7 @@ html.sem-snap { scroll-snap-type: none; }   /* durante o "pulo" */
     <div class="proj-esq-lbl">Escolha a sua esquadria ideal</div>
     <div class="proj-esq">Gold<br>Sublime<br>Prime Venko<br>Euro Show<br>Roll Door<br>Reiki Glazing</div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
 </section>
 
 <!-- ════ PROJETO 06 ════ -->
@@ -438,7 +437,7 @@ html.sem-snap { scroll-snap-type: none; }   /* durante o "pulo" */
     <div class="proj-esq-lbl">Escolha a sua esquadria ideal</div>
     <div class="proj-esq">Gold<br>Sublime<br>Prime Venko<br>Euro Show<br>Roll Door<br>Reiki Glazing</div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
 </section>
 
 <!-- ════ PROJETO 07 ════ -->
@@ -453,7 +452,7 @@ html.sem-snap { scroll-snap-type: none; }   /* durante o "pulo" */
     <div class="proj-esq-lbl">Escolha a sua esquadria ideal</div>
     <div class="proj-esq">Gold<br>Sublime<br>Prime Venko<br>Euro Show<br>Roll Door<br>Reiki Glazing</div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
 </section>
 
 <!-- ════ PROJETO 08 ════ -->
@@ -468,7 +467,7 @@ html.sem-snap { scroll-snap-type: none; }   /* durante o "pulo" */
     <div class="proj-esq-lbl">Escolha a sua esquadria ideal</div>
     <div class="proj-esq">Gold<br>Sublime<br>Prime Venko<br>Euro Show<br>Roll Door<br>Reiki Glazing</div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
 </section>
 
 <!-- ════ PROJETO 09 ════ -->
@@ -483,7 +482,7 @@ html.sem-snap { scroll-snap-type: none; }   /* durante o "pulo" */
     <div class="proj-esq-lbl">Escolha a sua esquadria ideal</div>
     <div class="proj-esq">Gold<br>Sublime<br>Prime Venko<br>Euro Show<br>Roll Door<br>Reiki Glazing</div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
 </section>
 
 <!-- ════ PROJETO 10 ════ -->
@@ -498,7 +497,7 @@ html.sem-snap { scroll-snap-type: none; }   /* durante o "pulo" */
     <div class="proj-esq-lbl">Escolha a sua esquadria ideal</div>
     <div class="proj-esq">Gold<br>Sublime<br>Prime Venko<br>Euro Show<br>Roll Door<br>Reiki Glazing</div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
 </section>
 
 <!-- ════ PROJETO 11 ════ -->
@@ -514,7 +513,7 @@ html.sem-snap { scroll-snap-type: none; }   /* durante o "pulo" */
     <div class="proj-esq">Gold<br>Sublime<br>Prime Venko<br>Euro Show<br>Roll Door<br>Reiki Glazing</div>
     <div class="proj-fach">Fachada (Atlanta)</div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
 </section>
 
 <!-- ════ PROJETO 12 — Ed. Phison ════ -->
@@ -530,7 +529,7 @@ html.sem-snap { scroll-snap-type: none; }   /* durante o "pulo" */
     <div class="proj-esq-lbl">Escolha a sua esquadria ideal</div>
     <div class="proj-esq">Gold<br>Sublime<br>Prime Venko<br>Euro Show<br>Roll Door<br>Reiki Glazing</div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
 </section>
 
 <!-- ════ PROJETO 13 ════ -->
@@ -546,7 +545,7 @@ html.sem-snap { scroll-snap-type: none; }   /* durante o "pulo" */
     <div class="proj-esq-lbl">Escolha a sua esquadria ideal</div>
     <div class="proj-esq">Gold<br>Sublime<br>Prime Venko<br>Euro Show<br>Roll Door<br>Reiki Glazing</div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
 </section>
 
 <!-- ════ PROJETO 14 — Ed. Malibu ════ -->
@@ -562,7 +561,7 @@ html.sem-snap { scroll-snap-type: none; }   /* durante o "pulo" */
     <div class="proj-esq-lbl">Escolha a sua esquadria ideal</div>
     <div class="proj-esq">Gold<br>Sublime<br>Prime Venko<br>Euro Show<br>Roll Door<br>Reiki Glazing</div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
 </section>
 
 <!-- ════ PROJETO 15 — Ed. Valência ════ -->
@@ -578,7 +577,7 @@ html.sem-snap { scroll-snap-type: none; }   /* durante o "pulo" */
     <div class="proj-esq-lbl">Escolha a sua esquadria ideal</div>
     <div class="proj-esq">Gold<br>Sublime<br>Prime Venko<br>Euro Show<br>Roll Door<br>Reiki Glazing</div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
 </section>
 
 <!-- ════ PROJETO 16 ════ -->
@@ -594,7 +593,7 @@ html.sem-snap { scroll-snap-type: none; }   /* durante o "pulo" */
     <div class="proj-esq-lbl">Escolha a sua esquadria ideal</div>
     <div class="proj-esq">Gold<br>Sublime<br>Prime Venko<br>Euro Show<br>Roll Door<br>Reiki Glazing</div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
 </section>
 
 <!-- ════ PROJETO 17 — Ed. Mahalo Front Beach ════ -->
@@ -611,7 +610,7 @@ html.sem-snap { scroll-snap-type: none; }   /* durante o "pulo" */
     <div class="proj-esq">Gold<br>Sublime<br>Prime Venko<br>Euro Show<br>Roll Door<br>Reiki Glazing</div>
     <div class="proj-fach">Fachada (Atlanta)</div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
 </section>
 
 <!-- ════ PROJETO 18 — Ed. Unique ════ -->
@@ -628,7 +627,7 @@ html.sem-snap { scroll-snap-type: none; }   /* durante o "pulo" */
     <div class="proj-esq">Gold<br>Sublime<br>Prime Venko<br>Euro Show<br>Roll Door<br>Reiki Glazing</div>
     <div class="proj-fach">Fachada (Atlanta)</div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
 </section>
 
 <!-- ════ PROJETO 19 — Euro Import BMW Joinville ════ -->
@@ -645,7 +644,7 @@ html.sem-snap { scroll-snap-type: none; }   /* durante o "pulo" */
     <div class="proj-esq">Gold<br>Sublime<br>Prime Venko<br>Euro Show<br>Roll Door<br>Reiki Glazing</div>
     <div class="proj-fach">Fachada (Atlanta)</div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
 </section>
 
 <!-- ════ PROJETO 20 — Euro Import BMW Cascavel ════ -->
@@ -662,7 +661,7 @@ html.sem-snap { scroll-snap-type: none; }   /* durante o "pulo" */
     <div class="proj-esq">Gold<br>Sublime<br>Prime Venko<br>Euro Show<br>Roll Door<br>Reiki Glazing</div>
     <div class="proj-fach">Fachada (Atlanta)</div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
 </section>
 
 <!-- ════ INOVAÇÃO ════ -->
@@ -674,13 +673,13 @@ html.sem-snap { scroll-snap-type: none; }   /* durante o "pulo" */
     <div class="inov-word">INOVAÇÃO</div>
     <div class="inov-rule"></div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
 </section>
 
 <!-- ════ INOVAÇÃO — foto18 ════ -->
 <section class="card">
   <img class="card-bg" src="obras/_secoes/inovacao-limpa.jpg" alt="">
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
 </section>
 
 <!-- ════ VIDROS: ANTES / DEPOIS ════ -->
@@ -696,7 +695,7 @@ html.sem-snap { scroll-snap-type: none; }   /* durante o "pulo" */
       <div class="mob-ab-label">Depois — Ligado</div>
     </div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
 </section>
 
 <!-- ════ VIDROS: VÍDEO 25 ════ -->
@@ -706,7 +705,7 @@ html.sem-snap { scroll-snap-type: none; }   /* durante o "pulo" */
   </video>
   <div class="ov-bottom"></div>
   <div class="mob-vidro-phrase">Assista até o final e entenda como funciona o nosso<br><span class="mvp-destaque">vidro polarizado inteligente</span></div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
 </section>
 
 <!-- ════ CONTATO ════ -->
@@ -779,39 +778,6 @@ obs.observe(sobreCard);
     var nb = card.querySelector('.num-bg-mob');
     if (nb) nb.textContent = pad(proj);
   });
-})();
-</script>
-
-<script>
-/* micro-animação: a tela dá um "pulinho" pra cima e volta, mostrando que é pra arrastar.
-   Para assim que a pessoa interage (ou se ela preferir menos animação). */
-(function () {
-  var html = document.documentElement;
-  var scroller = document.scrollingElement || html;
-  var parou = false;
-  var reduz = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  ['touchstart', 'wheel', 'keydown', 'pointerdown'].forEach(function (ev) {
-    window.addEventListener(ev, function () { parou = true; }, { passive: true, once: true });
-  });
-  function pulo() {
-    if (parou || scroller.scrollTop > 4) return;
-    html.classList.add('sem-snap');                      // desliga o snap durante o pulo
-    scroller.scrollTo({ top: 72, behavior: 'smooth' });   // sobe um pouco (espia a próxima tela)
-    setTimeout(function () {
-      scroller.scrollTo({ top: 0, behavior: 'smooth' }); // e volta
-      setTimeout(function () { html.classList.remove('sem-snap'); }, 500);
-    }, 400);
-  }
-  if (!reduz) {
-    setTimeout(function () {                             // 1º pulo, depois da animação da capa
-      pulo();
-      var n = 0;
-      var t = setInterval(function () {                  // repete espaçado, no máx. 3x
-        if (parou || ++n > 3) return clearInterval(t);
-        pulo();
-      }, 5200);
-    }, 3400);
-  }
 })();
 </script>
 </body>
