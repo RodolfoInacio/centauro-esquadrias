@@ -114,8 +114,20 @@ body {
 .capa-chev { width: 24px; height: 24px; animation: capaChevBounce 2s ease-in-out infinite; }
 @keyframes capaChevBounce {
   0%, 100% { transform: translateY(0); opacity: 0.5; }
-  50%       { transform: translateY(8px); opacity: 0.95; }
+  50%       { transform: translateY(-8px); opacity: 0.95; }
 }
+/* "espiada": capa + card seguinte sobem um pouco e voltam, convidando a arrastar para cima */
+@keyframes capaPeek {
+  0%   { transform: translateY(0); }
+  35%  { transform: translateY(-70px); }
+  55%  { transform: translateY(-70px); }
+  78%  { transform: translateY(6px); }
+  100% { transform: translateY(0); }
+}
+/* durante o pulo o snap fica desligado, senão o scroll acompanha os cards */
+html.peek { scroll-snap-type: none; overflow-anchor: none; }
+html.peek .card-capa,
+html.peek .card-capa + .card { animation: capaPeek 1.1s cubic-bezier(0.45,0,0.25,1) both; }
 @keyframes arrasteFade { 0% { opacity: 0; } 74% { opacity: 0; } 100% { opacity: 1; } }
 
 /* ════════════════════ CAPA ════════════════════ */
@@ -283,8 +295,8 @@ body {
     <div class="capa-anos">de excelência em esquadrias</div>
   </div>
   <div class="capa-arraste">
-    <span>Arraste para baixo</span>
-    <svg class="capa-chev" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg>
+    <span>Arraste para cima</span>
+    <svg class="capa-chev" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg>
   </div>
 </section>
 
@@ -778,6 +790,30 @@ obs.observe(sobreCard);
     var nb = card.querySelector('.num-bg-mob');
     if (nb) nb.textContent = pad(proj);
   });
+})();
+</script>
+<script>
+/* pulo da capa: sugere arrastar para cima até a primeira interação */
+(function () {
+  if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var b = document.documentElement, timer, stopped = false;
+  function stop() {
+    if (stopped) return;
+    stopped = true; clearTimeout(timer); b.classList.remove('peek');
+    window.removeEventListener('scroll', onScroll); window.removeEventListener('touchstart', stop); window.removeEventListener('wheel', stop);
+  }
+  function peek() {
+    if (stopped) return;
+    if ((window.scrollY || document.documentElement.scrollTop) > 4) return stop();
+    b.classList.add('peek');
+    setTimeout(function () { b.classList.remove('peek'); }, 1150);
+    timer = setTimeout(peek, 4500);
+  }
+  function onScroll() { if ((window.scrollY || document.documentElement.scrollTop) > 4) stop(); }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('touchstart', stop, { passive: true });
+  window.addEventListener('wheel', stop, { passive: true });
+  timer = setTimeout(peek, 3400);
 })();
 </script>
 </body>
