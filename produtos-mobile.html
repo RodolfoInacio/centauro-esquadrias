@@ -58,7 +58,8 @@ body {
 }
 
 /* ── CARD BASE ── */
-.card {
+html.sem-snap { scroll-snap-type: none; }   /* durante o "pulo" */
+
   width: 100vw;
   height: 100svh;
   min-height: -webkit-fill-available;
@@ -94,7 +95,7 @@ body {
 .scroll-hint svg { width: 22px; height: 22px; display: block; }
 @keyframes bounce {
   0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.4; }
-  50%       { transform: translateX(-50%) translateY(9px); opacity: 0.7; }
+  50%       { transform: translateX(-50%) translateY(-9px); opacity: 0.7; }
 }
 .capa-arraste {
   position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
@@ -109,7 +110,7 @@ body {
 .capa-chev { width: 24px; height: 24px; animation: capaChevBounce 2s ease-in-out infinite; }
 @keyframes capaChevBounce {
   0%, 100% { transform: translateY(0); opacity: 0.5; }
-  50%       { transform: translateY(8px); opacity: 0.95; }
+  50%       { transform: translateY(-8px); opacity: 0.95; }
 }
 @keyframes arrasteFade { 0% { opacity: 0; } 74% { opacity: 0; } 100% { opacity: 1; } }
 
@@ -230,8 +231,8 @@ body {
     <div class="capa-anos">de experiência</div>
   </div>
   <div class="capa-arraste">
-    <span>Arraste para baixo</span>
-    <svg class="capa-chev" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg>
+    <span>Arraste para cima</span>
+    <svg class="capa-chev" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg>
   </div>
 </section>
 
@@ -261,7 +262,7 @@ body {
       </div>
     </div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
 </section>
 
 <!-- ═══════════════ CATEGORIA 1: Linhas de Esquadria ═══════════════ -->
@@ -273,7 +274,7 @@ body {
     <div class="inov-word">Linhas de<br>Esquadria</div>
     <div class="inov-rule"></div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
 </section>
 
 <section class="card">
@@ -289,7 +290,7 @@ body {
     <div class="proj-esq">Alumínio de alto padrão, acabamento branco ou preto fosco</div>
     <div class="proj-fach">Linha versátil para janelas e portas de correr, com ótimo custo-benefício.</div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
 </section>
 
 <section class="card">
@@ -305,7 +306,7 @@ body {
     <div class="proj-esq">Alumínio extrudado, acabamento anodizado ou pintura eletrostática</div>
     <div class="proj-fach">Sistema de correr de alto desempenho, perfis robustos e vedação superior.</div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
 </section>
 
 <section class="card">
@@ -321,7 +322,7 @@ body {
     <div class="proj-esq">Alumínio premium, ferragens de alta precisão</div>
     <div class="proj-fach">Esquadrias de precisão com acabamento refinado e durabilidade.</div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
 </section>
 
 <section class="card">
@@ -337,7 +338,7 @@ body {
     <div class="proj-esq">Alumínio de perfil reduzido (slim), vidro temperado</div>
     <div class="proj-fach">Grandes panos de vidro com perfis slim e visual contemporâneo.</div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
 </section>
 
 <section class="card">
@@ -353,7 +354,7 @@ body {
     <div class="proj-esq">Alumínio extrudado com motorização</div>
     <div class="proj-fach">Portas automáticas de enrolar em alumínio — praticidade e segurança.</div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
 </section>
 
 <section class="card">
@@ -369,7 +370,7 @@ body {
     <div class="proj-esq">Sistema estrutural de vidro com fixação minimalista em alumínio</div>
     <div class="proj-fach">Envidraçamento estrutural com estética minimalista e leveza.</div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
 </section>
 
 <!-- ═══════════════ CATEGORIA 2: Portas & Grandes Vãos ═══════════════ -->
@@ -381,7 +382,7 @@ body {
     <div class="inov-word">Portas &amp;<br>Grandes Vãos</div>
     <div class="inov-rule"></div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
 </section>
 
 <section class="card">
@@ -397,7 +398,7 @@ body {
     <div class="proj-esq">Alumínio estrutural reforçado, vidro temperado</div>
     <div class="proj-fach">Portas pivotantes de grandes dimensões — imponência e design.</div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
 </section>
 
 <section class="card">
@@ -413,7 +414,7 @@ body {
     <div class="proj-esq">Alumínio de alto padrão, diversos acabamentos</div>
     <div class="proj-fach">Portas de entrada, de correr e pivotantes em alumínio de alto padrão.</div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
 </section>
 
 <section class="card">
@@ -429,7 +430,7 @@ body {
     <div class="proj-esq">Alumínio de alta resistência, acionamento manual ou motorizado</div>
     <div class="proj-fach">Portões basculantes e sociais em alumínio — praticidade para o dia a dia.</div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
 </section>
 
 <!-- ═══════════════ CATEGORIA 3: Fachadas & Revestimentos ═══════════════ -->
@@ -441,7 +442,7 @@ body {
     <div class="inov-word">Fachadas &amp;<br>Revestimentos</div>
     <div class="inov-rule"></div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
 </section>
 
 <section class="card">
@@ -457,7 +458,7 @@ body {
     <div class="proj-esq">Alumínio estrutural, vidro laminado/temperado</div>
     <div class="proj-fach">Fachadas envidraçadas e structural glazing de alto padrão.</div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
 </section>
 
 <section class="card">
@@ -473,7 +474,7 @@ body {
     <div class="proj-esq">Vidro temperado/laminado com estrutura de alumínio oculta</div>
     <div class="proj-fach">Revestimento contínuo em vidro — visual imponente e moderno.</div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
 </section>
 
 <section class="card">
@@ -489,7 +490,7 @@ body {
     <div class="proj-esq">Alumínio extrudado, lâminas fixas ou móveis</div>
     <div class="proj-fach">Brises de alumínio para conforto térmico e assinatura estética.</div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
 </section>
 
 <section class="card">
@@ -505,7 +506,7 @@ body {
     <div class="proj-esq">Alumínio com acabamento amadeirado (efeito madeira)</div>
     <div class="proj-fach">Ripado de alumínio amadeirado para fachadas e revestimentos.</div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
 </section>
 
 <!-- ═══════════════ CATEGORIA 4: Vidros & Ambientes ═══════════════ -->
@@ -517,7 +518,7 @@ body {
     <div class="inov-word">Vidros &amp;<br>Ambientes</div>
     <div class="inov-rule"></div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
 </section>
 
 <section class="card">
@@ -533,7 +534,7 @@ body {
     <div class="proj-esq">Vidro laminado com película de cristal líquido (PDLC)</div>
     <div class="proj-fach">Alterna entre transparente e opaco com um simples toque.</div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
 </section>
 
 <section class="card">
@@ -549,7 +550,7 @@ body {
     <div class="proj-esq">Vidro temperado, ferragens em alumínio ou inox</div>
     <div class="proj-fach">Boxes em vidro temperado com perfis slim e acabamento premium.</div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
 </section>
 
 <section class="card">
@@ -565,7 +566,7 @@ body {
     <div class="proj-esq">Vidro temperado/laminado, perfis de alumínio</div>
     <div class="proj-fach">Divisórias de vidro para escritórios e ambientes corporativos.</div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
 </section>
 
 <section class="card">
@@ -581,7 +582,7 @@ body {
     <div class="proj-esq">Vidro temperado/laminado, fixação em alumínio ou inox</div>
     <div class="proj-fach">Guarda-corpos de vidro com fixação minimalista e segura.</div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
 </section>
 
 <!-- ═══════════════ CATEGORIA 5: Complementos & Acessórios ═══════════════ -->
@@ -593,7 +594,7 @@ body {
     <div class="inov-word">Complementos<br>&amp; Acessórios</div>
     <div class="inov-rule"></div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
 </section>
 
 <section class="card">
@@ -609,7 +610,7 @@ body {
     <div class="proj-esq">Vidro espelhado, lapidação sob medida</div>
     <div class="proj-fach">Espelhos lapidados e decorativos sob medida.</div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
 </section>
 
 <section class="card">
@@ -625,7 +626,7 @@ body {
     <div class="proj-esq">Lâminas de alumínio integradas entre os vidros, acionamento manual ou motorizado</div>
     <div class="proj-fach">Persiana de alumínio integrada entre os vidros — controle de luz sem manutenção.</div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
 </section>
 
 <!-- ═══════════════ CATEGORIA 6: Áreas Externas & Estruturas ═══════════════ -->
@@ -637,7 +638,7 @@ body {
     <div class="inov-word">Áreas Externas<br>&amp; Estruturas</div>
     <div class="inov-rule"></div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
 </section>
 
 <section class="card">
@@ -653,7 +654,7 @@ body {
     <div class="proj-esq">Alumínio estrutural, cobertura fixa ou retrátil</div>
     <div class="proj-fach">Pergolados de alumínio com cobertura para áreas externas.</div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
 </section>
 
 <section class="card">
@@ -669,7 +670,7 @@ body {
     <div class="proj-esq">Vidro temperado e/ou alumínio estrutural</div>
     <div class="proj-fach">Escadas em vidro e alumínio — leveza e sofisticação.</div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
 </section>
 
 <section class="card">
@@ -685,7 +686,7 @@ body {
     <div class="proj-esq">Vidro laminado, estrutura de alumínio</div>
     <div class="proj-fach">Coberturas e claraboias de vidro com estrutura em alumínio.</div>
   </div>
-  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+  <div class="scroll-hint"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><polyline points="6 15 12 9 18 15"/></svg></div>
 </section>
 
 <!-- ════ CONTATO ════ -->
@@ -758,6 +759,39 @@ obs.observe(sobreCard);
     var nb = card.querySelector('.num-bg-mob');
     if (nb) nb.textContent = pad(prod);
   });
+})();
+</script>
+
+<script>
+/* micro-animação: a tela dá um "pulinho" pra cima e volta, mostrando que é pra arrastar.
+   Para assim que a pessoa interage (ou se ela preferir menos animação). */
+(function () {
+  var html = document.documentElement;
+  var scroller = document.scrollingElement || html;
+  var parou = false;
+  var reduz = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  ['touchstart', 'wheel', 'keydown', 'pointerdown'].forEach(function (ev) {
+    window.addEventListener(ev, function () { parou = true; }, { passive: true, once: true });
+  });
+  function pulo() {
+    if (parou || scroller.scrollTop > 4) return;
+    html.classList.add('sem-snap');                      // desliga o snap durante o pulo
+    scroller.scrollTo({ top: 72, behavior: 'smooth' });   // sobe um pouco (espia a próxima tela)
+    setTimeout(function () {
+      scroller.scrollTo({ top: 0, behavior: 'smooth' }); // e volta
+      setTimeout(function () { html.classList.remove('sem-snap'); }, 500);
+    }, 400);
+  }
+  if (!reduz) {
+    setTimeout(function () {                             // 1º pulo, depois da animação da capa
+      pulo();
+      var n = 0;
+      var t = setInterval(function () {                  // repete espaçado, no máx. 3x
+        if (parou || ++n > 3) return clearInterval(t);
+        pulo();
+      }, 5200);
+    }, 3400);
+  }
 })();
 </script>
 </body>
